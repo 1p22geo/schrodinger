@@ -19,7 +19,8 @@ dx = x[1] - x[0]
 dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
-V = ((5-X)**2 + (5-Y)**2)* (-0.02)
+V = np.zeros((Nx, Ny))
+V[Nx // 4: 3 * Nx // 4, Ny // 4: 3 * Ny // 4] = 1.0
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
