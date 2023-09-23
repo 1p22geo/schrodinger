@@ -25,7 +25,11 @@ quadratic_up_2x.gif - same, higher quality, longer animation.
 ### PROCEED WITH CAUTION
 ---
 
+(GIFs not included, too large for github)
+
 
 step_scatter.gif / .mp4 - a step gravity well, particle-in-a-box scenario
 
 hydrogen_ground.gif / .mp4 - a hydrogen atom in a ground state
+
+hydrogen_excited.gif / .mp4 - a hydrogen atom in a higher energy state
