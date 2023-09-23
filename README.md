@@ -3,6 +3,8 @@
 
 ## Animations contained here:
 
+gauss_empty.gif - a Gaussian wave packet moving across an empty potential function (no electromagnetic field, 0 gravity)
+
 gauss_sin.gif - a Gaussian wave packet with a sine potential function.
 
 gauss_step.gif - a Gaussian wave packet scattered by an upwards step potential

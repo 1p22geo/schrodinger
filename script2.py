@@ -7,10 +7,10 @@ import imageio.v2 as imageio
 # Constants and parameters
 Lx = 10.0  # Size of the domain in x-direction
 Ly = 10.0  # Size of the domain in y-direction
-Nx = 2000  # Number of spatial points in x-direction
-Ny = 2000  # Number of spatial points in y-direction
-Nt = 3000  # Number of time points
-T_max = 150  # Maximum time
+Nx = 1000  # Number of spatial points in x-direction
+Ny = 1000  # Number of spatial points in y-direction
+Nt = 500  # Number of time points
+T_max = 80  # Maximum time
 dt = T_max / Nt  # Time step
 x = np.linspace(0, Lx, Nx)
 y = np.linspace(0, Ly, Ny)
@@ -19,14 +19,14 @@ dx = x[1] - x[0]
 dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
-V = ((5-X)**2 + (5-Y)**2)* (-0.02)
+V = np.zeros((Nx, Ny))
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
 kx0 = 2.0
 ky0 = 2.0
 x0 = 5.0
-y0 = 2.0
+y0 = 5.0
 psi = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2)) * np.exp(1j * (kx0 * X + ky0 * Y))
 
 
