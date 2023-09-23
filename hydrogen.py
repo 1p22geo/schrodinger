@@ -5,11 +5,11 @@ import matplotlib.animation as animation
 import imageio.v2 as imageio
 
 # Constants and parameters
-Lx = 10.0  # Size of the domain in x-direction
-Ly = 10.0  # Size of the domain in y-direction
+Lx = 16.0  # Size of the domain in x-direction
+Ly = 16.0  # Size of the domain in y-direction
 Nx = 2000  # Number of spatial points in x-direction
 Ny = 2000  # Number of spatial points in y-direction
-Nt = 3000  # Number of time points
+Nt = 4000  # Number of time points
 T_max = 300  # Maximum time
 dt = T_max / Nt  # Time step
 x = np.linspace(0, Lx, Nx)
