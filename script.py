@@ -10,7 +10,7 @@ Ly = 10.0  # Size of the domain in y-direction
 Nx = 1000  # Number of spatial points in x-direction
 Ny = 1000  # Number of spatial points in y-direction
 Nt = 500  # Number of time points
-T_max = 30  # Maximum time
+T_max = 50  # Maximum time
 dt = T_max / Nt  # Time step
 x = np.linspace(0, Lx, Nx)
 y = np.linspace(0, Ly, Ny)
@@ -20,7 +20,8 @@ dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
 V = np.zeros((Nx, Ny))
-V[Nx // 4: 3 * Nx // 4, Ny // 4: 3 * Ny // 4] = 1.0
+V[:,:] = 10000
+V[Nx // 4: 3 * Nx // 4, Ny // 4: 3 * Ny // 4] = 0
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
@@ -81,7 +82,7 @@ for t in range(Nt):
     
     ax3.set_xlim(0, Lx)
     ax3.set_ylim(0, Ly)
-    ax3.set_zlim(-1,1)
+    #ax3.set_zlim(-1,1)
 
     # Save the figure as a PNG
     filename = f'output_images/frame_{t:03d}.png'
