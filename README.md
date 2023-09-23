@@ -15,3 +15,5 @@ quadratic_down_offset.gif - same, but offset on X instead on Y
 quadratic_up.gif - a wave packet in an inverted gravity well (or an electromagnetic field of a simmilar sign)
 
 quadratic_up_2x.gif - same, higher quality, longer animation.
+
+step_scatter.gif - a step gravity well, particle-in-a-box scenario
