@@ -82,10 +82,10 @@ for t in range(Nt):
     psi2 = psi2 * np.exp(-1j * (V + V_mean_field) * dt / 2)
 
     # Calculate the real and imaginary components of the wave functions
-    real_part1 = np.real(psi1)
-    imag_part1 = np.imag(psi1)
-    real_part2 = np.real(psi2)
-    imag_part2 = np.imag(psi2)
+    real_part1 = np.absolute(psi1)
+    imag_part1 = np.angle(psi1)
+    real_part2 = np.absolute(psi2)
+    imag_part2 = np.angle(psi2)
 
     # Create a figure with subplots for 3D projections
     fig = plt.figure(figsize=(12, 8))
@@ -93,36 +93,36 @@ for t in range(Nt):
     # 3D plot of real part for electron 1
     ax1 = fig.add_subplot(231, projection='3d')
     ax1.plot_surface(X, Y, real_part1, cmap='viridis')
-    ax1.set_title('Real Part (Electron 1)')
+    ax1.set_title('Absolute (Electron 1)')
     ax1.set_xlim(0, Lx)
     ax1.set_ylim(0, Ly)
     ax1.set_zlim(-0.5, 0.5)
 
     # 3D plot of imaginary part for electron 1
-    ax2 = fig.add_subplot(232, projection='3d')
-    ax2.plot_surface(X, Y, imag_part1, cmap='viridis')
-    ax2.set_title('Imaginary Part (Electron 1)')
+    ax2 = fig.add_subplot(234)
+    cf1 = ax2.contourf(X, Y, imag_part1)
+    ax2.set_title('Angle (Electron 1)')
     ax2.set_xlim(0, Lx)
     ax2.set_ylim(0, Ly)
-    ax2.set_zlim(-0.5, 0.5)
+    cb1 = fig.colorbar(cf1)
 
     # 3D plot of real part for electron 2
-    ax3 = fig.add_subplot(233, projection='3d')
+    ax3 = fig.add_subplot(232, projection='3d')
     ax3.plot_surface(X, Y, real_part2, cmap='viridis')
-    ax3.set_title('Real Part (Electron 2)')
+    ax3.set_title('Absolute (Electron 2)')
     ax3.set_xlim(0, Lx)
     ax3.set_ylim(0, Ly)
     ax3.set_zlim(-0.5, 0.5)
 
     # 3D plot of imaginary part for electron 2
-    ax4 = fig.add_subplot(234, projection='3d')
-    ax4.plot_surface(X, Y, imag_part2, cmap='viridis')
-    ax4.set_title('Imaginary Part (Electron 2)')
+    ax4 = fig.add_subplot(235)
+    cf2 = ax4.contourf(X, Y, imag_part2)
+    ax4.set_title('Angle (Electron 2)')
     ax4.set_xlim(0, Lx)
     ax4.set_ylim(0, Ly)
-    ax4.set_zlim(-0.5, 0.5)
+    cb2 = fig.colorbar(cf2)
     
-    ax4 = fig.add_subplot(235, projection='3d')
+    ax4 = fig.add_subplot(233, projection='3d')
     ax4.plot_surface(X, Y, V_mean_field)
     ax4.set_title('Potential mean field')
     ax4.set_xlim(0, Lx)
