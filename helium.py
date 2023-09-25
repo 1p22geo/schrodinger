@@ -80,6 +80,9 @@ for t in range(Nt):
     psi2 = psi2 * np.exp(-1j * (np.fft.fftfreq(Nx, dx)**2 + np.fft.fftfreq(Ny, dy)**2) * dt)
     psi2 = np.fft.ifft2(psi2)
     psi2 = psi2 * np.exp(-1j * (V + V_mean_field) * dt / 2)
+    
+    # Integrate the variable
+    integ = scipy.integrate.quad(psi1 + psi2)
 
     # Calculate the real and imaginary components of the wave functions
     real_part1 = np.absolute(psi1)
