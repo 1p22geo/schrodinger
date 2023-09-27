@@ -108,7 +108,6 @@ for t in range(Nt):
     ax2.set_title('Absolute (Electron 1)')
     ax2.set_xlim(0, Lx)
     ax2.set_ylim(0, Ly)
-    cb1 = fig.colorbar(cf1)
 
     # 3D plot of real part for electron 2
     ax3 = fig.add_subplot(232)
@@ -124,7 +123,6 @@ for t in range(Nt):
     ax4.set_title('Absolute (Electron 2)')
     ax4.set_xlim(0, Lx)
     ax4.set_ylim(0, Ly)
-    cb2 = fig.colorbar(cf2)
     
     ax4 = fig.add_subplot(233, projection='3d')
     ax4.plot_surface(X, Y, V_mean_field)
