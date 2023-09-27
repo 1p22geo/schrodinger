@@ -20,14 +20,16 @@ dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
 V = np.zeros((Nx, Ny))
-V[:,:] = 10000
-V[Nx // 4: 3 * Nx // 4, Ny // 4: 3 * Ny // 4] = 0
+V[:,:] = 0
+V[:, 3* Ny // 8: 4 * Ny // 8] = 1000000
+V[int(2.5*Nx / 7): int(3*Nx / 7), :] = 0
+V[int(4*Nx / 7): int(4.5*Nx / 7), :] = 0
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
 kx0 = 2.0
 ky0 = 2.0
-x0 = 5.0
+x0 = 2.0
 y0 = 5.0
 psi = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2)) * np.exp(1j * (kx0 * X + ky0 * Y))
 
