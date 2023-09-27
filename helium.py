@@ -81,6 +81,9 @@ for t in range(Nt):
     psi2 = psi2 * np.exp(-1j * (np.fft.fftfreq(Nx, dx)**2 + np.fft.fftfreq(Ny, dy)**2) * dt)
     psi2 = np.fft.ifft2(psi2)
     psi2 = psi2 * np.exp(-1j * (V + V_mean_field) * dt / 2)
+    
+    # Integrate the variable
+    integ = scipy.integrate.quad(psi1 + psi2)
 
     # Calculate the real and imaginary components of the wave functions
     real_part1 = np.angle(psi1)
@@ -105,7 +108,7 @@ for t in range(Nt):
     ax2.set_title('Absolute (Electron 1)')
     ax2.set_xlim(0, Lx)
     ax2.set_ylim(0, Ly)
-    ax2.set_zlim(-0.5, 0.5)
+    cb1 = fig.colorbar(cf1)
 
     # 3D plot of real part for electron 2
     ax3 = fig.add_subplot(232)
@@ -121,7 +124,7 @@ for t in range(Nt):
     ax4.set_title('Absolute (Electron 2)')
     ax4.set_xlim(0, Lx)
     ax4.set_ylim(0, Ly)
-    ax4.set_zlim(-0.5, 0.5)
+    cb2 = fig.colorbar(cf2)
     
     ax4 = fig.add_subplot(233, projection='3d')
     ax4.plot_surface(X, Y, V_mean_field)
