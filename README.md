@@ -34,6 +34,8 @@ quadratic_up_2x.gif - same, higher quality, longer animation.
 
 step_scatter.gif / .mp4 - a step gravity well, particle-in-a-box scenario
 
+double_slit.gif / .mp4 - The iconic double-slit experiment
+
 hydrogen_ground.gif / .mp4 - a hydrogen atom in a ground state
 
 hydrogen_excited.gif / .mp4 - a hydrogen atom in a higher energy state

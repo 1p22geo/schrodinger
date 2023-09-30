@@ -21,9 +21,9 @@ dy = y[1] - y[0]
 # Define the potential function (you can modify this)
 V = np.zeros((Nx, Ny))
 V[:,:] = 0
-V[:, 3* Ny // 8: 4 * Ny // 8] = 1000000
-V[int(2.5*Nx / 7): int(3*Nx / 7), :] = 0
-V[int(4*Nx / 7): int(4.5*Nx / 7), :] = 0
+V[:, int(3.5* Ny // 8): int(4 * Ny // 8)] = 1000000
+V[int(2.7*Nx / 7): int(3.2*Nx / 7), :] = 0
+V[int(3.8*Nx / 7): int(4.3*Nx / 7), :] = 0
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
@@ -53,33 +53,31 @@ for t in range(Nt):
     psi = psi * np.exp(-1j * V * dt / 2)
 
     # Calculate the real and imaginary components of the wave function
-    real_part = np.real(psi)
-    imag_part = np.imag(psi)
+    real_part = np.absolute(psi)
+    imag_part = np.angle(psi)
 
     # Create a figure with subplots for 3D projections
     fig = plt.figure(figsize=(12, 4))
 
     # 3D plot of real part
-    ax1 = fig.add_subplot(131, projection='3d')
-    ax1.plot_surface(X, Y, real_part, cmap='viridis')
-    ax1.set_title('Real Part')
+    ax1 = fig.add_subplot(131)
+    ax1.pcolormesh(X, Y, real_part)
+    ax1.set_title('Absolute')
     
     ax1.set_xlim(0, Lx)
     ax1.set_ylim(0, Ly)
-    ax1.set_zlim(-1,1)
 
     # 3D plot of imaginary part
-    ax2 = fig.add_subplot(132, projection='3d')
-    ax2.plot_surface(X, Y, imag_part, cmap='viridis')
-    ax2.set_title('Imaginary Part')
+    ax2 = fig.add_subplot(132)
+    ax2.pcolormesh(X, Y, imag_part)
+    ax2.set_title('Angle')
     
     ax2.set_xlim(0, Lx)
     ax2.set_ylim(0, Ly)
-    ax2.set_zlim(-1,1)
 
     # 3D plot of potential function
-    ax3 = fig.add_subplot(133, projection='3d')
-    ax3.plot_surface(X, Y, V, cmap='cool')
+    ax3 = fig.add_subplot(133)
+    ax3.pcolormesh(X, Y, V)
     ax3.set_title('Potential Function')
     
     ax3.set_xlim(0, Lx)
