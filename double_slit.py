@@ -76,8 +76,8 @@ for t in range(Nt):
     ax2.set_ylim(0, Ly)
 
     # 3D plot of potential function
-    ax3 = fig.add_subplot(133)
-    ax3.pcolormesh(X, Y, V)
+    ax3 = fig.add_subplot(133, projection='3d')
+    ax3.plot_surface(X, Y, V)
     ax3.set_title('Potential Function')
     
     ax3.set_xlim(0, Lx)
