@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Python Script
-        run: python3 ./script2.py
+        run: python3 script2.py
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.1.1
         with:
