@@ -6,6 +6,7 @@ jobs:
     name: Run the Python script
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Run Python Script
         run: python3 script2.py
       - name: Download a Build Artifact
