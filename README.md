@@ -1,9 +1,5 @@
 # A Python script to solve the Schrodinger's equation in a 2D domain.
 (spelled that wrong)
-# TO RUN AT HOME
-next weekend or sth
-helium.py (with trig. reprentation of complex numbers)
-double_slit.py (name speaks for itself)
 
 ## Animations contained here:
 
