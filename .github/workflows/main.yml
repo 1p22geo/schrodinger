@@ -12,7 +12,7 @@ jobs:
         uses: jannekem/run-python-script-action@v1.6
         with:
           # Python script
-          script: script2.py
+          script: script2
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.1.1
         with:
