@@ -20,12 +20,14 @@ dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
 V = np.zeros((Nx, Ny))
+V[:,:] = 0
+V[:, int(3.5* Ny // 8): int(4 * Ny // 8)] = 1000000
 
 # Initial wave function (Gaussial wave packet)
 sigma = 0.5
 kx0 = 2.0
 ky0 = 2.0
-x0 = 5.0
+x0 = 1.0
 y0 = 5.0
 psi = np.exp(-((X - x0)**2 + (Y - y0)**2) / (2 * sigma**2)) * np.exp(1j * (kx0 * X + ky0 * Y))
 
@@ -80,7 +82,6 @@ for t in range(Nt):
     
     ax3.set_xlim(0, Lx)
     ax3.set_ylim(0, Ly)
-    ax3.set_zlim(-1,1)
 
     # Save the figure as a PNG
     filename = f'output_images2/frame_{t:03d}.png'
