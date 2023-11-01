@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: pip3 install numpy scipy matplotlib imageio
       - name: Run Python Script
         run: python3 script2.py
       - name: Download a Build Artifact
