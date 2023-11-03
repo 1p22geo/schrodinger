@@ -36,4 +36,6 @@ hydrogen_ground.gif / .mp4 - a hydrogen atom in a ground state
 
 hydrogen_excited.gif / .mp4 - a hydrogen atom in a higher energy state
 
-helium_excited.gif / .mp4 - a hydrogen atom in a higher energy state
+helium_excited.gif / .mp4 - a helium atom in a higher energy state
+
+tunneling.gif / .mp4 - quantum tunneling, a photon going through an impassable barrier

@@ -9,8 +9,8 @@ Lx = 10.0  # Size of the domain in x-direction
 Ly = 10.0  # Size of the domain in y-direction
 Nx = 1000  # Number of spatial points in x-direction
 Ny = 1000  # Number of spatial points in y-direction
-Nt = 500  # Number of time points
-T_max = 80  # Maximum time
+Nt = 1200  # Number of time points
+T_max = 120  # Maximum time
 dt = T_max / Nt  # Time step
 x = np.linspace(0, Lx, Nx)
 y = np.linspace(0, Ly, Ny)
@@ -20,7 +20,8 @@ dy = y[1] - y[0]
 
 # Define the potential function (you can modify this)
 V = np.zeros((Nx, Ny))
-V[:,:] = 0
+V[:,:] = 1000000
+V[int(0.5* Nx // 8): int(7.5 * Nx // 8),int(0.5* Ny // 8): int(7.5 * Ny // 8)] = 0
 V[:, int(3.5* Ny // 8): int(4 * Ny // 8)] = 1000000
 
 # Initial wave function (Gaussial wave packet)
