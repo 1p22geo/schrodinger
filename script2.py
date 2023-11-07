@@ -75,17 +75,17 @@ ax3.set_ylim(0, Ly)
 ax3.set_zlim(-0.5, 0.5)
 
 # Save the figure as a PNG
-filename = f'output_images5/frame_test.png'
-plt.savefig(filename)
-print(f"Saved to {filename}")
-plt.close()
 
 
 # Create a directory to store the PNG images
 import os
-if not os.path.exists("output_images5"):
-    os.makedirs("output_images5")
+if not os.path.exists("output_images2"):
+    os.makedirs("output_images2")
 
+filename = f'output_images2/frame_test.png'
+plt.savefig(filename)
+print(f"Saved to {filename}")
+plt.close()
 # Lists to store the frames for the video
 frames = []
 
@@ -142,6 +142,6 @@ for t in range(Nt):
     frames.append(imageio.imread(filename))
     
 # Create an animated GIF from the frames
-imageio.mimsave('wave_animation5.gif', frames, duration=0.1)
+imageio.mimsave('wave_animation2.gif', frames, duration=0.1)
 
 print("Done! Saved PNG images and created an animated GIF.")
