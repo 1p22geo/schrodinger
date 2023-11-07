@@ -134,7 +134,7 @@ for t in range(Nt):
     ax3.set_zlim(-0.5, 0.5)
 
     # Save the figure as a PNG
-    filename = f'output_images5/frame_{t:03d}.png'
+    filename = f'output_images2/frame_{t:03d}.png'
     plt.savefig(filename)
     print(f"Saved to {filename}")
     plt.close()
