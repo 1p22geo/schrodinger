@@ -28,7 +28,16 @@ y_center = Ly / 2
 r = np.sqrt((X - x_center)**2 + (Y - y_center)**2)
 V = -1 / r  # Central Coulomb potential
 
-psi = np.exp(-r) / np.sqrt(np.pi)  # Ground state of hydrogen atom
+# Initial wave function (electron in a p-orbital)
+n = 3  # Principal quantum number
+l = 1  # Angular momentum quantum number for p-orbital
+m = 0  # Magnetic quantum number
+r_norm = r / (n * a0)  # Normalize r for the excited state
+theta = np.arctan2(Y - y_center, X - x_center)
+# phi = np.zeros_like(theta)  # Azimuthal angle (0 for simplicity)
+phi = theta
+Ylm = scipy.special.sph_harm(m, l, theta, phi)  # Spherical harmonic
+psi = (2 / (n * a0)**(3/2)) * r_norm * np.exp(-r_norm) * Ylm
 
 
 
