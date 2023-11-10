@@ -30,7 +30,7 @@ V = -1 / r  # Central Coulomb potential
 
 # Initial wave function (electron in a p-orbital)
 n = 4  # Principal quantum number
-l = 1  # Angular momentum quantum number for p-orbital
+l = 3  # Angular momentum quantum number for p-orbital
 m = 0  # Magnetic quantum number
 r_norm = r / (n * a0)  # Normalize r for the excited state
 theta = np.arctan2(Y - y_center, X - x_center)
