@@ -29,7 +29,7 @@ r = np.sqrt((X - x_center)**2 + (Y - y_center)**2)
 V = -1 / r  # Central Coulomb potential
 
 # Initial wave function (electron in a p-orbital)
-n = 3  # Principal quantum number
+n = 4  # Principal quantum number
 l = 2  # Angular momentum quantum number for p-orbital
 m = 0  # Magnetic quantum number
 r_norm = r / (n * a0)  # Normalize r for the excited state
