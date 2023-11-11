@@ -29,9 +29,9 @@ r = np.sqrt((X - x_center)**2 + (Y - y_center)**2)
 V = -1 / r  # Central Coulomb potential
 
 # Initial wave function (electron in a p-orbital)
-n = 2  # Principal quantum number
-l = 1  # Angular momentum quantum number for p-orbital
-m = 1  # Magnetic quantum number
+n = 4  # Principal quantum number
+l = 2  # Angular momentum quantum number for p-orbital
+m = 2  # Magnetic quantum number
 r_norm = r / (n * a0)  # Normalize r for the excited state
 theta = np.arctan2(Y - y_center, X - x_center)
 # phi = np.zeros_like(theta)  # Azimuthal angle (0 for simplicity)
