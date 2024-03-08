@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 class GraphDisplay():
-    def __init__(self, config):
+    def __init__(self, config, figsize=(12, 8)):
         self.config = config
-        self.fig = plt.figure(figsize=(12, 8))
+        self.fig = plt.figure(figsize=figsize)
 
     def save(self, filename):
         plt.savefig(filename)
@@ -27,4 +27,12 @@ class GraphDisplay():
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
+            case 'simple':
+                ax = self.fig.add_subplot(location)
+                ax.pcolormesh(self.config.X, self.config.Y, function)
+                ax.set_title(title)
+                
+                ax.set_xlim(0, self.config.Lx)
+                ax.set_ylim(0, self.config.Ly)
+
 
