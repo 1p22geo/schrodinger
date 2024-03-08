@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  run:
+    name: Run the Python script
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: pip3 install numpy scipy matplotlib imageio
+      - name: Run Python Script
+        run: python3 script2.py
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: output_images2
+          path: output_images2/
+          retention-days: 90
