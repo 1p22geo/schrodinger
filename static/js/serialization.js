@@ -6,6 +6,7 @@ export function serialize_state(state) {
   return btoa(
     JSON.stringify({
       particles: particle_state,
+      config: state.config,
     }),
   );
 }

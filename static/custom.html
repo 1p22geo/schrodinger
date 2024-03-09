@@ -31,10 +31,16 @@
       <div class="flex flex-row w-full items-center justify-start">
         <div class="flex flex-col w-24 gap-4">
           Add particles
-          <div class="w-24 h-24 bg-green-300" id="add-electron">
+          <div
+            class="w-24 h-24 bg-green-300 grid place-content-center cursor-pointer"
+            id="add-electron"
+          >
             ELEKTRON<br />ładny obrazek
           </div>
-          <div class="w-24 h-24 bg-yellow-300" id="add-photon">
+          <div
+            class="w-24 h-24 bg-yellow-300 grid place-content-center cursor-pointer"
+            id="add-photon"
+          >
             FOTON<br />ładny obrazek
           </div>
         </div>
@@ -45,6 +51,21 @@
           ></div>
           <div>
             <img src="media/hydrogen/level_1.png" id="main-image-render" />
+          </div>
+          <div class="flex flex-row w-full items-center justify-end gap-4 h-12">
+            <div
+              id="reload"
+              class="bg-gray-300 w-24 h-12 grid place-content-center cursor-pointer"
+            >
+              RELOAD
+            </div>
+            <div id="eta" class="text-gray-500 font-mono"></div>
+            <div
+              id="render"
+              class="bg-[#101060] w-24 h-12 text-white grid place-content-center cursor-pointer"
+            >
+              RENDER
+            </div>
           </div>
         </div>
         <div class="flex flex-col w-[600px] items-center" id="sidebar">

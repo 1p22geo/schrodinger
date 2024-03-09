@@ -4,6 +4,16 @@ import { serialize_state } from "./serialization.js";
 
 const state = {
   particles: [],
+  config: {
+    domain: {
+      x: 10,
+      y: 10,
+      Nx: 1000,
+      Ny: 1000,
+      Nt: 2000,
+      T_max: 10,
+    },
+  },
 };
 
 let focused_particle = -1;
@@ -20,9 +30,48 @@ function render_sidebar() {
   const sidebar = document.querySelector("#sidebar");
   if (focused_particle < 0) {
     sidebar.innerHTML = `
-<h1>Experiment config</h1>
-<h2>not implemented yet</h2>
+<h1 class="text-xl">Experiment config</h1>
+<form id="config-form" class="flex flex-col gap-4">
+  Size of the domain:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.x}">
+      x
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.y}">
+  </div>
+  Resolution of the domain:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nx}">
+      x
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.Ny}">
+  </div>
+
+  Length of simulation:
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.T_max}">
+
+  Number of time divisions
+  <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
+
+</form>
 `;
+    const form = document.querySelector(`#config-form`);
+    form.onchange = () => {
+      state.config.domain.x = parseInt(form.querySelectorAll("input")[0].value);
+      state.config.domain.y = parseInt(form.querySelectorAll("input")[1].value);
+      state.config.domain.Nx = parseInt(
+        form.querySelectorAll("input")[2].value,
+      );
+      state.config.domain.Ny = parseInt(
+        form.querySelectorAll("input")[3].value,
+      );
+      state.config.domain.T_max = parseInt(
+        form.querySelectorAll("input")[4].value,
+      );
+      state.config.domain.Nt = parseInt(
+        form.querySelectorAll("input")[5].value,
+      );
+      render_data();
+    };
+
     return;
   }
 
@@ -30,7 +79,7 @@ function render_sidebar() {
   switch (particle.__type) {
     case PARTICLES.ELECTRON: {
       sidebar.innerHTML = `
-<h1>Particle ${focused_particle}</h1>
+<h1 class="text-xl">Particle ${focused_particle}</h1>
 <h1>${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-4">
   Principal quantum number:
@@ -63,6 +112,7 @@ function render_sidebar() {
 }
 
 function render_data() {
+  console.log(state);
   document.querySelector("#particles").replaceChildren([]);
   const div = document.createElement("div");
   div.classList.add(
@@ -71,6 +121,8 @@ function render_data() {
     "h-24",
     "bg-[#101060]",
     "text-white",
+    "grid",
+    "place-content-center",
   );
   div.id = `config`;
   div.innerText = "FINITE SIMULATED SPACETIME";
@@ -81,7 +133,14 @@ function render_data() {
   state.particles.map((p, ix) => {
     console.log(p);
     const div = document.createElement("div");
-    div.classList.add("cursor-pointer", "w-24", "h-24", "bg-green-300");
+    div.classList.add(
+      "cursor-pointer",
+      "w-24",
+      "h-24",
+      "bg-green-300",
+      "grid",
+      "place-content-center",
+    );
     div.id = `particle-${ix}`;
     div.onclick = () => {
       switch_sidebar(ix);
@@ -89,14 +148,37 @@ function render_data() {
     div.innerText = p.__type;
     document.querySelector("#particles").appendChild(div);
   });
-  document
-    .querySelector("#main-image-render")
-    .setAttribute("src", `/api/renderpreview?state=${serialize_state(state)}`);
+  fetch(
+    `/api/renderpreview?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}`,
+  ).then((res) => {
+    res.blob().then((blob) => {
+      document
+        .querySelector("#main-image-render")
+        .setAttribute("src", URL.createObjectURL(blob));
+      document.querySelector("#eta").innerText =
+        `ETA: ${res.headers.get("X-ETA-To-Full-Animation")}`;
+    });
+  });
 }
 
 document.querySelector("#add-electron").onclick = () => {
   state.particles.push(new Electron(1, 0, 0));
   render_data();
+};
+
+document.querySelector("#reload").onclick = () => {
+  render_sidebar();
+  render_data();
+};
+
+document.querySelector("#render").onclick = () => {
+  fetch(
+    `/api/render?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}`,
+  ).then((res) => {
+    res.json().then((json) => {
+      window.location.assign(json.preview_url);
+    });
+  });
 };
 
 render_data();

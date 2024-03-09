@@ -2,10 +2,15 @@ import numpy as np
 import flask
 import lib
 import uuid
+import time
 
 
 def renderpreview(state):
-    config = lib.QuantumConfig()
+    start = time.time_ns()
+    dc = state["config"]["domain"]
+    config = lib.QuantumConfig(
+        1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
+    )
 
     serialized_particles = state["particles"]
     particles = []
@@ -45,7 +50,16 @@ def renderpreview(state):
             "3d",
         )
     filename = uuid.uuid4()
-    filename = f"temp/{filename}.png"
+    filename = f"static/temp/{filename}.png"
     graph.save(filename)
 
-    return flask.send_file(filename)
+    end = time.time_ns()
+    frame_time = end - start
+    eta = frame_time * config.Nt
+
+    days = int(eta / lib.NS_IN_DAY)
+    hours = round((eta % lib.NS_IN_DAY) / lib.NS_IN_HOUR, 2)
+
+    res = flask.send_file(filename)
+    res.headers["X-ETA-To-Full-Animation"] = f"{days} days, {hours} hours"
+    return res
