@@ -32,9 +32,7 @@ class GraphDisplay:
         - 'simple': simple 2d color plot
 
         Parameters:
-            int location: the matplotlib location for the subplot
-                location 235 means the fifth graph on a 2x3 grid
-                location 132 means the second graph on a 1x3 grid
+            FigureLocation location: the location for the subplot
             np.array function: the values of the function, as an array or List.
                 suggested array shape: (Nx, Ny)
             str title: title of the sublot (displayed above it)
@@ -42,20 +40,20 @@ class GraphDisplay:
         """
         match fig_type:
             case "color":
-                ax = self.fig.add_subplot(location)
+                ax = self.fig.add_subplot(location.spec())
                 cs = ax.contourf(self.config.X, self.config.Y, function)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
             case "3d":
-                ax = self.fig.add_subplot(location, projection="3d")
+                ax = self.fig.add_subplot(location.spec(), projection="3d")
                 ax.plot_surface(self.config.X, self.config.Y, function, cmap="viridis")
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
             case "simple":
-                ax = self.fig.add_subplot(location)
+                ax = self.fig.add_subplot(location.spec())
                 ax.pcolormesh(self.config.X, self.config.Y, function)
                 ax.set_title(title)
 

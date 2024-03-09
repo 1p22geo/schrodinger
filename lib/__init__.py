@@ -7,3 +7,4 @@ from lib.potential import (
     Potential as EmptyPotential,
 )
 from lib.graphs import GraphDisplay
+from lib.figlocation import FigureLocation
