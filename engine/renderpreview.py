@@ -22,7 +22,7 @@ def renderpreview(state):
                     )
                 )
 
-    graph = lib.GraphDisplay(config, (12, 4*len(particles)))
+    graph = lib.GraphDisplay(config, (12, 4 * len(particles)))
 
     for n in range(len(particles)):
         particle = particles[n]

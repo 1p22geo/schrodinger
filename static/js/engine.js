@@ -41,13 +41,19 @@ function render_sidebar() {
   <input type="number" class="mb-4 border" value="${particle.magnetic_quantum}">
 </form>
 `;
-      const form = document.querySelector(`#config-${focused_particle}`)
-      form.onchange = ()=>{
-        particle.principal_quantum = parseInt(form.querySelectorAll("input")[0].value);
-        particle.azimuthal_quantum = parseInt(form.querySelectorAll("input")[1].value);
-        particle.magnetic_quantum = parseInt(form.querySelectorAll("input")[2].value);
-        render_data()
-      }
+      const form = document.querySelector(`#config-${focused_particle}`);
+      form.onchange = () => {
+        particle.principal_quantum = parseInt(
+          form.querySelectorAll("input")[0].value,
+        );
+        particle.azimuthal_quantum = parseInt(
+          form.querySelectorAll("input")[1].value,
+        );
+        particle.magnetic_quantum = parseInt(
+          form.querySelectorAll("input")[2].value,
+        );
+        render_data();
+      };
       break;
     }
 
@@ -59,7 +65,13 @@ function render_sidebar() {
 function render_data() {
   document.querySelector("#particles").replaceChildren([]);
   const div = document.createElement("div");
-  div.classList.add("w-24", "h-24", "bg-[#101060]", "text-white");
+  div.classList.add(
+    "cursor-pointer",
+    "w-24",
+    "h-24",
+    "bg-[#101060]",
+    "text-white",
+  );
   div.id = `config`;
   div.innerText = "FINITE SIMULATED SPACETIME";
   div.onclick = () => {
@@ -69,7 +81,7 @@ function render_data() {
   state.particles.map((p, ix) => {
     console.log(p);
     const div = document.createElement("div");
-    div.classList.add("w-24", "h-24", "bg-green-300");
+    div.classList.add("cursor-pointer", "w-24", "h-24", "bg-green-300");
     div.id = `particle-${ix}`;
     div.onclick = () => {
       switch_sidebar(ix);
