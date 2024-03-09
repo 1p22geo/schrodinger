@@ -1,10 +1,5 @@
 import os
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.animation as animation
-import scipy
-import math
 import lib
 
 config = lib.QuantumConfig(1, 16, 16, 2000, 2000, 4000, 300)
