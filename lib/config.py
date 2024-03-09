@@ -1,8 +1,21 @@
 import numpy as np
 
 
-class QuantumConfig():
-    def __init__(self, a0, Lx=10, Ly=10, Nx=1000, Ny=1000, Nt=2000, T_max=10 ):
+class QuantumConfig:
+    """
+    Configuration for an experiment.
+
+    Atributes:
+        float a0: the Bohr radius. Better to leave it as default.
+        float Lx: size of the domain in x
+        float Ly: size of the domain in y
+        int Nx: resolution of the domain in x
+        int Ny: resolution of the domain in y
+        int Nt: amount of time-steps
+        float T_max: duration of the experiment
+    """
+
+    def __init__(self, a0=1.0, Lx=10, Ly=10, Nx=1000, Ny=1000, Nt=2000, T_max=10):
         self.a0 = a0
         self.Lx = Lx
         self.Ly = Ly
