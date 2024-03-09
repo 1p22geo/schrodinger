@@ -6,7 +6,6 @@ const state = {
 };
 
 function render_data() {
-  console.log(particles);
   document
     .querySelector("#main-image-render")
     .setAttribute("src", `/api/renderpreview?state=${serialize_state(state)}`);
