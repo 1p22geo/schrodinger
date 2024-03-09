@@ -1,4 +1,5 @@
 # A Python script to solve the Schrodinger's equation in a 2D domain.
+
 (spelled that wrong)
 
 ## Animations contained here:
@@ -22,11 +23,12 @@ quadratic_up_2x.gif - same, higher quality, longer animation.
 ---
 
 ### LARGE FILES!!
+
 ### PROCEED WITH CAUTION
+
 ---
 
 (GIFs not included, too large for github)
-
 
 step_scatter.gif / .mp4 - a step gravity well, particle-in-a-box scenario
 

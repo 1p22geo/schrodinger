@@ -1,35 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Schrodinger's equation | About the project</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="grid place-center">
-    <header class="w-full box-border gap-4 bg-black sticky top-0 text-white text-left p-2 flex items-center align-center">
-        <a href="index.html" class="text-xl w-content mr-auto">Physics simulations - Schrodinger's equation</a>
-        <a href="hydrogen.html" class="hover:text-gray-300">Hydrogen levels</a>
-        <a href="large.html" class="hover:text-gray-300">Large files</a>
-        <a href="about.html" class="hover:text-gray-300">About the project</a>
-        
+  </head>
+  <body class="grid place-center">
+    <header
+      class="w-full box-border gap-4 bg-black sticky top-0 text-white text-left p-2 flex items-center align-center"
+    >
+      <a href="index.html" class="text-xl w-content mr-auto"
+        >Physics simulations - Schrodinger's equation</a
+      >
+      <a href="hydrogen.html" class="hover:text-gray-300">Hydrogen levels</a>
+      <a href="large.html" class="hover:text-gray-300">Large files</a>
+      <a href="about.html" class="hover:text-gray-300">About the project</a>
     </header>
-    <div class="w-content mx-auto text-center font-sans flex flex-col items-center">
-        <h1 class="text-3xl m-4">About the project</h1>
-        <p>
-            Python. That's really all you need to know.
-            5 lines of Python.
-        </p>
-        <pre class="text-left m-4">
+    <div
+      class="w-content mx-auto text-center font-sans flex flex-col items-center"
+    >
+      <h1 class="text-3xl m-4">About the project</h1>
+      <p>Python. That's really all you need to know. 5 lines of Python.</p>
+      <pre class="text-left m-4">
     psi = psi * np.exp(-1j * V * dt / 2)
     psi = np.fft.fft2(psi)
     psi = psi * np.exp(-1j * (np.fft.fftfreq(Nx, dx)**2 + np.fft.fftfreq(Ny, dy)**2) * dt)
     psi = np.fft.ifft2(psi)
     psi = psi * np.exp(-1j * V * dt / 2)
-        </pre>
-        <p>
-            And that's all the thinking here. The rest is theory and complex plots.
-        </p>
+        </pre
+      >
+      <p>
+        And that's all the thinking here. The rest is theory and complex plots.
+      </p>
     </div>
-</body>
+  </body>
 </html>
