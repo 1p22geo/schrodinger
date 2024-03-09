@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schrodinger's equation | Experiment engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/engine.js" type="module" defer></script>
+  </head>
+  <body class="grid place-center">
+    <header
+      class="w-full box-border gap-4 bg-black sticky top-0 text-white text-left p-2 flex items-center align-center"
+    >
+      <a href="index.html" class="text-xl w-content mr-auto"
+        >Physics simulations - Schrodinger's equation</a
+      >
+      <a href="custom.html" class="hover:text-gray-300"
+        >Customized experiments</a
+      >
+      <a href="hydrogen.html" class="hover:text-gray-300">Hydrogen levels</a>
+      <a href="large.html" class="hover:text-gray-300">Large files</a>
+      <a href="about.html" class="hover:text-gray-300">About the project</a>
+    </header>
+    <div
+      class="w-full mx-auto text-center font-sans flex flex-col items-center"
+    >
+      <h1 class="text-3xl mt-4">Interactive experiment engine</h1>
+      <h2 class="text-xl mb-4">
+        Requires HTTP server with Flask and Javascript
+      </h2>
+      <div class="flex flex-row w-full items-center justify-start">
+        <div class="flex flex-col w-24 gap-4">
+          Add particles
+          <div class="w-24 h-24 bg-green-300" id="add-electron">
+            ELEKTRON<br />ładny obrazek
+          </div>
+          <div class="w-24 h-24 bg-yellow-300" id="add-photon">
+            FOTON<br />ładny obrazek
+          </div>
+        </div>
+
+        <div class="flex flex-col w-full items-center">
+          Particles in universe:
+          <div
+            class="flex flex-row w-full items-center justify-center gap-4 h-24"
+            id="particles"
+          ></div>
+          <div>
+            <img src="media/hydrogen/level_1.png" id="main-image-render" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
