@@ -13,6 +13,8 @@ class QueuedRender:
     def __init__(self, state):
         self.state = "RENDERING"
         self.latest = None
+        self.frame = 0
+        self.maxframe = state["config"]["domain"]["Nt"]
         self.thread = threading.Thread(target=self.render, args=(state,))
         self.thread.start()
 
@@ -48,6 +50,8 @@ class QueuedRender:
             graph = lib.GraphDisplay(config, (12, 4 * len(particles)))
             for n in range(len(particles)):
                 particle = particles[n]
+                particle.propagate(potential.V)
+
                 graph.add_figure(
                     lib.FigureLocation(len(particles), 3, 3 * n),
                     np.angle(particle.psi),
@@ -69,6 +73,7 @@ class QueuedRender:
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)
             self.latest = filename
+            self.frame = t
 
         self.state = "READY"
 
@@ -77,7 +82,8 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps(
+            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 
@@ -86,6 +92,19 @@ def preview_render(render_id):
     try:
         renderstate = renders[render_id].state
         latest = renders[render_id].latest
+        frame = renders[render_id].frame
+        maxframe = renders[render_id].maxframe
+        reload = ""
+        if not latest:
+            reload = "setTimeout(()=>{window.location.reload()}, 1000)"
+        onload = ""
+        if renderstate == "RENDERING":
+            renderstate = f"{renderstate} frame {frame}/{maxframe}"
+            onload = """
+document.querySelector("img").onload = ()=>\x7b
+    setTimeout(()=>\x7bwindow.location.reload()\x7d, 500)
+\x7d
+"""
         return f"""
 <html>
 <head>
@@ -93,10 +112,13 @@ def preview_render(render_id):
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h1 class="text-xl">{renderstate}</h1>
+<h1 class="text-xl">
+    Render {render_id}: {renderstate}
+</h1>
 <img src="/{latest}">
-<script>
-setTimeout(()=>\x7bwindow.location.reload()\x7d, 5000)
+<script defer>
+{reload}
+{onload}
 </script>
 </body>
 </html>

@@ -6,9 +6,9 @@ config = lib.QuantumConfig(1, 10, 10, 1000, 1000, 3000, 200)
 
 # Define the potential function (you can modify this)
 potential = lib.EmptyPotential(config)
-potential.V[:, int(3.5 * config.Ny // 8) : int(4 * config.Ny // 8)] = 1000000
-potential.V[int(2.7 * config.Nx / 7) : int(3.2 * config.Nx / 7), :] = 0
-potential.V[int(3.8 * config.Nx / 7) : int(4.3 * config.Nx / 7), :] = 0
+potential.V[:, int(3.5 * config.Ny // 8): int(4 * config.Ny // 8)] = 1000000
+potential.V[int(2.7 * config.Nx / 7): int(3.2 * config.Nx / 7), :] = 0
+potential.V[int(3.8 * config.Nx / 7): int(4.3 * config.Nx / 7), :] = 0
 
 # Initial wave function (Gaussial wave packet)
 particle = lib.WavePacket(config, 0.5, 2.0, 2.0, 2.0, 5.0)

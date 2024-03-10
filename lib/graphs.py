@@ -48,7 +48,8 @@ class GraphDisplay:
                 self.fig.colorbar(cs)
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
-                ax.plot_surface(self.config.X, self.config.Y, function, cmap="viridis")
+                ax.plot_surface(self.config.X, self.config.Y,
+                                function, cmap="viridis")
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
