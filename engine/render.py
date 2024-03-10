@@ -14,6 +14,7 @@ class QueuedRender:
         self.state = "RENDERING"
         self.latest = None
         self.frame = 0
+        self.mp4 = None
         self.maxframe = state["config"]["domain"]["Nt"]
         self.thread = threading.Thread(target=self.render, args=(state,))
         self.thread.start()
@@ -75,6 +76,13 @@ class QueuedRender:
             self.latest = filename
             self.frame = t
 
+        print("Files ready. Rendering to MP4.")
+        self.state = "RENDERING_MP4"
+        os.system(f"ffmpeg -i {dirname}/frame_%d.png {dirname}/movie.mpg")
+        os.system(
+            f"ffmpeg -i {dirname}/movie.mpg -c:v libx264 -c:a libfaac -crf 1 -preset:v veryslow {dirname}/movie.mp4"
+        )
+        self.mp4 = f"{dirname}/movie.mp4"
         self.state = "READY"
 
 
@@ -82,8 +90,7 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps(
-            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 
@@ -95,7 +102,7 @@ def preview_render(render_id):
         frame = renders[render_id].frame
         maxframe = renders[render_id].maxframe
         reload = ""
-        if not latest:
+        if not latest or renderstate == "RENDERING_MP4":
             reload = "setTimeout(()=>{window.location.reload()}, 1000)"
         onload = ""
         if renderstate == "RENDERING":
@@ -105,6 +112,18 @@ document.querySelector("img").onload = ()=>\x7b
     setTimeout(()=>\x7bwindow.location.reload()\x7d, 500)
 \x7d
 """
+        download = ""
+        if renders[render_id].mp4:
+            mp4 = renders[render_id].mp4
+            download = f"""
+<a
+    href="/{mp4}"
+    class="hover:underline text-gray-800"
+    download
+>
+    Download MP4
+</a>
+            """
         return f"""
 <html>
 <head>
@@ -112,9 +131,10 @@ document.querySelector("img").onload = ()=>\x7b
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h1 class="text-xl">
+<h1 class="text-2xl">
     Render {render_id}: {renderstate}
 </h1>
+{download}
 <img src="/{latest}">
 <script defer>
 {reload}
