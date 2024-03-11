@@ -20,9 +20,10 @@ class GraphDisplay:
         """
         save the graph output into a file
         """
-        plt.savefig(filename)
+        self.fig.savefig(filename)
         print(f"Saved to {filename}")
-        plt.close()
+        plt.close(self.fig)
+        del self.fig
 
     def add_figure(self, location, function, title="", fig_type="3d"):
         """

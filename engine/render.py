@@ -152,5 +152,5 @@ def recent_renders():
     for render_id in range(len(renders)):
         render = renders[render_id]
         st = render.state
-        res += f'<a href="/api/preview?id={render_id}">#{render_id} - {st}</a>'
+        res += f'<a href="/api/preview?id={render_id}">#{render_id} - {st}</a><br/>'
     return res
