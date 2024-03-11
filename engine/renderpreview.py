@@ -49,11 +49,13 @@ def renderpreview(state):
             lib.CoulombPotential(config).V,
             f"Mean potential field (particle {n})",
             "3d",
+            zlim=(-1, 0),
+            cmap=None
         )
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
     if not os.path.exists("static/temp"):
-            os.makedirs("static/temp")
+        os.makedirs("static/temp")
     graph.save(filename)
 
     end = time.time_ns()

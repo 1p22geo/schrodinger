@@ -25,7 +25,13 @@ class GraphDisplay:
         plt.close(self.fig)
         del self.fig
 
-    def add_figure(self, location, function, title="", fig_type="3d"):
+    def add_figure(self,
+                   location,
+                   function,
+                   title="",
+                   fig_type="3d",
+                   cmap="viridis",
+                   zlim=(None, None)):
         """
         add another subplot figure
 
@@ -44,20 +50,21 @@ class GraphDisplay:
         match fig_type:
             case "color":
                 ax = self.fig.add_subplot(location.spec())
-                cs = ax.contourf(self.config.X, self.config.Y, function)
+                cs = ax.contourf(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
-                ax.plot_surface(self.config.X, self.config.Y, function, cmap="viridis")
+                ax.plot_surface(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
+                ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
-                ax.pcolormesh(self.config.X, self.config.Y, function)
+                ax.pcolormesh(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
 
                 ax.set_xlim(0, self.config.Lx)
