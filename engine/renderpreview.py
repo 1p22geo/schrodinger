@@ -3,6 +3,7 @@ import flask
 import lib
 import uuid
 import time
+import os
 
 
 def renderpreview(state):
@@ -51,6 +52,8 @@ def renderpreview(state):
         )
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
+    if not os.path.exists("static/temp"):
+            os.makedirs("static/temp")
     graph.save(filename)
 
     end = time.time_ns()
