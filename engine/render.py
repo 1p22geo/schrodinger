@@ -78,7 +78,9 @@ class QueuedRender:
 
         print("Files ready. Rendering to MP4.")
         self.state = "RENDERING_MP4"
-        os.system(f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg")
+        os.system(
+            f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg"
+        )
         os.system(
             f"ffmpeg -i {dirname}/movie.mpg -c:v libx264 -c:a libfaac -crf 1 -preset:v veryslow {dirname}/movie.mp4"
         )
@@ -90,7 +92,8 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps(
+            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 

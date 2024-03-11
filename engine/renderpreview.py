@@ -50,7 +50,7 @@ def renderpreview(state):
             f"Mean potential field (particle {n})",
             "3d",
             zlim=(-1, 0),
-            cmap=None
+            cmap=None,
         )
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
