@@ -4,29 +4,12 @@ import lib
 import uuid
 import time
 import os
+from engine.deserialization import Deserializer
 
 
 def renderpreview(state):
     start = time.time_ns()
-    dc = state["config"]["domain"]
-    config = lib.QuantumConfig(
-        1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
-    )
-
-    serialized_particles = state["particles"]
-    particles = []
-    for sp in serialized_particles:
-        match sp["type"]:
-            case "electron":
-                particles.append(
-                    lib.Electron(
-                        config,
-                        lib.CoulombPotential(config),
-                        sp["principal_quantum"],
-                        sp["azimuthal_quantum"],
-                        sp["magnetic_quantum"],
-                    )
-                )
+    config, potential, particles = Deserializer().ds(state)
 
     graph = lib.GraphDisplay(config, (12, 4 * len(particles)))
 

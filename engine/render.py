@@ -5,6 +5,7 @@ import uuid
 import json
 import threading
 import os
+from engine.deserialization import Deserializer
 
 renders = []
 
@@ -20,26 +21,7 @@ class QueuedRender:
         self.thread.start()
 
     def render(self, state):
-        dc = state["config"]["domain"]
-        config = lib.QuantumConfig(
-            1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
-        )
-
-        potential = lib.CoulombPotential(config)
-        serialized_particles = state["particles"]
-        particles = []
-        for sp in serialized_particles:
-            match sp["type"]:
-                case "electron":
-                    particles.append(
-                        lib.Electron(
-                            config,
-                            potential,
-                            sp["principal_quantum"],
-                            sp["azimuthal_quantum"],
-                            sp["magnetic_quantum"],
-                        )
-                    )
+        config, potential, particles = Deserializer().ds(state)
 
         dirname = uuid.uuid4()
         dirname = f"static/temp/{dirname}"
@@ -70,6 +52,8 @@ class QueuedRender:
                     potential.V,
                     f"Mean potential field (particle {n})",
                     "3d",
+                    cmap=None,
+                    zlim=(-1, 0)
                 )
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)
