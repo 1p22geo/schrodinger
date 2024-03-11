@@ -38,7 +38,9 @@ class Deserializer():
                                 sp['kx0'],
                                 sp['ky0'],
                                 sp['x0'],
-                                sp['y0']
+                                sp['y0'],
+                                sp['vx'],
+                                sp['vy']
                                 )
                             )
 

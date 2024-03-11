@@ -135,6 +135,12 @@ kx0, ky0:
       ,
   <input type="number" class="mb-4 border w-full" value="${particle.ky0}">
   </div>
+v:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${particle.vx}">
+      ,
+  <input type="number" class="mb-4 border w-full" value="${particle.vy}">
+  </div>
 
 </form>
 `;
@@ -155,6 +161,13 @@ kx0, ky0:
         particle.ky0 = parseFloat(
           form.querySelectorAll("input")[4].value,
         );
+        particle.vx = parseFloat(
+          form.querySelectorAll("input")[5].value,
+        );
+        particle.vy = parseFloat(
+          form.querySelectorAll("input")[6].value,
+        );
+
         render_data();
       };
       break;
@@ -219,7 +232,7 @@ document.querySelector("#add-electron").onclick = () => {
   render_data();
 };
 document.querySelector("#add-photon").onclick = () => {
-  state.particles.push(new Photon(0.5, 2.0, 2.0, 5.0, 5.0));
+  state.particles.push(new Photon(0.5, 2.0, 2.0, 5.0, 5.0, 0.0, 0.0));
   render_data();
 };
 

@@ -12,6 +12,8 @@ class WavePacket:
         float ky0: initial height of the wave packet
         float x0: initial x position
         float y0: initial y position
+        float vx: velocity X component (EXPERIMENTAL)
+        float vy: velocity Y component (EXPERIMENTAL)
     """
 
     def __init__(
@@ -22,8 +24,12 @@ class WavePacket:
         ky0=2.0,
         x0=2.0,
         y0=5.0,
+        vx=0.0,
+        vy=0.0,
     ):
         self.config = config
+        self.vx = vx
+        self.vy = vy
         self.psi = np.exp(
             -((config.X - x0) ** 2 + (config.Y - y0) ** 2) / (2 * sigma**2)
         ) * np.exp(1j * (kx0 * config.X + ky0 * config.Y))
@@ -36,6 +42,11 @@ class WavePacket:
             np.array V: the potential field as an array
                 of shape (Nx, Ny)
         """
+
+        print(self.vy)
+        print(self.config.dy)
+        self.psi = [np.roll(row, int(self.vy / self.config.dy * self.config.dt)) for row in self.psi]
+        self.psi = np.roll(self.psi, int(self.vx / self.config.dx * self.config.dt))
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)
