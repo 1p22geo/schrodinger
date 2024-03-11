@@ -8,6 +8,7 @@ from engine.deserialization import Deserializer
 
 
 def renderpreview(state):
+    print(state)
     start = time.time_ns()
     config, potential, particles = Deserializer().ds(state)
 
@@ -29,7 +30,7 @@ def renderpreview(state):
         )
         graph.add_figure(
             lib.FigureLocation(len(particles), 3, 3 * n + 2),
-            lib.CoulombPotential(config).V,
+            potential.V,
             f"Mean potential field (particle {n})",
             "3d",
             zlim=(-1, 0),

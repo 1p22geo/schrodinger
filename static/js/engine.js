@@ -13,6 +13,7 @@ const state = {
       Ny: 1000,
       Nt: 2000,
       T_max: 10,
+      potential: "coulomb"
     },
   },
 };
@@ -52,10 +53,17 @@ function render_sidebar() {
   Number of time divisions
   <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
 
+  Potential function
+  <select>
+    <option value="coulomb">Central Coulomb potential</option>
+    <option value="none">Empty potential field</option>
+  </select>
+
 </form>
 `;
     const form = document.querySelector(`#config-form`);
-    form.onchange = () => {
+    form.querySelectorAll("select")[0].value = state.config.domain.potential
+     form.onchange = () => {
       state.config.domain.x = parseInt(form.querySelectorAll("input")[0].value);
       state.config.domain.y = parseInt(form.querySelectorAll("input")[1].value);
       state.config.domain.Nx = parseInt(
@@ -70,6 +78,8 @@ function render_sidebar() {
       state.config.domain.Nt = parseInt(
         form.querySelectorAll("input")[5].value,
       );
+      state.config.domain.potential = 
+        form.querySelectorAll("select")[0].value
       render_data();
     };
 
