@@ -43,10 +43,8 @@ class WavePacket:
                 of shape (Nx, Ny)
         """
 
-        print(self.vy)
-        print(self.config.dy)
         self.psi = [np.roll(row, int(self.vy / self.config.dy * self.config.dt)) for row in self.psi]
-        self.psi = np.roll(self.psi, int(self.vx / self.config.dx * self.config.dt))
+        self.psi = np.roll(self.psi, int(self.vx / self.config.dx * self.config.dt), axis=0)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)
