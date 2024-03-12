@@ -33,6 +33,9 @@ class WavePacket:
         self.psi = np.exp(
             -((config.X - x0) ** 2 + (config.Y - y0) ** 2) / (2 * sigma**2)
         ) * np.exp(1j * (kx0 * config.X + ky0 * config.Y))
+        
+        integ = np.sum((abs(self.psi)**2)*(config.dx)*(config.dy))
+        self.psi/=integ**(1/2)
 
     def propagate(self, V):
         """
@@ -57,3 +60,4 @@ class WavePacket:
             * self.config.dt
         )
         self.psi = np.fft.ifft2(self.psi)
+        

@@ -44,6 +44,8 @@ class Electron:
             * np.exp(-self.r_norm)
             * self.Ylm
         )
+        integ = np.sum((abs(self.psi)**2)*(config.dx)*(config.dy))
+        self.psi/=integ**(1/2)
 
     def propagate(self, V):
         """
