@@ -26,6 +26,9 @@ class Electron:
         azimuthal_quantum=0,
         magnetic_quantum=0,
     ):
+        self.principal_quantum=principal_quantum
+        self.azimuthal_quantum=azimuthal_quantum
+        self.magnetic_quantum=magnetic_quantum
         self.config = config
         self.r_norm = potential.r / (
             principal_quantum * config.a0
