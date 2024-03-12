@@ -5,6 +5,9 @@ class Potential:
     def __init__(self, config):
         self.x_center = config.Lx / 2
         self.y_center = config.Ly / 2
+        self.r = np.sqrt(
+            (config.X - self.x_center) ** 2 + (config.Y - self.y_center) ** 2
+        )
         self.V = np.zeros((config.Nx, config.Ny))
         self.V[:, :] = 0
 
@@ -12,9 +15,6 @@ class Potential:
 class CoulombPotential(Potential):
     def __init__(self, config):
         super().__init__(config)
-        self.r = np.sqrt(
-            (config.X - self.x_center) ** 2 + (config.Y - self.y_center) ** 2
-        )
         self.V = -1 / self.r  # Central Coulomb potential
 
 
