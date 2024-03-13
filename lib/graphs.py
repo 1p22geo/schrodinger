@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
+import os
 
 matplotlib.use("Agg")
 
@@ -53,22 +54,35 @@ class GraphDisplay:
         match fig_type:
             case "color":
                 ax = self.fig.add_subplot(location.spec())
-                cs = ax.contourf(self.config.X, self.config.Y, function, cmap=cmap)
+                cs = ax.contourf(self.config.X, self.config.Y,
+                                 function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
-                ax.plot_surface(self.config.X, self.config.Y, function, cmap=cmap)
+                ax.plot_surface(self.config.X, self.config.Y,
+                                function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
-                ax.pcolormesh(self.config.X, self.config.Y, function, cmap=cmap)
+                ax.pcolormesh(self.config.X, self.config.Y,
+                              function, cmap=cmap)
                 ax.set_title(title)
 
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
+
+    def render_mp4(self, dirname):
+        os.system(
+            f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg"
+        )
+        os.system(
+            f"ffmpeg -i {dirname}/movie.mpg -c:v libx264 -c:a libfaac -crf 1 -preset:v veryslow {dirname}/movie.mp4"
+        )
+        mp4 = f"{dirname}/movie.mp4"
+        return mp4

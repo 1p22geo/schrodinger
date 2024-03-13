@@ -76,7 +76,8 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps(
+            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 
