@@ -26,9 +26,9 @@ class Electron:
         azimuthal_quantum=0,
         magnetic_quantum=0,
     ):
-        self.principal_quantum=principal_quantum
-        self.azimuthal_quantum=azimuthal_quantum
-        self.magnetic_quantum=magnetic_quantum
+        self.principal_quantum = principal_quantum
+        self.azimuthal_quantum = azimuthal_quantum
+        self.magnetic_quantum = magnetic_quantum
         self.config = config
         self.r_norm = potential.r / (
             principal_quantum * config.a0
@@ -47,8 +47,8 @@ class Electron:
             * np.exp(-self.r_norm)
             * self.Ylm
         )
-        integ = np.sum((abs(self.psi)**2)*(config.dx)*(config.dy))
-        self.psi/=integ**(1/2)
+        integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
+        self.psi /= integ ** (1 / 2)
 
     def propagate(self, V):
         """

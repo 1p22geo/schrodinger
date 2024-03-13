@@ -1,20 +1,20 @@
 import lib
 
 
-class Deserializer():
+class Deserializer:
     def __init__(self):
         pass
 
     def ds(self, state):
         dc = state["config"]["domain"]
-        config = lib.QuantumConfig(
+        config = lib.Config(
             1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
         )
         potential = None
-        match dc['potential']:
-            case 'coulomb':
+        match dc["potential"]:
+            case "coulomb":
                 potential = lib.CoulombPotential(config)
-            case 'none':
+            case "none":
                 potential = lib.EmptyPotential(config)
         serialized_particles = state["particles"]
         particles = []
@@ -32,16 +32,16 @@ class Deserializer():
                     )
                 case "photon":
                     particles.append(
-                            lib.WavePacket(
-                                config,
-                                sp['sigma'],
-                                sp['kx0'],
-                                sp['ky0'],
-                                sp['x0'],
-                                sp['y0'],
-                                sp['vx'],
-                                sp['vy']
-                                )
-                            )
+                        lib.WavePacket(
+                            config,
+                            sp["sigma"],
+                            sp["kx0"],
+                            sp["ky0"],
+                            sp["x0"],
+                            sp["y0"],
+                            sp["vx"],
+                            sp["vy"],
+                        )
+                    )
 
         return config, potential, particles

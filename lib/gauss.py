@@ -1,4 +1,5 @@
 import numpy as np
+import lib
 
 
 class WavePacket:
@@ -33,9 +34,9 @@ class WavePacket:
         self.psi = np.exp(
             -((config.X - x0) ** 2 + (config.Y - y0) ** 2) / (2 * sigma**2)
         ) * np.exp(1j * (kx0 * config.X + ky0 * config.Y))
-        
-        integ = np.sum((abs(self.psi)**2)*(config.dx)*(config.dy))
-        self.psi/=integ**(1/2)
+
+        integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
+        self.psi /= integ ** (1 / 2)
 
     def propagate(self, V):
         """
@@ -46,8 +47,8 @@ class WavePacket:
                 of shape (Nx, Ny)
         """
 
-        self.psi = [np.roll(row, int(self.vy / self.config.dy * self.config.dt)) for row in self.psi]
-        self.psi = np.roll(self.psi, int(self.vx / self.config.dx * self.config.dt), axis=0)
+        self.psi = lib.waveutils.rollwave(
+            self.config, self.psi, self.vx, self.vy)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)
@@ -60,4 +61,3 @@ class WavePacket:
             * self.config.dt
         )
         self.psi = np.fft.ifft2(self.psi)
-        

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class QuantumConfig:
+class Config:
     """
     Configuration for an experiment.
 

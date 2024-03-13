@@ -2,7 +2,7 @@ import os
 import numpy as np
 import lib
 
-config = lib.QuantumConfig(1, 16, 16, 2000, 2000, 4000, 300)
+config = lib.Config(1, 16, 16, 2000, 2000, 4000, 300)
 
 potential = lib.CoulombPotential(config)
 

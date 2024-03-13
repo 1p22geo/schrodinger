@@ -53,7 +53,7 @@ class QueuedRender:
                     f"Mean potential field (particle {n})",
                     "3d",
                     cmap=None,
-                    zlim=(-1, 0)
+                    zlim=(-1, 0),
                 )
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)
@@ -76,8 +76,7 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps(
-            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 
