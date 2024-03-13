@@ -2,15 +2,15 @@ import os
 import numpy as np
 import lib
 
-config = lib.Config(1, 10, 20, 4000, 4000, 4000, 200)
+config = lib.Config(1, 20, 20, 4000, 4000, 4000, 200)
 
-proton_1 = lib.CoulombPotential(config, x_center=5, y_center=5)
-proton_2 = lib.CoulombPotential(config, x_center=5, y_center=15)
+proton_1 = lib.CoulombPotential(config, x_center=10, y_center=5)
+proton_2 = lib.CoulombPotential(config, x_center=10, y_center=15)
 
 
-el1 = lib.Electron(config, proton_1, 2, 1, 0)
+el1 = lib.Electron(config, proton_1, 1, 0, 0)
 
-el2 = lib.Electron(config, proton_2, 2, 1, 0)
+el2 = lib.Electron(config, proton_2, 1, 0, 0)
 el2.psi *= -1
 
 
@@ -21,6 +21,14 @@ frames = []
 
 for t in range(config.Nt):
     print(f"Time: {t}")
+    merged = 1
+    if t <= 100:
+        merged = t/100
+    proton_1 = lib.CoulombPotential(
+        config, x_center=10, y_center=(5+merged*5))
+    proton_2 = lib.CoulombPotential(
+        config, x_center=10, y_center=(15-merged*5))
+
     potential_1 = lib.MeanFieldPotential(
         config, el2).V + proton_1.V + proton_2.V
     potential_2 = lib.MeanFieldPotential(
@@ -48,10 +56,20 @@ for t in range(config.Nt):
             el2.psi), "Absolute (Electron 2)", "3d"
     )
     graph.add_figure(
-        lib.FigureLocation(2, 3, 2), proton_1.V, "Potential (proton 1)", "3d"
+        lib.FigureLocation(2, 3, 2),
+        proton_1.V,
+        "Potential (proton 1)",
+        "3d",
+        cmap=None,
+        zlim=(-1, 0)
     )
     graph.add_figure(
-        lib.FigureLocation(2, 3, 5), proton_2.V, "Potential (proton 2)", "3d"
+        lib.FigureLocation(2, 3, 5),
+        proton_2.V,
+        "Potential (proton 2)",
+        "3d",
+        cmap=None,
+        zlim=(-1, 0)
     )
 
     filename = f"output_images/frame_{t}.png"
