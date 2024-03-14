@@ -6,7 +6,7 @@ export class Electron {
     this.azimuthal_quantum = azimuthal_quantum;
     this.magnetic_quantum = magnetic_quantum;
     this.__type = PARTICLES.ELECTRON;
-    this.__style = ["bg-green-300"]
+    this.__style = ["bg-green-300"];
   }
   serialize() {
     return {

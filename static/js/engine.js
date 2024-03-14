@@ -13,7 +13,7 @@ const state = {
       Ny: 1000,
       Nt: 2000,
       T_max: 10,
-      potential: "coulomb"
+      potential: "coulomb",
     },
   },
 };
@@ -62,8 +62,8 @@ function render_sidebar() {
 </form>
 `;
     const form = document.querySelector(`#config-form`);
-    form.querySelectorAll("select")[0].value = state.config.domain.potential
-     form.onchange = () => {
+    form.querySelectorAll("select")[0].value = state.config.domain.potential;
+    form.onchange = () => {
       state.config.domain.x = parseInt(form.querySelectorAll("input")[0].value);
       state.config.domain.y = parseInt(form.querySelectorAll("input")[1].value);
       state.config.domain.Nx = parseInt(
@@ -78,8 +78,7 @@ function render_sidebar() {
       state.config.domain.Nt = parseInt(
         form.querySelectorAll("input")[5].value,
       );
-      state.config.domain.potential = 
-        form.querySelectorAll("select")[0].value
+      state.config.domain.potential = form.querySelectorAll("select")[0].value;
       render_data();
     };
 
@@ -146,27 +145,13 @@ v:
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
       form.onchange = () => {
-        particle.sigma = parseFloat(
-          form.querySelectorAll("input")[0].value,
-        );
-        particle.x0 = parseFloat(
-          form.querySelectorAll("input")[1].value,
-        );
-        particle.y0 = parseFloat(
-          form.querySelectorAll("input")[2].value,
-        );
-        particle.kx0 = parseFloat(
-          form.querySelectorAll("input")[3].value,
-        );
-        particle.ky0 = parseFloat(
-          form.querySelectorAll("input")[4].value,
-        );
-        particle.vx = parseFloat(
-          form.querySelectorAll("input")[5].value,
-        );
-        particle.vy = parseFloat(
-          form.querySelectorAll("input")[6].value,
-        );
+        particle.sigma = parseFloat(form.querySelectorAll("input")[0].value);
+        particle.x0 = parseFloat(form.querySelectorAll("input")[1].value);
+        particle.y0 = parseFloat(form.querySelectorAll("input")[2].value);
+        particle.kx0 = parseFloat(form.querySelectorAll("input")[3].value);
+        particle.ky0 = parseFloat(form.querySelectorAll("input")[4].value);
+        particle.vx = parseFloat(form.querySelectorAll("input")[5].value);
+        particle.vy = parseFloat(form.querySelectorAll("input")[6].value);
 
         render_data();
       };

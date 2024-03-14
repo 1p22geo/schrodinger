@@ -11,7 +11,7 @@ export class Photon {
     this.vy = vy;
 
     this.__type = PARTICLES.PHOTON;
-    this.__style = ["bg-yellow-300"]
+    this.__style = ["bg-yellow-300"];
   }
   serialize() {
     return {
@@ -23,7 +23,6 @@ export class Photon {
       y0: this.y0,
       vx: this.vx,
       vy: this.vy,
-
     };
   }
 }
