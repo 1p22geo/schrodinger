@@ -33,7 +33,7 @@ class QueuedRender:
             graph = lib.GraphDisplay(config, (12, 4 * len(particles)))
             for n in range(len(particles)):
                 particle = particles[n]
-                particle.propagate(potential.V)
+                particle.propagate(potential.V, particles)
 
                 graph.add_figure(
                     lib.FigureLocation(len(particles), 3, 3 * n),

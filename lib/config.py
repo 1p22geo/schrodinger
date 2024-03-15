@@ -29,3 +29,4 @@ class Config:
         self.X, self.Y = np.meshgrid(self.x, self.y)
         self.dx = self.x[1] - self.x[0]
         self.dy = self.y[1] - self.y[0]
+        self.interactions_enabled = False

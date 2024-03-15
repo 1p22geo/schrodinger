@@ -1,5 +1,7 @@
 import numpy as np
+import random
 import lib
+import uuid
 
 
 class WavePacket:
@@ -28,6 +30,7 @@ class WavePacket:
         vx=0.0,
         vy=0.0,
     ):
+        self._id = uuid.uuid4()
         self.config = config
         self.vx = vx
         self.vy = vy
@@ -38,7 +41,7 @@ class WavePacket:
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
 
-    def propagate(self, V):
+    def propagate(self, V, particles):
         """
         propagate the wave function in a potential field
 
@@ -47,7 +50,8 @@ class WavePacket:
                 of shape (Nx, Ny)
         """
 
-        self.psi = lib.waveutils.rollwave(self.config, self.psi, self.vx, self.vy)
+        self.psi = lib.waveutils.rollwave(
+            self.config, self.psi, self.vx, self.vy)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)
@@ -60,3 +64,12 @@ class WavePacket:
             * self.config.dt
         )
         self.psi = np.fft.ifft2(self.psi)
+
+        if not (self.config.interactions_enabled):
+            return
+        # Interact with other particles
+        for p in particles:
+            if p._id == self._id:
+                continue
+            pass
+            # interact with particle
