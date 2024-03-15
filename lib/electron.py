@@ -40,15 +40,14 @@ class Electron:
         self.psi /= integ ** (1 / 2)
 
     def calculate_psi(self, potential):
-        '''
+        """
         calculate the wave function for a bound electron with given n, l, m
-        '''
+        """
         r_norm = potential.r / (
             self.principal_quantum * self.config.a0
         )  # Normalize r for the excited state
         theta = np.arctan2(
-            self.config.Y - potential.y_center,
-            self.config.X - potential.x_center
+            self.config.Y - potential.y_center, self.config.X - potential.x_center
         )
         # phi = np.zeros_like(theta)  # Azimuthal angle (0 for simplicity)
         phi = theta
