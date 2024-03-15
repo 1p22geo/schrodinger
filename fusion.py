@@ -2,7 +2,7 @@ import os
 import numpy as np
 import lib
 
-config = lib.Config(1, 20, 20, 4000, 4000, 4000, 200)
+config = lib.Config(1, 20, 20, 4000, 4000, 2000, 200)
 
 proton_1 = lib.CoulombPotential(config, x_center=10, y_center=5)
 proton_2 = lib.CoulombPotential(config, x_center=10, y_center=15)
@@ -22,8 +22,8 @@ frames = []
 for t in range(config.Nt):
     print(f"Time: {t}")
     merged = 1
-    if t <= 100:
-        merged = t/100
+    if t <= 1000:
+        merged = t/1000
     proton_1 = lib.CoulombPotential(
         config, x_center=10, y_center=(5+merged*5))
     proton_2 = lib.CoulombPotential(
