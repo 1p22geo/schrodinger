@@ -25,8 +25,9 @@ for t in range(config.Nt):
     merged = 1
     if t <= 1000:
         merged = t / 1000
-        el1.psi = lib.waveutils.rollwave(config, el1.psi, 0, 1)
-        el2.psi = lib.waveutils.rollwave(config, el2.psi, 0, -1)
+        el1.psi = np.roll(el1.psi, 1, axis=0)
+        el2.psi = np.roll(el2.psi, -1, axis=0)
+
     proton_1 = lib.CoulombPotential(
         config, x_center=10, y_center=(5 + merged * 5))
     proton_2 = lib.CoulombPotential(
