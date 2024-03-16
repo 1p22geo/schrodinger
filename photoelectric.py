@@ -2,7 +2,7 @@ import os
 import numpy as np
 import lib
 
-config = lib.Config(1, 20, 20, 2000, 2000, 1000, 10)
+config = lib.Config(1, 20, 20, 2000, 2000, 2000, 50)
 
 potential = lib.CoulombPotential(config)
 
@@ -16,7 +16,7 @@ if not os.path.exists(dirname):
 
 frames = []
 for t in range(config.Nt):
-    if t == 500:
+    if t == 400:
         particles[0].principal_quantum = 1
         particles[0].azimuthal_quantum = 0
         particles[0].psi = particles[0].calculate_psi(potential)

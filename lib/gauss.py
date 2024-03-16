@@ -50,7 +50,8 @@ class WavePacket:
                 of shape (Nx, Ny)
         """
 
-        self.psi = lib.waveutils.rollwave(self.config, self.psi, self.vx, self.vy)
+        self.psi = lib.waveutils.rollwave(
+            self.config, self.psi, self.vx, self.vy)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)

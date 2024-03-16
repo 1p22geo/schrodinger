@@ -17,6 +17,6 @@ def test_photon_propagate():
     res = np.sum((abs(ph.psi) ** 2) * (config.dx) * (config.dy))
     assert floateq(res, 1)
     for _ in range(config.Nt):
-        ph.propagate(potential.V)
+        ph.propagate(potential.V, [])
         res = np.sum((abs(ph.psi) ** 2) * (config.dx) * (config.dy))
         assert floateq(res, 1)

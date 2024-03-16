@@ -24,11 +24,15 @@ for t in range(config.Nt):
     merged = 1
     if t <= 1000:
         merged = t / 1000
-    proton_1 = lib.CoulombPotential(config, x_center=10, y_center=(5 + merged * 5))
-    proton_2 = lib.CoulombPotential(config, x_center=10, y_center=(15 - merged * 5))
+    proton_1 = lib.CoulombPotential(
+        config, x_center=10, y_center=(5 + merged * 5))
+    proton_2 = lib.CoulombPotential(
+        config, x_center=10, y_center=(15 - merged * 5))
 
-    potential_1 = lib.MeanFieldPotential(config, el2).V + proton_1.V + proton_2.V
-    potential_2 = lib.MeanFieldPotential(config, el1).V + proton_1.V + proton_2.V
+    potential_1 = lib.MeanFieldPotential(
+        config, el2).V + proton_1.V + proton_2.V
+    potential_2 = lib.MeanFieldPotential(
+        config, el1).V + proton_1.V + proton_2.V
 
     el1.propagate(potential_1)
     el2.propagate(potential_2)
@@ -36,16 +40,20 @@ for t in range(config.Nt):
     graph = lib.GraphDisplay(config)
 
     graph.add_figure(
-        lib.FigureLocation(2, 3, 0), np.angle(el1.psi), "Phase (Electron 1)", "color"
+        lib.FigureLocation(2, 3, 0), np.angle(
+            el1.psi), "Phase (Electron 1)", "color"
     )
     graph.add_figure(
-        lib.FigureLocation(2, 3, 3), np.angle(el2.psi), "Phase (Electron 2)", "color"
+        lib.FigureLocation(2, 3, 3), np.angle(
+            el2.psi), "Phase (Electron 2)", "color"
     )
     graph.add_figure(
-        lib.FigureLocation(2, 3, 1), np.absolute(el1.psi), "Absolute (Electron 1)", "3d"
+        lib.FigureLocation(2, 3, 1), np.absolute(
+            el1.psi), "Absolute (Electron 1)", "3d"
     )
     graph.add_figure(
-        lib.FigureLocation(2, 3, 4), np.absolute(el2.psi), "Absolute (Electron 2)", "3d"
+        lib.FigureLocation(2, 3, 4), np.absolute(
+            el2.psi), "Absolute (Electron 2)", "3d"
     )
     graph.add_figure(
         lib.FigureLocation(2, 3, 2),

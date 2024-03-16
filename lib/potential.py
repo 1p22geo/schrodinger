@@ -23,6 +23,7 @@ class MeanFieldPotential(Potential):
         super().__init__(config, *args, **kwargs)
         self.rho = np.abs(particle.psi) ** 2  # Charge density of electron
         self.V = -1 / np.sqrt(
-            (config.X - self.x_center) ** 2 + (config.Y - self.y_center) ** 2 + 1e-6
+            (config.X - self.x_center) ** 2 +
+            (config.Y - self.y_center) ** 2 + 1e-6
         )  # Regularize the denominator
         self.V *= np.sum(self.rho) * config.dx * config.dy  # Scale by charge
