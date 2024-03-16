@@ -2,7 +2,7 @@ import os
 import numpy as np
 import lib
 
-config = lib.Config(1, 20, 20, 4000, 4000, 2000, 200)
+config = lib.Config(1, 20, 20, 4000, 4000, 2000, 100)
 
 proton_1 = lib.CoulombPotential(config, x_center=10, y_center=5)
 proton_2 = lib.CoulombPotential(config, x_center=10, y_center=15)
@@ -33,10 +33,8 @@ for t in range(config.Nt):
     proton_2 = lib.CoulombPotential(
         config, x_center=10, y_center=(15 - merged * 5))
 
-    potential_1 = lib.MeanFieldPotential(
-        config, el2).V + proton_1.V + proton_2.V
-    potential_2 = lib.MeanFieldPotential(
-        config, el1).V + proton_1.V + proton_2.V
+    potential_1 = proton_1.V + proton_2.V
+    potential_2 = proton_1.V + proton_2.V
 
     el1.propagate(potential_1, particles)
     el2.propagate(potential_2, particles)
