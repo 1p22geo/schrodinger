@@ -18,6 +18,7 @@ if not os.path.exists("output_images"):
     os.makedirs("output_images")
 
 frames = []
+particles = [el1, el2]
 
 for t in range(config.Nt):
     print(f"Time: {t}")
@@ -36,8 +37,8 @@ for t in range(config.Nt):
     potential_2 = lib.MeanFieldPotential(
         config, el1).V + proton_1.V + proton_2.V
 
-    el1.propagate(potential_1)
-    el2.propagate(potential_2)
+    el1.propagate(potential_1, particles)
+    el2.propagate(potential_2, particles)
 
     graph = lib.GraphDisplay(config)
 
