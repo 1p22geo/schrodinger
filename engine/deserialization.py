@@ -1,5 +1,7 @@
-import lib.constants as constants
-
+import lib.config
+import lib.potential
+import lib.electron
+import lib.gauss
 
 class Deserializer:
     '''
@@ -17,22 +19,22 @@ class Deserializer:
                 base64-decoding and json-decoding
         '''
         dc = state["config"]["domain"]
-        config = constants.Config(
+        config = lib.config.Config(
             1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
         )
         potential = None
         match dc["potential"]:
             case "coulomb":
-                potential = constants.CoulombPotential(config)
+                potential = lib.potential.CoulombPotential(config)
             case "none":
-                potential = constants.EmptyPotential(config)
+                potential = lib.potential.EmptyPotential(config)
         serialized_particles = state["particles"]
         particles = []
         for sp in serialized_particles:
             match sp["type"]:
                 case "electron":
                     particles.append(
-                        constants.Electron(
+                        lib.electron.Electron(
                             config,
                             potential,
                             sp["principal_quantum"],
@@ -42,7 +44,7 @@ class Deserializer:
                     )
                 case "photon":
                     particles.append(
-                        constants.WavePacket(
+                        lib.gauss.WavePacket(
                             config,
                             sp["sigma"],
                             sp["kx0"],

@@ -1,11 +1,13 @@
 import numpy as np
 import flask
-import lib.constants as constants
 import uuid
 import json
 import threading
 import os
 from engine.deserialization import Deserializer
+
+import lib.graphs
+import lib.figlocation
 
 renders = []
 
@@ -30,25 +32,25 @@ class QueuedRender:
             os.makedirs(dirname)
 
         for t in range(config.Nt):
-            graph = constants.GraphDisplay(config, (12, 4 * len(particles)))
+            graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
             for n in range(len(particles)):
                 particle = particles[n]
                 particle.propagate(potential.V, particles)
 
                 graph.add_figure(
-                    constants.FigureLocation(len(particles), 3, 3 * n),
+                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
                     np.angle(particle.psi),
                     f"Phase (particle {n})",
                     "color",
                 )
                 graph.add_figure(
-                    constants.FigureLocation(len(particles), 3, 3 * n + 1),
+                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
                     np.absolute(particle.psi),
                     f"Absolute (particle {n})",
                     "3d",
                 )
                 graph.add_figure(
-                    constants.FigureLocation(len(particles), 3, 3 * n + 2),
+                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
                     potential.V,
                     f"Mean potential field (particle {n})",
                     "3d",

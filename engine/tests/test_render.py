@@ -1,13 +1,17 @@
-import engine
-from lib.testutils import *
+from lib.testutils.clearcache import rmtemp
 import time
 import os
 
+import engine.render
+
 
 def test_render():
-    rmtemp()
+    try:
+        rmtemp()
+    except:
+        print("No static/temp found, continuing...")
 
-    engine.queue_render(
+    engine.render.queue_render(
         {
             "config": {
                 "domain": {

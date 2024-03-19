@@ -1,7 +1,9 @@
 from engine.deserialization import Deserializer
-from lib.testutils import *
-import lib.constants as constants
+from lib.testutils.floateq import floateq
 
+import lib.electron
+import lib.gauss
+import lib.potential
 
 def test_deserialization_default():
     state = {
@@ -45,14 +47,14 @@ def test_deserialization_default():
     assert config.Nt == 5
     assert config.T_max == 6
 
-    assert isinstance(particles[0], constants.Electron)
+    assert isinstance(particles[0], lib.electron.Electron)
     assert particles[0].principal_quantum == 3
     assert particles[0].azimuthal_quantum == 2
     assert particles[0].magnetic_quantum == 1
 
-    assert isinstance(particles[1], constants.Photon)
+    assert isinstance(particles[1], lib.gauss.WavePacket)
     assert particles[1].vx == 5
     assert particles[1].vy == 6
     # only testing those fields due to access levels
 
-    assert isinstance(potential, constants.CoulombPotential)
+    assert isinstance(potential, lib.potential.CoulombPotential)

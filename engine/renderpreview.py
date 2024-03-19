@@ -1,35 +1,38 @@
 import numpy as np
 import flask
-import lib.constants as constants
 import uuid
 import time
 import os
+
 from engine.deserialization import Deserializer
 
+import lib.graphs
+import lib.figlocation
+import lib.constants
 
 def renderpreview(state):
     print(state)
     start = time.time_ns()
     config, potential, particles = Deserializer().ds(state)
 
-    graph = constants.GraphDisplay(config, (12, 4 * len(particles)))
+    graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
 
     for n in range(len(particles)):
         particle = particles[n]
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
             np.angle(particle.psi),
             f"Phase (particle {n})",
             "color",
         )
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n + 1),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
             np.absolute(particle.psi),
             f"Absolute (particle {n})",
             "3d",
         )
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n + 2),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
             potential.V,
             f"Mean potential field (particle {n})",
             "3d",
@@ -46,8 +49,8 @@ def renderpreview(state):
     frame_time = end - start
     eta = frame_time * config.Nt
 
-    days = int(eta / constants.NS_IN_DAY)
-    hours = round((eta % constants.NS_IN_DAY) / constants.NS_IN_HOUR, 2)
+    days = int(eta / lib.constants.NS_IN_DAY)
+    hours = round((eta % lib.constants.NS_IN_DAY) / lib.constants.NS_IN_HOUR, 2)
 
     res = flask.send_file(filename)
     res.headers["X-ETA-To-Full-Animation"] = f"{days} days, {hours} hours"
