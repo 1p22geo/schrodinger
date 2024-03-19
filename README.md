@@ -2,7 +2,9 @@
 (spelled that wrong)
 
 ## Static deployment
-[github pages](https://1p22geo.github.io/schrodinger)
+[github pages](https://1p22geo.github.io/schrodinger)  
+
+[docs](https://1p22geo.github.io/schrodinger/doc/)  
 
 Includes everything except for the customizable experiment engine.
 All static files and tutorials included.
