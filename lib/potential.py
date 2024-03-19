@@ -1,16 +1,35 @@
 import numpy as np
 
+import lib.config
 
 class Potential:
     '''
     The base class for a potential field
+    '''
+    config:lib.config.Config
+    '''
+    configuration for the domain
+    '''
+    x_center:float|None
+    '''
+    defaults to center of domain,
+          the centerpoint of the potential
+    '''
+    y_center:float|None
+    '''
+    defaults to center of domain,
+          the centerpoint of the potential
+    '''
+    r: np.array
+    '''
+    A `np.array` of shape `(Nx, Ny)` where each point
+    is assigned its distance from `(x_center, y_center)`.
 
-    Attributes:
-        Config config: configuration for the engine
-        float ?x_center: defaults to center of domain,
-          the centerpoint of the potential
-        float ?y_center: defaults to center of domain,
-          the centerpoint of the potential
+    Only for internal use in calculating V.
+    '''
+    V: np.array
+    '''
+    An initially zero-filled `np.array` of shape `(Nx, Ny)`
     '''
     def __init__(self, config, x_center=None, y_center=None):
         self.x_center = x_center if x_center else config.Lx / 2
@@ -30,13 +49,12 @@ class CoulombPotential(Potential):
 
     Atrributes same as Potential.
 
+    '''
+    V: np.array
+    '''
+    The actual potential field definition.
 
-    Attributes:
-        Config config: configuration for the engine
-        float ?x_center: defaults to center of domain,
-          the centerpoint of the potential
-        float ?y_center: defaults to center of domain,
-              the centerpoint of the potential
+    A `np.array` of shape `(Nx, Ny)`
     '''
     def __init__(self, config, *args, **kwargs):
         super().__init__(config, *args, **kwargs)
@@ -51,16 +69,21 @@ class MeanFieldPotential(Potential):
 
     Atrributes same as Potential.
 
-    
-    Attributes:
-        Config config: configuration for the engine
-        Particle particle: the particle with a wave function
-            we are constructing the potential for
-        float ?x_center: defaults to center of domain,
-          the centerpoint of the potential
-        float ?y_center: defaults to center of domain,
-          the centerpoint of the potential
     '''
+    V: np.array
+    '''
+    The actual potential field definition.
+
+    A `np.array` of shape `(Nx, Ny)`
+    '''
+    
+    rho: np.array
+    '''
+    The `rho` parameter of the potential
+
+    A `np.array` of shape `(Nx, Ny)`
+    '''
+
     def __init__(self, config, particle, *args, **kwargs):
         super().__init__(config, *args, **kwargs)
         self.rho = np.abs(particle.psi) ** 2  # Charge density of electron

@@ -2,23 +2,32 @@ import matplotlib.pyplot as plt
 import matplotlib
 import os
 
+import numpy as np
+
+import lib.config
+import lib.figlocation
+
 matplotlib.use("Agg")
 
 
 class GraphDisplay:
     """
     Class for displaying experiment output as a matplotlib graph into a file.
-
-    Attributes:
-        Config config: experiment config
-        tuple<int> figsize: size of the graph display
     """
+    config: lib.config.Config
+    '''
+    configuration for the domain
+    '''
+    fig: plt.figure
+    '''
+    the actual matplotlib `matplotlib.pypylot.figure`
+    '''
 
     def __init__(self, config, figsize=(12, 8)):
         self.config = config
         self.fig = plt.figure(figsize=figsize)
 
-    def save(self, filename):
+    def save(self, filename:str):
         """
         save the graph output into a file
         """
@@ -29,10 +38,10 @@ class GraphDisplay:
 
     def add_figure(
         self,
-        location,
-        function,
-        title="",
-        fig_type="3d",
+        location:lib.figlocation.FigureLocation,
+        function:np.array,
+        title:str="",
+        fig_type:str="3d",
         cmap="viridis",
         zlim=(None, None),
     ):
@@ -45,11 +54,11 @@ class GraphDisplay:
         - 'simple': simple 2d color plot
 
         Parameters:
-            FigureLocation location: the location for the subplot
-            np.array function: the values of the function, as an array or List.
-                suggested array shape: (Nx, Ny)
-            str title: title of the sublot (displayed above it)
-            str fig_type: the type of the figure
+        - `location:lib.figlocation.FigureLocation`: the location for the subplot
+        - `function:np.array`: the actual function to plot
+        - `title:str`: the title of the subplot
+        - `fig_title:str`: the figure type
+        - `cmap` and `zlim`: kwargs for matplotlib
         """
         match fig_type:
             case "color":
@@ -78,6 +87,9 @@ class GraphDisplay:
                 ax.set_ylim(0, self.config.Ly)
 
     def render_mp4(self, dirname):
+        '''
+        renders images in `{dirname}/frame%d.png` into `{dirname}/movie.mp4` and `{dirname}/movie.mpg`
+        '''
         os.system(
             f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg"
         )

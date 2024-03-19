@@ -3,21 +3,51 @@ import uuid
 
 import lib.particle
 import lib.waveutils
+import lib.config
 
 class WavePacket(lib.particle.Particle):
     """
-    Gaussian wave packet.
+    Gaussian wave packet.  
     Pretty simple representation of a photon or other alone particle
-
-    Attributes:
-        float sigma: the uncertainty in the initial position
-        float kx0: initial width of the wave packet
-        float ky0: initial height of the wave packet
-        float x0: initial x position
-        float y0: initial y position
-        float vx: velocity X component (EXPERIMENTAL)
-        float vy: velocity Y component (EXPERIMENTAL)
     """
+    sigma: float
+    '''
+    the uncertainty of the initial position
+    '''
+    kx0: float
+    '''
+    initial width for the wave packet
+    '''
+    ky0: float
+    '''
+    initial height for the wave packet
+    '''
+    x0: float
+    '''
+    initial X position for the wave packet
+    '''
+    y0: float
+    '''
+    initial Y position for the wave packet
+    '''
+    vx: float
+    '''
+    X component for the velocity [EXPERIMENTAL]
+    '''
+    vy: float
+    '''
+    Y component for the velocity [EXPERIMENTAL]
+    '''
+    config: lib.config.Config
+    '''
+    configuration for the domain
+    '''
+    psi: np.array
+    '''
+    the wave function  
+
+    a `np.array` of shape `(config.Nx, config.Ny)`
+    '''
 
     def __init__(
         self,
@@ -41,16 +71,21 @@ class WavePacket(lib.particle.Particle):
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
 
-    def propagate(self, V, particles):
+    def propagate(self, 
+                  V:np.array, 
+                  particles: list[lib.particle.Particle]
+                  ):
         """
         propagate the wave function in a potential field
 
-        Attributes:
-            np.array V: the potential field as an array
-                of shape (Nx, Ny)
-            Particle[] particles: an array of other particles 
-                for inter-particle interactions
+        Parameters:
+        - `np.array V`: the potential field as an array
+            of shape (Nx, Ny)
+        - `Particle[] particles`: an array of other particles 
+            for inter-particle interactions
+        
         """
+        
 
         self.psi = lib.waveutils.rollwave(
             self.config, self.psi, self.vx, self.vy)
