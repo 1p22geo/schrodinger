@@ -1,6 +1,6 @@
 from engine.deserialization import Deserializer
 from lib.testutils import *
-import lib
+import lib.constants as constants
 
 
 def test_deserialization_default():
@@ -45,14 +45,14 @@ def test_deserialization_default():
     assert config.Nt == 5
     assert config.T_max == 6
 
-    assert isinstance(particles[0], lib.Electron)
+    assert isinstance(particles[0], constants.Electron)
     assert particles[0].principal_quantum == 3
     assert particles[0].azimuthal_quantum == 2
     assert particles[0].magnetic_quantum == 1
 
-    assert isinstance(particles[1], lib.Photon)
+    assert isinstance(particles[1], constants.Photon)
     assert particles[1].vx == 5
     assert particles[1].vy == 6
     # only testing those fields due to access levels
 
-    assert isinstance(potential, lib.CoulombPotential)
+    assert isinstance(potential, constants.CoulombPotential)

@@ -2,24 +2,38 @@ import numpy as np
 import scipy
 import uuid
 
-import lib
+import lib.particle
+import lib.config
+import lib.potential
 
-
-class Electron(lib.Particle):
+class Electron(lib.particle.Particle):
     """
-    Basic representation of an electron in an atom.
-
-    Attributes:
-        Config config: experiment configurations
-        Potential potential: the potential field
+    Basic representation of an electron in an atom.    
+    """
+    config: lib.config.Config
+    '''
+       experiment configurations
+    '''
+    potential: lib.potential.Potential
+    '''
+    the potential field
             we are modeling the electron in
-        int principal_quantum: principal quantum number
+    '''
+    principal_quantum: int
+    '''
+    principal quantum number
             (aka energy level or electron orbital)
-        int azimuthal_quantum: azimuthal quantum number
+    '''
+    azimuthal_quantum: int
+    '''
+    azimuthal quantum number
             (aka suborbital)
-        int magnetic_quantum: magnetic quantum number
+    '''
+    magnetic_quantum: int
+    '''
+    magnetic quantum number
             (experimental, better leave it at default)
-    """
+    '''
 
     def __init__(
         self,

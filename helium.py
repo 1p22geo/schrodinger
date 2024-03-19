@@ -1,15 +1,15 @@
 import os
 import numpy as np
-import lib
+import lib.constants as constants
 
-config = lib.Config(1, 16, 16, 2000, 2000, 4000, 300)
+config = constants.Config(1, 16, 16, 2000, 2000, 4000, 300)
 
-potential = lib.CoulombPotential(config)
+potential = constants.CoulombPotential(config)
 
 
-el1 = lib.Electron(config, potential, 2, 1, 0)
+el1 = constants.Electron(config, potential, 2, 1, 0)
 
-el2 = lib.Electron(config, potential, 2, 1, 0)
+el2 = constants.Electron(config, potential, 2, 1, 0)
 el2.psi *= -1
 
 
@@ -20,13 +20,13 @@ frames = []
 
 for t in range(config.Nt):
     print(f"Time: {t}")
-    p1 = lib.MeanFieldPotential(config, el2)
-    p2 = lib.MeanFieldPotential(config, el1)
+    p1 = constants.MeanFieldPotential(config, el2)
+    p2 = constants.MeanFieldPotential(config, el1)
 
     el1.propagate(potential.V + p1.V)
     el2.propagate(potential.V + p2.V)
 
-    graph = lib.GraphDisplay(config)
+    graph = constants.GraphDisplay(config)
 
     graph.add_figure(231, np.angle(el1.psi), "Phase (Electron 1)", "color")
     graph.add_figure(232, np.angle(el2.psi), "Phase (Electron 2)", "color")

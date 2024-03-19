@@ -1,9 +1,10 @@
 import numpy as np
-import lib
 import uuid
 
+import lib.particle
+import lib.waveutils
 
-class WavePacket(lib.Particle):
+class WavePacket(lib.particle.Particle):
     """
     Gaussian wave packet.
     Pretty simple representation of a photon or other alone particle
