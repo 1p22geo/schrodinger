@@ -1,10 +1,9 @@
 import numpy as np
-import random
 import lib
 import uuid
 
 
-class WavePacket:
+class WavePacket(lib.Particle):
     """
     Gaussian wave packet.
     Pretty simple representation of a photon or other alone particle
@@ -48,6 +47,8 @@ class WavePacket:
         Attributes:
             np.array V: the potential field as an array
                 of shape (Nx, Ny)
+            Particle[] particles: an array of other particles 
+                for inter-particle interactions
         """
 
         self.psi = lib.waveutils.rollwave(

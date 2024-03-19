@@ -1,12 +1,11 @@
 import numpy as np
 import scipy
 import uuid
-import random
 
 import lib
 
 
-class Electron:
+class Electron(lib.Particle):
     """
     Basic representation of an electron in an atom.
 
@@ -69,6 +68,8 @@ class Electron:
         Attributes:
             np.array V: the potential field as an array
                 of shape (Nx, Ny)
+            Particle[] particles: an array of other particles 
+                for inter-particle interactions
         """
 
         # Propagate through the Schrodinger's equation

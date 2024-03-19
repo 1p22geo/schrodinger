@@ -2,10 +2,20 @@ import lib
 
 
 class Deserializer:
+    '''
+    Simple class for deserializing JSON data from the frontend.
+    '''
     def __init__(self):
         pass
 
     def ds(self, state):
+        '''
+        Deserialize some data.
+
+        Arguments:
+            dict state: the state after
+                base64-decoding and json-decoding
+        '''
         dc = state["config"]["domain"]
         config = lib.Config(
             1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]

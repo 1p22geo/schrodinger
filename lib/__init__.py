@@ -1,3 +1,4 @@
+from lib.particle import Particle
 from lib.electron import Electron
 from lib.gauss import WavePacket
 from lib.gauss import WavePacket as Photon  # alias for web UI engine
