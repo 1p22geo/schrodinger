@@ -27,7 +27,7 @@ class Deserializer:
             case "coulomb":
                 potential = lib.potential.CoulombPotential(config)
             case "none":
-                potential = lib.potential.EmptyPotential(config)
+                potential = lib.potential.Potential(config)
         serialized_particles = state["particles"]
         particles = []
         for sp in serialized_particles:
