@@ -1,4 +1,5 @@
 from lib.testutils.clearcache import rmtemp
+from lib.testutils.asserts import assert_file_exists
 import time
 import os
 
@@ -49,8 +50,5 @@ def test_render():
     assert len(os.listdir("static/temp")) == 1
     dirname = os.listdir("static/temp")[0]
     dirname = f"static/temp/{dirname}"
-    with open(f"{dirname}/frame_1.png", "rb") as f:
-        assert f.readable()
-    time.sleep(30)
-    with open(f"{dirname}/movie.mp4", "rb") as f:
-        assert f.readable()
+    assert assert_file_exists(f"{dirname}/frame_1.png", 30)
+    assert assert_file_exists(f"{dirname}/movie.mp4", 90)
