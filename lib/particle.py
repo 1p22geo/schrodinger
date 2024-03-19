@@ -22,7 +22,7 @@ class Particle():
 
     def propagate(self, 
                   V:np.array, 
-                  particles: list[lib.particle.Particle]
+                  particles: list["lib.particle.Particle"]
                   ):
         """
         propagate the wave function in a potential field
