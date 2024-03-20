@@ -6,40 +6,42 @@ import lib.particle
 import lib.config
 import lib.potential
 
+
 class Electron(lib.particle.Particle):
     """
-    Basic representation of an electron in an atom.    
+    Basic representation of an electron in an atom.
     """
+
     config: lib.config.Config
-    '''
+    """
        experiment configurations
-    '''
+    """
     potential: lib.potential.Potential
-    '''
+    """
     the potential field
             we are modeling the electron in
-    '''
+    """
     principal_quantum: int
-    '''
+    """
     principal quantum number
             (aka energy level or electron orbital)
-    '''
+    """
     azimuthal_quantum: int
-    '''
+    """
     azimuthal quantum number
             (aka suborbital)
-    '''
+    """
     magnetic_quantum: int
-    '''
+    """
     magnetic quantum number
             (experimental, better leave it at default)
-    '''
+    """
     psi: np.array
-    '''
+    """
     the wave function  
 
     a `np.array` of shape `(config.Nx, config.Ny)`
-    '''
+    """
 
     def __init__(
         self,
@@ -58,7 +60,7 @@ class Electron(lib.particle.Particle):
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
 
-    def calculate_psi(self, potential:lib.potential.Potential):
+    def calculate_psi(self, potential: lib.potential.Potential):
         """
         calculate the wave function for a bound electron with given n, l, m
         """
@@ -80,19 +82,17 @@ class Electron(lib.particle.Particle):
             * Ylm
         )
         return psi
-    def propagate(self, 
-                  V:np.array, 
-                  particles: list[lib.particle.Particle]
-                  ):
+
+    def propagate(self, V: np.array, particles: list[lib.particle.Particle]):
         """
         propagate the wave function in a potential field
 
         Parameters:
         - `np.array V`: the potential field as an array
             of shape (Nx, Ny)
-        - `Particle[] particles`: an array of other particles 
+        - `Particle[] particles`: an array of other particles
             for inter-particle interactions
-        
+
         """
 
         # Propagate through the Schrodinger's equation

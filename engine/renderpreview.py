@@ -10,6 +10,7 @@ import lib.graphs
 import lib.figlocation
 import lib.constants
 
+
 def renderpreview(state):
     print(state)
     start = time.time_ns()

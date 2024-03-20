@@ -14,20 +14,21 @@ class GraphDisplay:
     """
     Class for displaying experiment output as a matplotlib graph into a file.
     """
+
     config: lib.config.Config
-    '''
+    """
     configuration for the domain
-    '''
+    """
     fig: plt.figure
-    '''
+    """
     the actual matplotlib `matplotlib.pypylot.figure`
-    '''
+    """
 
     def __init__(self, config, figsize=(12, 8)):
         self.config = config
         self.fig = plt.figure(figsize=figsize)
 
-    def save(self, filename:str):
+    def save(self, filename: str):
         """
         save the graph output into a file
         """
@@ -38,10 +39,10 @@ class GraphDisplay:
 
     def add_figure(
         self,
-        location:lib.figlocation.FigureLocation,
-        function:np.array,
-        title:str="",
-        fig_type:str="3d",
+        location: lib.figlocation.FigureLocation,
+        function: np.array,
+        title: str = "",
+        fig_type: str = "3d",
         cmap="viridis",
         zlim=(None, None),
     ):
@@ -63,33 +64,30 @@ class GraphDisplay:
         match fig_type:
             case "color":
                 ax = self.fig.add_subplot(location.spec())
-                cs = ax.contourf(self.config.X, self.config.Y,
-                                 function, cmap=cmap)
+                cs = ax.contourf(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
-                ax.plot_surface(self.config.X, self.config.Y,
-                                function, cmap=cmap)
+                ax.plot_surface(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
-                ax.pcolormesh(self.config.X, self.config.Y,
-                              function, cmap=cmap)
+                ax.pcolormesh(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title)
 
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
 
     def render_mp4(self, dirname):
-        '''
+        """
         renders images in `{dirname}/frame%d.png` into `{dirname}/movie.mp4` and `{dirname}/movie.mpg`
-        '''
+        """
         os.system(
             f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg"
         )

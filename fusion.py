@@ -29,9 +29,11 @@ for t in range(config.Nt):
         el2.psi = np.roll(el2.psi, -1, axis=0)
 
     proton_1 = constants.CoulombPotential(
-        config, x_center=10, y_center=(5 + merged * 5))
+        config, x_center=10, y_center=(5 + merged * 5)
+    )
     proton_2 = constants.CoulombPotential(
-        config, x_center=10, y_center=(15 - merged * 5))
+        config, x_center=10, y_center=(15 - merged * 5)
+    )
 
     potential_1 = proton_1.V + proton_2.V
     potential_2 = proton_1.V + proton_2.V
@@ -42,20 +44,28 @@ for t in range(config.Nt):
     graph = constants.GraphDisplay(config)
 
     graph.add_figure(
-        constants.FigureLocation(2, 3, 0), np.angle(
-            el1.psi), "Phase (Electron 1)", "color"
+        constants.FigureLocation(2, 3, 0),
+        np.angle(el1.psi),
+        "Phase (Electron 1)",
+        "color",
     )
     graph.add_figure(
-        constants.FigureLocation(2, 3, 3), np.angle(
-            el2.psi), "Phase (Electron 2)", "color"
+        constants.FigureLocation(2, 3, 3),
+        np.angle(el2.psi),
+        "Phase (Electron 2)",
+        "color",
     )
     graph.add_figure(
-        constants.FigureLocation(2, 3, 1), np.absolute(
-            el1.psi), "Absolute (Electron 1)", "3d"
+        constants.FigureLocation(2, 3, 1),
+        np.absolute(el1.psi),
+        "Absolute (Electron 1)",
+        "3d",
     )
     graph.add_figure(
-        constants.FigureLocation(2, 3, 4), np.absolute(
-            el2.psi), "Absolute (Electron 2)", "3d"
+        constants.FigureLocation(2, 3, 4),
+        np.absolute(el2.psi),
+        "Absolute (Electron 2)",
+        "3d",
     )
     graph.add_figure(
         constants.FigureLocation(2, 3, 2),

@@ -5,6 +5,7 @@ import lib.config
 import lib.gauss
 import lib.potential
 
+
 def test_photon_integral():
     config = lib.config.Config(1, 20, 20, 1000, 1000, 2000, 10)
     ph = lib.gauss.WavePacket(config, 0.5, 2, 2, 10, 10, 0, 0)

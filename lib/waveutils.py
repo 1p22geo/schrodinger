@@ -2,7 +2,8 @@ import numpy as np
 
 import lib.config
 
-def rollwave(config:lib.config.Config, wave:np.array, vx:float, vy:float):
+
+def rollwave(config: lib.config.Config, wave: np.array, vx: float, vy: float):
     """
     Move a wave linearily forward by `(vx, vy)` within experiment coordinates.
     Might not work well with small distances.
@@ -12,7 +13,7 @@ def rollwave(config:lib.config.Config, wave:np.array, vx:float, vy:float):
     - `wave: np.array`: the wave to move, an array of shape `(Nx, Ny)`
     - `vx: float`: the X velocity (will be normalized, taking into account dx and dt)
     - `vy: float`: the Y velocity (will be normalized, taking into account dy and dt)
-    
+
     """
     wave = [np.roll(row, int(vy / config.dy * config.dt)) for row in wave]
     wave = np.roll(wave, int(vx / config.dx * config.dt), axis=0)

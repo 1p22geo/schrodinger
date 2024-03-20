@@ -5,6 +5,7 @@ import lib.electron
 import lib.gauss
 import lib.potential
 
+
 def test_deserialization_default():
     state = {
         "config": {
