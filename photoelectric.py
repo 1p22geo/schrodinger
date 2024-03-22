@@ -1,13 +1,19 @@
 import os
 import numpy as np
-import lib.constants as constants
 
-config = constants.Config(1, 20, 20, 2000, 2000, 2000, 50)
+import lib.config
+import lib.potential
+import lib.electron
+import lib.gauss
+import lib.graphs
+import lib.figlocation
 
-potential = constants.CoulombPotential(config)
+config = lib.config.Config(1, 20, 20, 2000, 2000, 2000, 50)
+
+potential = lib.potential.CoulombPotential(config)
 
 
-particles = [constants.Electron(config, potential, 2, 1, 0)]
+particles = [lib.electron.Electron(config, potential, 2, 1, 0)]
 
 
 dirname = "output_images"
@@ -20,27 +26,27 @@ for t in range(config.Nt):
         particles[0].principal_quantum = 1
         particles[0].azimuthal_quantum = 0
         particles[0].psi = particles[0].calculate_psi(potential)
-        particles.append(constants.Photon(config, x0=10, y0=10, vx=1))
+        particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vx=1))
 
-    graph = constants.GraphDisplay(config, (12, 4 * len(particles)))
+    graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
     for n in range(len(particles)):
         particle = particles[n]
         particle.propagate(potential.V, particles)
 
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
             np.angle(particle.psi),
             f"Phase (particle {n})",
             "color",
         )
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n + 1),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
             np.absolute(particle.psi),
             f"Absolute (particle {n})",
             "3d",
         )
         graph.add_figure(
-            constants.FigureLocation(len(particles), 3, 3 * n + 2),
+            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
             potential.V,
             f"Mean potential field (particle {n})",
             "3d",
