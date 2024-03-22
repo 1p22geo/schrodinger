@@ -8,7 +8,7 @@ import lib.gauss
 import lib.graphs
 import lib.figlocation
 
-config = lib.config.Config(1, 20, 20, 2000, 2000, 2000, 50)
+config = lib.config.Config(1, 20, 20, 2000, 2000, 2, 50)
 
 potential = lib.potential.CoulombPotential(config)
 
@@ -56,5 +56,5 @@ for t in range(config.Nt):
     filename = f"{dirname}/frame_{t}.png"
     graph.save(filename)
 
-
-print("Done! Saved all images.")
+mp4 = lib.graphs.GraphDisplay(config).render_mp4("output_images")
+print(f"Saved mp4 to {mp4}")
