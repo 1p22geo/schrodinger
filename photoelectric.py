@@ -26,9 +26,9 @@ for t in range(config.Nt):
         particles[0].principal_quantum = 1
         particles[0].azimuthal_quantum = 0
         particles[0].psi = particles[0].calculate_psi(potential)
-        particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vx=1))
+        particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vy=1))
 
-    graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
+    graph = lib.graphs.GraphDisplay(config, (12, 8))
     for n in range(len(particles)):
         particle = particles[n]
         particle.propagate(potential.V, particles)
