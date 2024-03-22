@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import shutil
 
 import lib.config
 import lib.potential
@@ -8,7 +9,8 @@ import lib.gauss
 import lib.graphs
 import lib.figlocation
 
-config = lib.config.Config(1, 20, 20, 2000, 2000, 2, 50)
+config = lib.config.Config(
+    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=20, T_max=50)
 
 potential = lib.potential.CoulombPotential(config)
 
@@ -17,6 +19,9 @@ particles = [lib.electron.Electron(config, potential, 2, 1, 0)]
 
 
 dirname = "output_images"
+if os.path.exists(dirname):
+    shutil.rmtree(dirname, ignore_errors=True)
+
 if not os.path.exists(dirname):
     os.makedirs(dirname)
 
@@ -28,7 +33,8 @@ for t in range(config.Nt):
         particles[0].psi = particles[0].calculate_psi(potential)
         particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vy=1))
 
-    graph = lib.graphs.GraphDisplay(config, (12, 8))
+    graph = lib.graphs.GraphDisplay(
+        config, (12, 8), frameno=t)
     for n in range(len(particles)):
         particle = particles[n]
         particle.propagate(potential.V, particles)
@@ -56,5 +62,5 @@ for t in range(config.Nt):
     filename = f"{dirname}/frame_{t}.png"
     graph.save(filename)
 
-mp4 = lib.graphs.GraphDisplay(config).render_mp4("output_images")
+mp4 = lib.graphs.GraphDisplay(config).render_mp4(dirname)
 print(f"Saved mp4 to {mp4}")
