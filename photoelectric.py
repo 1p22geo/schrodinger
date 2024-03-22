@@ -10,7 +10,7 @@ import lib.graphs
 import lib.figlocation
 
 config = lib.config.Config(
-    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=20, T_max=50)
+    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=200, T_max=50)
 
 potential = lib.potential.CoulombPotential(config)
 
@@ -27,11 +27,17 @@ if not os.path.exists(dirname):
 
 frames = []
 for t in range(config.Nt):
-    if t == 400:
+    if t == 40:
         particles[0].principal_quantum = 1
         particles[0].azimuthal_quantum = 0
         particles[0].psi = particles[0].calculate_psi(potential)
         particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vy=1))
+
+    if t == 110:
+        particles[0].principal_quantum = 2
+        particles[0].azimuthal_quantum = 1
+        particles[0].psi = particles[0].calculate_psi(potential)
+        del particles[1]
 
     graph = lib.graphs.GraphDisplay(
         config, (12, 8), frameno=t)
