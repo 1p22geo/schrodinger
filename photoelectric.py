@@ -10,7 +10,7 @@ import lib.graphs
 import lib.figlocation
 
 config = lib.config.Config(
-    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=200, T_max=50)
+    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=2000, T_max=50)
 
 potential = lib.potential.CoulombPotential(config)
 
@@ -27,13 +27,13 @@ if not os.path.exists(dirname):
 
 frames = []
 for t in range(config.Nt):
-    if t == 40:
+    if t == 400:
         particles[0].principal_quantum = 1
         particles[0].azimuthal_quantum = 0
         particles[0].psi = particles[0].calculate_psi(potential)
         particles.append(lib.gauss.WavePacket(config, x0=10, y0=10, vy=1))
 
-    if t == 110:
+    if t == 1100:
         particles[0].principal_quantum = 2
         particles[0].azimuthal_quantum = 1
         particles[0].psi = particles[0].calculate_psi(potential)
@@ -46,19 +46,19 @@ for t in range(config.Nt):
         particle.propagate(potential.V, particles)
 
         graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
+            lib.figlocation.FigureLocation(2, 3, 3 * n),
             np.angle(particle.psi),
             f"Phase (particle {n})",
             "color",
         )
         graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
+            lib.figlocation.FigureLocation(2, 3, 3 * n + 1),
             np.absolute(particle.psi),
             f"Absolute (particle {n})",
             "3d",
         )
         graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
+            lib.figlocation.FigureLocation(2, 3, 3 * n + 2),
             potential.V,
             f"Mean potential field (particle {n})",
             "3d",
