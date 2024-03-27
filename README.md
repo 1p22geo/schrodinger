@@ -19,7 +19,6 @@ All static files and tutorials included.
   - numpy
   - scipy
   - matplotlib
-  - shutil
 - Install [ffmpeg](https://ffmpeg.org)
 - Run the app
 
