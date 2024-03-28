@@ -43,10 +43,26 @@ class GraphDisplay:
         self.fig = plt.figure(figsize=figsize)
 
     def save(self, filename: str):
-        """
-        save the graph output into a file
-        """
+        """Save the animation frame as an image file.
 
+        Parameters
+        ----------
+        - `filename : str`
+            - The name of the output file, including the file extension.
+
+        Notes
+        -----
+        - This method saves the figure as an image file using the `fig.savefig`
+        method.
+        - It also prints a message to the console indicating that
+        the figure has been saved.
+
+        Examples
+        --------
+        >>> frame = AnimationFrame(...)
+        >>> frame.save('output.png')
+        Saved to output.png
+        """
         self.frameno and self.render_frameno()
 
         self.fig.savefig(filename)

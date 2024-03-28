@@ -62,7 +62,12 @@ class Electron(lib.particle.Particle):
 
     def calculate_psi(self, potential: lib.potential.Potential):
         """
-        calculate the wave function for a bound electron with given n, l, m
+        Calculate the wave function for a bound electron with given n, l, m
+
+        Parameters
+        ----------
+        - potential: lib.potential.Potential
+            - the actual potential function to model an electron in
         """
         r_norm = potential.r / (
             self.principal_quantum * self.config.a0
@@ -87,10 +92,13 @@ class Electron(lib.particle.Particle):
         """
         propagate the wave function in a potential field
 
-        Parameters:
-        - `np.array V`: the potential field as an array
+        Parameters
+        ----------
+        - `V: np.array`
+            - the potential field as an array
             of shape (Nx, Ny)
-        - `Particle[] particles`: an array of other particles
+        - `particles: list[lib.particle.Particle]`
+            - an array of other particles
             for inter-particle interactions
 
         """

@@ -14,7 +14,7 @@ class Particle:
     """
     psi: np.array
     """
-    the wave function  
+    the wave function
 
     a `np.array` of shape `(config.Nx, config.Ny)`
     """
@@ -27,10 +27,13 @@ class Particle:
         """
         propagate the wave function in a potential field
 
-        Parameters:
-        - `np.array V`: the potential field as an array
+        Parameters
+        ----------
+        - `V: np.array`
+            - the potential field as an array
             of shape (Nx, Ny)
-        - `Particle[] particles`: an array of other particles
+        - `particles: list[lib.particle.Particle]`
+            - an array of other particles
             for inter-particle interactions
 
         """

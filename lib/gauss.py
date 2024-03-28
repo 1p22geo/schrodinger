@@ -77,15 +77,19 @@ class WavePacket(lib.particle.Particle):
         """
         propagate the wave function in a potential field
 
-        Parameters:
-        - `np.array V`: the potential field as an array
+        Parameters
+        ----------
+        - `V: np.array`
+            - the potential field as an array
             of shape (Nx, Ny)
-        - `Particle[] particles`: an array of other particles
+        - `particles: list[lib.particle.Particle]`
+            - an array of other particles
             for inter-particle interactions
 
         """
 
-        self.psi = lib.waveutils.rollwave(self.config, self.psi, self.vx, self.vy)
+        self.psi = lib.waveutils.rollwave(
+            self.config, self.psi, self.vx, self.vy)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         self.psi = np.fft.fft2(self.psi)
