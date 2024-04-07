@@ -85,8 +85,8 @@ class GraphDisplay:
         function: np.array,
         title: str = "",
         fig_type: str = "3d",
-        cmap="viridis",
         zlim=(None, None),
+        **kwargs,
     ):
         """
         add another subplot figure
@@ -108,7 +108,7 @@ class GraphDisplay:
             case "color":
                 ax = self.fig.add_subplot(location.spec())
                 cs = ax.contourf(self.config.X, self.config.Y,
-                                 function, cmap=cmap)
+                                 function, **kwargs)
                 ax.set_title(title, **lib.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
@@ -116,15 +116,14 @@ class GraphDisplay:
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
                 ax.plot_surface(self.config.X, self.config.Y,
-                                function, cmap=cmap)
+                                function, **kwargs)
                 ax.set_title(title, **lib.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
-                ax.pcolormesh(self.config.X, self.config.Y,
-                              function, cmap=cmap)
+                ax.pcolormesh(self.config.X, self.config.Y, function, **kwargs)
                 ax.set_title(title, **lib.constants.PLT_FONT)
 
                 ax.set_xlim(0, self.config.Lx)
