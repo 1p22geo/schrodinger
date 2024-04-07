@@ -9,7 +9,8 @@ import lib.gauss
 import lib.graphs
 import lib.figlocation
 
-config = lib.config.Config(a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=2000, T_max=50)
+config = lib.config.Config(
+    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=2000, T_max=50)
 
 potential = lib.potential.CoulombPotential(config)
 

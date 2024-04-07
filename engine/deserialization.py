@@ -35,7 +35,8 @@ class Deserializer:
                         lib.electron.Electron(
                             config,
                             lib.potential.CoulombPotential(
-                                config, sp["x_center"], sp["y_center"]),
+                                config, sp["x_center"], sp["y_center"]
+                            ),
                             sp["principal_quantum"],
                             sp["azimuthal_quantum"],
                             sp["magnetic_quantum"],
@@ -57,7 +58,10 @@ class Deserializer:
                 case lib.constants.DeserializationConstants.POTENTIAL.COULOMB:
                     potentials.append(
                         lib.potential.CoulombPotential(
-                            config, x_center=sp["x_center"], y_center=sp["y_center"], charge=sp["charge"]
+                            config,
+                            x_center=sp["x_center"],
+                            y_center=sp["y_center"],
+                            charge=sp["charge"],
                         )
                     )
 

@@ -71,10 +71,22 @@ class QueuedRender:
         print("Files ready. Rendering to MP4.")
         self.state = "RENDERING_MP4"
         os.system(
-            f"ffmpeg -i {dirname}/frame_%d.png -c:v mpeg2video -q:v 5 -c:a mp2 -f vob {dirname}/movie.mpg"
+            " ".join(
+                [
+                    f"ffmpeg -i {dirname}/frame_%d.png",
+                    "-c:v mpeg2video -q:v 5 -c:a mp2",
+                    "-f vob {dirname}/movie.mpg",
+                ]
+            )
         )
         os.system(
-            f"ffmpeg -i {dirname}/movie.mpg -c:v libx264 -c:a libfaac -crf 1 -preset:v veryslow {dirname}/movie.mp4"
+            "".join(
+                [
+                    f"ffmpeg -i {dirname}/movie.mpg",
+                    "-c:v libx264 -c:a libfaac -crf 1",
+                    "-preset:v veryslow {dirname}/movie.mp4",
+                ]
+            )
         )
         self.mp4 = f"{dirname}/movie.mp4"
         self.state = "READY"
