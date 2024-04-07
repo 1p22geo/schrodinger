@@ -44,7 +44,7 @@ class Quark(lib.particle.Particle):
         self.config = config
         self.x_center = x_center
         self.y_center = y_center
-        self.psi = np.zeros((config.Nx, config.Ny))
+        self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         for x in range(config.Nx):
             for y in range(config.Ny):
                 x_norm = x * config.dx - x_center
@@ -67,6 +67,13 @@ class Quark(lib.particle.Particle):
             for inter-particle interactions
 
         """
+
+        # Quarks don't interact with electromagnetic fields in
+        # a normal way, so I will just make them kinda sit in place.
+        #
+        # Once again, a major simplification.
+        V = lib.potential.CoulombPotential(
+            self.config, self.x_center, self.y_center).V
 
         # Propagate through the Schrodinger's equation
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)

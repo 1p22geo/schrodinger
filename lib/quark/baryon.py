@@ -36,7 +36,6 @@ class Baryon(lib.quark.hadron.Hadron):
         """
 
         R = 0 * math.pi / 3
-        R2 = 6 * math.pi / 3
         G = 2 * math.pi / 3
         B = 4 * math.pi / 3
         for x in range(config.Nx):
@@ -45,9 +44,12 @@ class Baryon(lib.quark.hadron.Hadron):
                 y_norm = y - config.Ny / 2
                 theta = np.angle(x_norm + 1j * y_norm)
                 theta += math.pi
-                r = max(1 - abs(R - theta) ** 4, 1 - abs(R2 - theta) ** 4, 0)
-                g = max(1 - abs(G - theta) ** 4, 0)
-                b = max(1 - abs(B - theta) ** 4, 0)
+                r = max(1 - abs(R - theta) ** 4, 1 -
+                        abs(R+2*math.pi - theta) ** 4, 0)
+                g = max(1 - abs(G - theta) ** 4, 1 -
+                        abs(G+2*math.pi - theta) ** 4, 0)
+                b = max(1 - abs(B - theta) ** 4, 1 -
+                        abs(B+2*math.pi - theta) ** 4, 0)
                 self.colors[x][y] = np.array((r, g, b))
 
     def draw(self,
@@ -64,13 +66,13 @@ class Baryon(lib.quark.hadron.Hadron):
         and graphs are made on a `x` by `y` grid
         """
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, num),
+            lib.figlocation.FigureLocation(x, y, 3*num),
             np.angle(self.psi),
             "Phase (Electron 1)",
             "color",
         )
         graph.add_figure(
-            lib.figlocation.FigureLocation(1, 3, 1),
+            lib.figlocation.FigureLocation(x, y, 3*num+1),
             np.absolute(self.psi),
             "Absolute (Electron 1)",
             "3d",
@@ -78,10 +80,13 @@ class Baryon(lib.quark.hadron.Hadron):
         )
 
         graph.add_figure(
-            lib.figlocation.FigureLocation(1, 3, 2),
+            lib.figlocation.FigureLocation(x, y, 3*num+2),
             potential.V,
             "Mean potential (electron 1)",
             "3d",
             zlim=(-1, 0),
             cmap=None,
         )
+
+    def propagate(self, V, particles):
+        super().propagate(V, particles)

@@ -32,7 +32,7 @@ class Hadron(lib.particle.Particle):
     def __init__(self, config, quarks: list[lib.quark.quark.Quark]):
         self._id = uuid.uuid4()
         self.config = config
-        self.psi = np.zeros((config.Nx, config.Ny))
+        self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         self.quarks = quarks
         for q in self.quarks:
             self.psi += q.psi
@@ -52,7 +52,8 @@ class Hadron(lib.particle.Particle):
 
         """
 
-        self.psi = np.zeros((self.config.Nx, self.config.Ny))
+        self.psi = np.zeros(
+            (self.config.Nx, self.config.Ny), dtype="complex128")
         for q in self.quarks:
             q.propagate(V, particles)
             self.psi += q.psi
