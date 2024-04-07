@@ -1,9 +1,9 @@
 from engine.deserialization import Deserializer
-from lib.testutils.floateq import floateq
 
 import lib.electron
 import lib.gauss
 import lib.potential
+import lib.constants
 
 
 def test_deserialization_default():
@@ -16,18 +16,21 @@ def test_deserialization_default():
                 "Ny": 4,
                 "Nt": 5,
                 "T_max": 6,
-                "potential": "coulomb",
             }
         },
-        "particles": [
+        "components": [
             {
-                "type": "electron",
+                "type":
+                lib.constants.DeserializationConstants.PARTICLES.ELECTRON,
                 "principal_quantum": 3,
                 "azimuthal_quantum": 2,
                 "magnetic_quantum": 1,
+                "x_center": 5,
+                "y_center": 5,
             },
             {
-                "type": "photon",
+                "type":
+                lib.constants.DeserializationConstants.PARTICLES.PHOTON,
                 "sigma": 0.5,
                 "kx0": 1,
                 "ky0": 2,
@@ -36,9 +39,16 @@ def test_deserialization_default():
                 "vx": 5,
                 "vy": 6,
             },
+            {
+                "type":
+                lib.constants.DeserializationConstants.POTENTIAL.COULOMB,
+                "x_center": 5,
+                "y_center": 5,
+                "charge": 1,
+            },
         ],
     }
-    config, potential, particles = Deserializer().ds(state)
+    config, potentials, particles = Deserializer().ds(state)
     assert config.Lx == 1
     assert config.Ly == 2
 
@@ -58,4 +68,7 @@ def test_deserialization_default():
     assert particles[1].vy == 6
     # only testing those fields due to access levels
 
-    assert isinstance(potential, lib.potential.CoulombPotential)
+    assert isinstance(potentials[0], lib.potential.CoulombPotential)
+
+    assert len(particles) == 2
+    assert len(potentials) == 1

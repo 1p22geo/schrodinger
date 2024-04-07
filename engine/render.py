@@ -75,16 +75,16 @@ class QueuedRender:
                 [
                     f"ffmpeg -i {dirname}/frame_%d.png",
                     "-c:v mpeg2video -q:v 5 -c:a mp2",
-                    "-f vob {dirname}/movie.mpg",
+                    f"-f vob {dirname}/movie.mpg",
                 ]
             )
         )
         os.system(
-            "".join(
+            " ".join(
                 [
                     f"ffmpeg -i {dirname}/movie.mpg",
                     "-c:v libx264 -c:a libfaac -crf 1",
-                    "-preset:v veryslow {dirname}/movie.mp4",
+                    f"-preset:v veryslow {dirname}/movie.mp4",
                 ]
             )
         )

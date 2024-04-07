@@ -1,5 +1,6 @@
 from lib.testutils.clearcache import rmtemp
 from lib.testutils.asserts import assert_file_exists
+import lib.constants
 import time
 import os
 
@@ -9,7 +10,7 @@ import engine.render
 def test_render():
     try:
         rmtemp()
-    except:
+    except OSError:
         print("No static/temp found, continuing...")
 
     engine.render.queue_render(
@@ -22,18 +23,21 @@ def test_render():
                     "Ny": 1000,
                     "Nt": 10,
                     "T_max": 1,
-                    "potential": "coulomb",
                 }
             },
-            "particles": [
+            "components": [
                 {
-                    "type": "electron",
+                    "type":
+                    lib.constants.DeserializationConstants.PARTICLES.ELECTRON,
                     "principal_quantum": 3,
                     "azimuthal_quantum": 2,
                     "magnetic_quantum": 1,
+                    "x_center": 5,
+                    "y_center": 5,
                 },
                 {
-                    "type": "photon",
+                    "type":
+                    lib.constants.DeserializationConstants.PARTICLES.PHOTON,
                     "sigma": 0.5,
                     "kx0": 2,
                     "ky0": 2,
@@ -41,6 +45,13 @@ def test_render():
                     "y0": 5,
                     "vx": 0,
                     "vy": 0,
+                },
+                {
+                    "type":
+                    lib.constants.DeserializationConstants.POTENTIAL.COULOMB,
+                    "x_center": 5,
+                    "y_center": 5,
+                    "charge": 1,
                 },
             ],
         }
