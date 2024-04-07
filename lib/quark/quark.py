@@ -51,7 +51,7 @@ class Quark(lib.particle.Particle):
                 y_norm = y * config.dy - y_center
 
                 r = math.sqrt(x_norm**2 + y_norm**2)
-            self.psi[x][y] = math.exp(-r / config.a0)
+                self.psi[x][y] = math.exp(-r / config.a0)
 
     def propagate(self, V: np.array, particles: list[lib.particle.Particle]):
         """

@@ -8,6 +8,9 @@ import lib.electron
 import lib.graphs
 import lib.figlocation
 
+import lib.quark.quark
+import lib.quark.hadron
+
 config = lib.config.Config(0.7, 10, 10, 2000, 2000, 10, 1)
 
 potential = lib.potential.CoulombPotential(config)
@@ -48,49 +51,21 @@ for t in range(config.Nt):
             b = max(1 - abs(B - theta) ** 4, 0)
             colors[x][y] = np.array((r, g, b))
 
-    psi = np.zeros((config.Nx, config.Ny))
-
-    p1 = np.zeros((config.Nx, config.Ny))
-    center_1 = (2.0, 5.0)
-    for x in range(config.Nx):
-        for y in range(config.Ny):
-            x_norm = x * config.dx - center_1[0]
-            y_norm = y * config.dy - center_1[1]
-
-            r = math.sqrt(x_norm**2 + y_norm**2)
-            p1[x][y] = math.exp(-r / config.a0)
-
-    p2 = np.zeros((config.Nx, config.Ny))
-    center_2 = (6.5, 5.0 - 1.5 * math.sqrt(3))
-    for x in range(config.Nx):
-        for y in range(config.Ny):
-            x_norm = x * config.dx - center_2[0]
-            y_norm = y * config.dy - center_2[1]
-
-            r = math.sqrt(x_norm**2 + y_norm**2)
-            p2[x][y] = math.exp(-r / config.a0)
-
-    p3 = np.zeros((config.Nx, config.Ny))
-    center_3 = (6.5, 5.0 + 1.5 * math.sqrt(3))
-    for x in range(config.Nx):
-        for y in range(config.Ny):
-            x_norm = x * config.dx - center_3[0]
-            y_norm = y * config.dy - center_3[1]
-
-            r = math.sqrt(x_norm**2 + y_norm**2)
-            p3[x][y] = math.exp(-r / config.a0)
-
-    psi = p1 + p2 + p3
+    particle = lib.quark.hadron.Hadron(config, [
+        lib.quark.quark.Quark(config, 2.0, 5.0),
+        lib.quark.quark.Quark(config, 6.5, 5.0-1.5*math.sqrt(3)),
+        lib.quark.quark.Quark(config, 6.5, 5.0+1.5*math.sqrt(3))
+    ])
 
     graph.add_figure(
         lib.figlocation.FigureLocation(1, 3, 0),
-        np.angle(psi),
+        np.angle(particle.psi),
         "Phase (Electron 1)",
         "color",
     )
     graph.add_figure(
         lib.figlocation.FigureLocation(1, 3, 1),
-        np.absolute(psi),
+        np.absolute(particle.psi),
         "Absolute (Electron 1)",
         "3d",
         facecolors=colors,

@@ -24,12 +24,12 @@ class Hadron(lib.particle.Particle):
 
     a `np.array` of shape `(config.Nx, config.Ny)`
     """
-    quarks: "list[lib.quark.quark.Quark]"
+    quarks: list[lib.quark.quark.Quark]
     """
     Literally the list of involved quarks
     """
 
-    def __init__(self, config, quarks: lib.quark.quark.Quark):
+    def __init__(self, config, quarks: list[lib.quark.quark.Quark]):
         self._id = uuid.uuid4()
         self.config = config
         self.psi = np.zeros((config.Nx, config.Ny))
