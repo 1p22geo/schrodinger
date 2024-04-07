@@ -1,10 +1,11 @@
-import { PARTICLES } from "./constants.js";
+import { PARTICLES, POTENTIAL } from "./constants.js";
 import { Electron } from "./electron.js";
 import { Photon } from "./photon.js";
+import { CoulombPotential } from "./potential.js";
 import { serialize_state } from "./serialization.js";
 
 const state = {
-  particles: [],
+  components: [],
   config: {
     domain: {
       x: 10,
@@ -13,7 +14,6 @@ const state = {
       Ny: 1000,
       Nt: 2000,
       T_max: 10,
-      potential: "coulomb",
     },
   },
 };
@@ -21,7 +21,7 @@ const state = {
 let focused_particle = -1;
 
 function switch_sidebar(particleID) {
-  if (particleID > state.particles.length) {
+  if (particleID > state.components.length) {
     throw new Error("Particle ID too high");
   }
   focused_particle = particleID;
@@ -53,16 +53,9 @@ function render_sidebar() {
   Number of time divisions
   <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
 
-  Potential function
-  <select>
-    <option value="coulomb">Central Coulomb potential</option>
-    <option value="none">Empty potential field</option>
-  </select>
-
 </form>
 `;
     const form = document.querySelector(`#config-form`);
-    form.querySelectorAll("select")[0].value = state.config.domain.potential;
     form.onchange = () => {
       state.config.domain.x = parseInt(form.querySelectorAll("input")[0].value);
       state.config.domain.y = parseInt(form.querySelectorAll("input")[1].value);
@@ -78,18 +71,17 @@ function render_sidebar() {
       state.config.domain.Nt = parseInt(
         form.querySelectorAll("input")[5].value,
       );
-      state.config.domain.potential = form.querySelectorAll("select")[0].value;
       render_data();
     };
 
     return;
   }
 
-  const particle = state.particles[focused_particle];
+  const particle = state.components[focused_particle];
   switch (particle.__type) {
     case PARTICLES.ELECTRON: {
       sidebar.innerHTML = `
-<h1 class="text-xl">Particle ${focused_particle}</h1>
+<h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
   Principal quantum number:
@@ -98,6 +90,13 @@ function render_sidebar() {
   <input type="number" class="mb-4 border" value="${particle.azimuthal_quantum}">
   Magnetic quantum number
   <input type="number" class="mb-4 border" value="${particle.magnetic_quantum}">
+x0, y0:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${particle.x_center}">
+      ,
+  <input type="number" class="mb-4 border w-full" value="${particle.y_center}">
+  </div>
+
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
@@ -111,13 +110,20 @@ function render_sidebar() {
         particle.magnetic_quantum = parseInt(
           form.querySelectorAll("input")[2].value,
         );
+        particle.x_center = parseInt(
+          form.querySelectorAll("input")[3].value,
+        );
+        particle.y_center = parseInt(
+          form.querySelectorAll("input")[4].value,
+        );
+
         render_data();
       };
       break;
     }
     case PARTICLES.PHOTON: {
       sidebar.innerHTML = `
-<h1 class="text-xl">Particle ${focused_particle}</h1>
+<h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
 &sigma;:
@@ -157,6 +163,32 @@ v:
       };
       break;
     }
+    case POTENTIAL.COULOMB: {
+      sidebar.innerHTML = `
+<h1 class="text-xl">Component ${focused_particle}</h1>
+<h1 class="mb-4">${particle.__type}</h1>
+<form id="config-${focused_particle}" class="flex flex-col gap-2">
+charge:
+  <input type="number" class="mb-4 border" value="${particle.charge}">
+x0, y0:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${particle.x_center}">
+      ,
+  <input type="number" class="mb-4 border w-full" value="${particle.y_center}">
+  </div>
+
+</form>
+`;
+      const form = document.querySelector(`#config-${focused_particle}`);
+      form.onchange = () => {
+        particle.charge = parseFloat(form.querySelectorAll("input")[0].value);
+        particle.x_center = parseFloat(form.querySelectorAll("input")[1].value);
+        particle.y_center = parseFloat(form.querySelectorAll("input")[2].value);
+
+        render_data();
+      };
+      break;
+    }
 
     default:
       break;
@@ -182,7 +214,7 @@ function render_data() {
     switch_sidebar(-1);
   };
   document.querySelector("#particles").appendChild(div);
-  state.particles.map((p, ix) => {
+  state.components.map((p, ix) => {
     const div = document.createElement("div");
     div.classList.add(
       ...p.__style,
@@ -196,7 +228,7 @@ function render_data() {
     div.onclick = () => {
       switch_sidebar(ix);
     };
-    div.innerText = p.__type;
+    div.innerText = p.text;
     document.querySelector("#particles").appendChild(div);
   });
   fetch(
@@ -213,13 +245,18 @@ function render_data() {
 }
 
 document.querySelector("#add-electron").onclick = () => {
-  state.particles.push(new Electron(1, 0, 0));
+  state.components.push(new Electron(1, 0, 0, 5.0, 5.0));
   render_data();
 };
 document.querySelector("#add-photon").onclick = () => {
-  state.particles.push(new Photon(0.5, 2.0, 2.0, 5.0, 5.0, 0.0, 0.0));
+  state.components.push(new Photon(0.5, 2.0, 2.0, 5.0, 5.0, 0.0, 0.0));
   render_data();
 };
+document.querySelector("#add-potential").onclick = () => {
+  state.components.push(new CoulombPotential(5.0, 5.0, 1));
+  render_data();
+};
+
 
 document.querySelector("#reload").onclick = () => {
   render_sidebar();

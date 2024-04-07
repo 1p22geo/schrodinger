@@ -33,11 +33,9 @@ class GraphDisplay:
     Otherwise it displays the given frame number for this figure.
     """
 
-    def __init__(self,
-                 config: lib.config.Config,
-                 figsize=(12, 8),
-                 frameno: int | None = None
-                 ):
+    def __init__(
+        self, config: lib.config.Config, figsize=(12, 8), frameno: int | None = None
+    ):
         self.config = config
         self.frameno = frameno
         self.fig = plt.figure(figsize=figsize)
@@ -77,8 +75,9 @@ class GraphDisplay:
         No need to call it, `GraphDisplay.save()` calls it automagically
             if `frameno` is not None
         """
-        self.fig.text(0, 0, "frame "+str(self.frameno),
-                      fontsize=10, **lib.constants.PLT_FONT)
+        self.fig.text(
+            0, 0, "frame " + str(self.frameno), fontsize=10, **lib.constants.PLT_FONT
+        )
 
     def add_figure(
         self,
@@ -108,24 +107,21 @@ class GraphDisplay:
         match fig_type:
             case "color":
                 ax = self.fig.add_subplot(location.spec())
-                cs = ax.contourf(self.config.X, self.config.Y,
-                                 function, cmap=cmap)
+                cs = ax.contourf(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title, **lib.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
             case "3d":
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
-                ax.plot_surface(self.config.X, self.config.Y,
-                                function, cmap=cmap)
+                ax.plot_surface(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title, **lib.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
-                ax.pcolormesh(self.config.X, self.config.Y,
-                              function, cmap=cmap)
+                ax.pcolormesh(self.config.X, self.config.Y, function, cmap=cmap)
                 ax.set_title(title, **lib.constants.PLT_FONT)
 
                 ax.set_xlim(0, self.config.Lx)

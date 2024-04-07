@@ -14,12 +14,15 @@ import lib.constants
 def renderpreview(state):
     print(state)
     start = time.time_ns()
-    config, potential, particles = Deserializer().ds(state)
+    config, potentials, particles = Deserializer().ds(state)
 
     graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
 
     for n in range(len(particles)):
         particle = particles[n]
+        V_total = np.zeros((config.Nx, config.Ny))
+        for potential in potentials:
+            V_total += potential.V
         graph.add_figure(
             lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
             np.angle(particle.psi),
@@ -34,7 +37,7 @@ def renderpreview(state):
         )
         graph.add_figure(
             lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
-            potential.V,
+            V_total,
             f"Mean potential field (particle {n})",
             "3d",
             zlim=(-1, 0),
@@ -51,7 +54,8 @@ def renderpreview(state):
     eta = frame_time * config.Nt
 
     days = int(eta / lib.constants.NS_IN_DAY)
-    hours = round((eta % lib.constants.NS_IN_DAY) / lib.constants.NS_IN_HOUR, 2)
+    hours = round((eta % lib.constants.NS_IN_DAY) /
+                  lib.constants.NS_IN_HOUR, 2)
 
     res = flask.send_file(filename)
     res.headers["X-ETA-To-Full-Animation"] = f"{days} days, {hours} hours"

@@ -23,7 +23,7 @@ class QueuedRender:
         self.thread.start()
 
     def render(self, state):
-        config, potential, particles = Deserializer().ds(state)
+        config, potentials, particles = Deserializer().ds(state)
 
         dirname = uuid.uuid4()
         dirname = f"static/temp/{dirname}"
@@ -35,7 +35,11 @@ class QueuedRender:
             graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
             for n in range(len(particles)):
                 particle = particles[n]
-                particle.propagate(potential.V, particles)
+                V_total = np.zeros((config.Nx, config.Ny))
+                for potential in potentials:
+                    V_total += potential.V
+
+                particle.propagate(V_total, particles)
 
                 graph.add_figure(
                     lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
@@ -44,14 +48,16 @@ class QueuedRender:
                     "color",
                 )
                 graph.add_figure(
-                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
+                    lib.figlocation.FigureLocation(
+                        len(particles), 3, 3 * n + 1),
                     np.absolute(particle.psi),
                     f"Absolute (particle {n})",
                     "3d",
                 )
                 graph.add_figure(
-                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
-                    potential.V,
+                    lib.figlocation.FigureLocation(
+                        len(particles), 3, 3 * n + 2),
+                    V_total,
                     f"Mean potential field (particle {n})",
                     "3d",
                     cmap=None,
@@ -78,7 +84,8 @@ def queue_render(state):
     renders.append(QueuedRender(state))
     render_id = len(renders) - 1
     return flask.Response(
-        json.dumps({"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
+        json.dumps(
+            {"id": render_id, "preview_url": f"/api/preview?id={render_id}"}),
         status=202,
     )
 

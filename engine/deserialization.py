@@ -2,6 +2,7 @@ import lib.config
 import lib.potential
 import lib.electron
 import lib.gauss
+import lib.constants
 
 
 class Deserializer:
@@ -24,27 +25,23 @@ class Deserializer:
         config = lib.config.Config(
             1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
         )
-        potential = None
-        match dc["potential"]:
-            case "coulomb":
-                potential = lib.potential.CoulombPotential(config)
-            case "none":
-                potential = lib.potential.Potential(config)
-        serialized_particles = state["particles"]
+        serialized_components = state["components"]
         particles = []
-        for sp in serialized_particles:
+        potentials = []
+        for sp in serialized_components:
             match sp["type"]:
-                case "electron":
+                case lib.constants.DeserializationConstants.PARTICLES.ELECTRON:
                     particles.append(
                         lib.electron.Electron(
                             config,
-                            potential,
+                            lib.potential.CoulombPotential(
+                                config, sp["x_center"], sp["y_center"]),
                             sp["principal_quantum"],
                             sp["azimuthal_quantum"],
                             sp["magnetic_quantum"],
                         )
                     )
-                case "photon":
+                case lib.constants.DeserializationConstants.PARTICLES.PHOTON:
                     particles.append(
                         lib.gauss.WavePacket(
                             config,
@@ -57,5 +54,11 @@ class Deserializer:
                             sp["vy"],
                         )
                     )
+                case lib.constants.DeserializationConstants.POTENTIAL.COULOMB:
+                    potentials.append(
+                        lib.potential.CoulombPotential(
+                            config, x_center=sp["x_center"], y_center=sp["y_center"], charge=sp["charge"]
+                        )
+                    )
 
-        return config, potential, particles
+        return config, potentials, particles

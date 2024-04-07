@@ -10,7 +10,16 @@ TEST_TOLERANCE_TRESHOLD = 0.001
 """
 the tolerance threshold for lib.testutils.floateq.floateq()
 """
-PLT_FONT = {'fontname': 'monospace'}
+PLT_FONT = {"fontname": "monospace"}
 """
 The fontname dict for Matplotlib
 """
+
+
+class DeserializationConstants:
+    class PARTICLES:
+        ELECTRON = "PARTICLES.ELECTRON"
+        PHOTON = "PARTICLES.PHOTON"
+
+    class POTENTIAL:
+        COULOMB = "POTENTIAL.COULOMB"

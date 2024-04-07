@@ -60,10 +60,26 @@ class CoulombPotential(Potential):
 
     A `np.array` of shape `(Nx, Ny)`
     """
+    charge: float
+    """
+    A linear multiplier to the force.
 
-    def __init__(self, config, *args, **kwargs):
+    Which is kinda what electric charge does to electrostatic force.
+    """
+
+    def __init__(self, config, *args, charge=1, **kwargs):
+        """
+        Theoretically the electron is negative and this one is positive.
+        But this is quantum physics.
+
+        Also some fancy people have a negative sign in front of "attracting"
+        forces, and positive for repelling forces. Whatever
+
+        Also, `charge` is actually q1*q2
+        """
+        self.charge = charge
         super().__init__(config, *args, **kwargs)
-        self.V = -1 / self.r  # Central Coulomb potential
+        self.V = -charge / self.r
 
 
 class MeanFieldPotential(Potential):
@@ -94,6 +110,7 @@ class MeanFieldPotential(Potential):
         super().__init__(config, *args, **kwargs)
         self.rho = np.abs(particle.psi) ** 2  # Charge density of electron
         self.V = -1 / np.sqrt(
-            (config.X - self.x_center) ** 2 + (config.Y - self.y_center) ** 2 + 1e-6
+            (config.X - self.x_center) ** 2 +
+            (config.Y - self.y_center) ** 2 + 1e-6
         )  # Regularize the denominator
         self.V *= np.sum(self.rho) * config.dx * config.dy  # Scale by charge

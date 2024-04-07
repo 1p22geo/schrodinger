@@ -10,12 +10,13 @@ export class Photon {
     this.vx = vx;
     this.vy = vy;
 
+    this.text = "PHOTON"
     this.__type = PARTICLES.PHOTON;
     this.__style = ["bg-yellow-300"];
   }
   serialize() {
     return {
-      type: "photon",
+      type: PARTICLES.PHOTON,
       sigma: this.sigma,
       kx0: this.kx0,
       ky0: this.ky0,

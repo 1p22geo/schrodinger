@@ -9,8 +9,7 @@ import lib.gauss
 import lib.graphs
 import lib.figlocation
 
-config = lib.config.Config(
-    a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=2000, T_max=50)
+config = lib.config.Config(a0=1, Lx=20, Ly=20, Nx=2000, Ny=2000, Nt=2000, T_max=50)
 
 potential = lib.potential.CoulombPotential(config)
 
@@ -39,8 +38,7 @@ for t in range(config.Nt):
         particles[0].psi = particles[0].calculate_psi(potential)
         del particles[1]
 
-    graph = lib.graphs.GraphDisplay(
-        config, (12, 8), frameno=t)
+    graph = lib.graphs.GraphDisplay(config, (12, 8), frameno=t)
     for n in range(len(particles)):
         particle = particles[n]
         particle.propagate(potential.V, particles)
