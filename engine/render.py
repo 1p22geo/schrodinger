@@ -38,31 +38,10 @@ class QueuedRender:
                 V_total = np.zeros((config.Nx, config.Ny))
                 for potential in potentials:
                     V_total += potential.V
+                particle.draw(graph, V_total,  len(particles), 3, n)
 
-                particle.propagate(V_total, particles)
+                particle.propagate(V_total, particles, t)
 
-                graph.add_figure(
-                    lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
-                    np.angle(particle.psi),
-                    f"Phase (particle {n})",
-                    "color",
-                )
-                graph.add_figure(
-                    lib.figlocation.FigureLocation(
-                        len(particles), 3, 3 * n + 1),
-                    np.absolute(particle.psi),
-                    f"Absolute (particle {n})",
-                    "3d",
-                )
-                graph.add_figure(
-                    lib.figlocation.FigureLocation(
-                        len(particles), 3, 3 * n + 2),
-                    V_total,
-                    f"Mean potential field (particle {n})",
-                    "3d",
-                    cmap=None,
-                    zlim=(-1, 0),
-                )
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)
             self.latest = filename

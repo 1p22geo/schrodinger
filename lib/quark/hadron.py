@@ -37,7 +37,7 @@ class Hadron(lib.particle.Particle):
         for q in self.quarks:
             self.psi += q.psi
 
-    def propagate(self, V: np.array, particles: list[lib.particle.Particle]):
+    def propagate(self, V: np.array, particles: list[lib.particle.Particle], frame: int):
         """
         propagate the wave function in a potential field
 
@@ -55,7 +55,7 @@ class Hadron(lib.particle.Particle):
         self.psi = np.zeros(
             (self.config.Nx, self.config.Ny), dtype="complex128")
         for q in self.quarks:
-            q.propagate(V, particles)
+            q.propagate(V, particles, frame)
             self.psi += q.psi
 
         if not (self.config.interactions_enabled):

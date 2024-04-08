@@ -88,5 +88,5 @@ class Baryon(lib.quark.hadron.Hadron):
             cmap=None,
         )
 
-    def propagate(self, V, particles):
-        super().propagate(V, particles)
+    def propagate(self, V, particles, frame):
+        super().propagate(V, particles, frame)

@@ -23,26 +23,8 @@ def renderpreview(state):
         V_total = np.zeros((config.Nx, config.Ny))
         for potential in potentials:
             V_total += potential.V
-        graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n),
-            np.angle(particle.psi),
-            f"Phase (particle {n})",
-            "color",
-        )
-        graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 1),
-            np.absolute(particle.psi),
-            f"Absolute (particle {n})",
-            "3d",
-        )
-        graph.add_figure(
-            lib.figlocation.FigureLocation(len(particles), 3, 3 * n + 2),
-            V_total,
-            f"Mean potential field (particle {n})",
-            "3d",
-            zlim=(-1, 0),
-            cmap=None,
-        )
+
+        particle.draw(graph, V_total, len(particles), 3, n)
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
     if not os.path.exists("static/temp"):

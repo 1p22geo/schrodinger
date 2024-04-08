@@ -1,6 +1,4 @@
 import os
-import math
-import numpy as np
 
 import lib.config
 import lib.potential
@@ -31,7 +29,7 @@ for t in range(config.Nt):
         particle = particles[n]
 
         particle.draw(graph, potential, 2, 3, n)
-        particle.propagate(potential.V, particles)
+        particle.propagate(potential.V, particles, n)
 
     filename = f"output_images4/frame_{t:03d}.png"
     graph.save(filename)
