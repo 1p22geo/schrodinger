@@ -19,7 +19,7 @@ def test_photon_propagate():
     ph = lib.gauss.WavePacket(config, 0.5, 2, 2, 10, 10, 0, 0)
     res = np.sum((abs(ph.psi) ** 2) * (config.dx) * (config.dy))
     assert floateq(res, 1)
-    for _ in range(config.Nt):
-        ph.propagate(potential.V, [])
+    for t in range(config.Nt):
+        ph.propagate(potential.V, [], t)
         res = np.sum((abs(ph.psi) ** 2) * (config.dx) * (config.dy))
         assert floateq(res, 1)

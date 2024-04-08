@@ -20,8 +20,8 @@ def test_electron_propagate():
     el = lib.electron.Electron(config, potential, 1, 0, 0)
     res = np.sum((abs(el.psi) ** 2) * (config.dx) * (config.dy))
     assert floateq(res, 1)
-    for _ in range(config.Nt):
-        el.propagate(potential.V, [])
+    for t in range(config.Nt):
+        el.propagate(potential.V, [], t)
         res = np.sum((abs(el.psi) ** 2) * (config.dx) * (config.dy))
         assert floateq(res, 1)
 
