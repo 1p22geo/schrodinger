@@ -4,6 +4,7 @@ import uuid
 import lib.particle
 import lib.config
 import lib.potential
+import lib.quark.quark
 
 
 class Hadron(lib.particle.Particle):

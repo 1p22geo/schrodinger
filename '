@@ -56,7 +56,7 @@ class Baryon(lib.quark.hadron.Hadron):
 
     def draw(self,
              graph: "lib.graphs.GraphDisplay",
-             V: np.array,
+             potential: "lib.potential.Potential",
              x,
              y,
              num):
@@ -83,7 +83,7 @@ class Baryon(lib.quark.hadron.Hadron):
 
         graph.add_figure(
             lib.figlocation.FigureLocation(x, y, 3*num+2),
-            V,
+            potential.V,
             "Mean potential (electron 1)",
             "3d",
             zlim=(-1, 0),

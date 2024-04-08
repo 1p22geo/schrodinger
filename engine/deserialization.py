@@ -3,6 +3,7 @@ import lib.potential
 import lib.electron
 import lib.gauss
 import lib.constants
+import lib.quark.baryon
 
 
 class Deserializer:
@@ -55,6 +56,16 @@ class Deserializer:
                             sp["vy"],
                         )
                     )
+                case lib.constants.DeserializationConstants.PARTICLES.NEUTRON:
+                    particles.append(
+                        lib.quark.baryon.Baryon(
+                            config,
+                            sp["x0"],
+                            sp["y0"],
+                            sp["spread"]
+                        )
+                    )
+
                 case lib.constants.DeserializationConstants.POTENTIAL.COULOMB:
                     potentials.append(
                         lib.potential.CoulombPotential(
