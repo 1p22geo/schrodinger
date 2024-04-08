@@ -4,6 +4,8 @@ import math
 import lib.quark.hadron
 import lib.quark.color
 
+import lib.waveutils
+
 
 class Meson(lib.quark.hadron.Hadron):
     """
@@ -32,27 +34,22 @@ class Meson(lib.quark.hadron.Hadron):
         u = math.sqrt(xa**2+ya**2)
         xa /= u
         ya /= u
+        self.vx = vx
+        self.vy = vy
+        self.x0 = x0
+        self.y0 = y0
         super().__init__(config, [
             lib.quark.quark.Quark(config, x0 + xa*spread, y0 + ya*spread, c1),
             lib.quark.quark.Quark(config, x0 - xa*spread, y0 - ya*spread, c2),
         ])
-
-        R = 0 * math.pi / 3
-        G = 2 * math.pi / 3
-        B = 4 * math.pi / 3
-        for x in range(config.Nx):
-            for y in range(config.Ny):
-                x_norm = x - config.Nx / 2
-                y_norm = y - config.Ny / 2
-                theta = np.angle(x_norm + 1j * y_norm)
-                theta += math.pi
-                r = max(1 - abs(R - theta) ** 4, 1 -
-                        abs(R+2*math.pi - theta) ** 4, 0)
-                g = max(1 - abs(G - theta) ** 4, 1 -
-                        abs(G+2*math.pi - theta) ** 4, 0)
-                b = max(1 - abs(B - theta) ** 4, 1 -
-                        abs(B+2*math.pi - theta) ** 4, 0)
-                self.colors[x][y] = np.array((r, g, b))
+        self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
+        for n in range(len(self.quarks)):
+            self.quarks[n].psi = lib.waveutils.rollwave(
+                self.config, self.quarks[n].psi, self.vx, self.vy)
+            self.quarks[n].x_center += self.vx * self.config.dt
+            self.quarks[n].y_center += self.vy * self.config.dt
+
         super().propagate(V, particles, frame)
+        self.colors = lib.quark.color.colorquarks(self.config, self.quarks)

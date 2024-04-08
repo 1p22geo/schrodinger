@@ -47,4 +47,5 @@ class Baryon(lib.quark.hadron.Hadron):
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[0].color_charge = lib.quark.color.COLOR.GREEN
+            self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         return particles
