@@ -40,7 +40,9 @@ class QueuedRender:
                     V_total += potential.V
                 particle.draw(graph, V_total,  len(particles), 3, n)
 
-                particle.propagate(V_total, particles, t)
+                new_particles = particle.propagate(V_total, particles, t)
+                if new_particles:
+                    particles = new_particles
 
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)

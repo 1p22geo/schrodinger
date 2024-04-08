@@ -24,7 +24,7 @@ class Deserializer:
         """
         dc = state["config"]["domain"]
         config = lib.config.Config(
-            1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"]
+            1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"], dc["interactions"]
         )
         serialized_components = state["components"]
         particles = []

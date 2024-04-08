@@ -29,14 +29,56 @@ class Hadron(lib.particle.Particle):
     """
     Literally the list of involved quarks
     """
+    colors: np.array
+    """
+    Colors which can be passed as **facecolors to matplotlib or
+    `lib.graphs.GraphDisplay.add_figure`
+    """
 
     def __init__(self, config, quarks: list[lib.quark.quark.Quark]):
         self._id = uuid.uuid4()
         self.config = config
         self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         self.quarks = quarks
+        self.colors = np.zeros((config.Nx, config.Ny, 3))
         for q in self.quarks:
             self.psi += q.psi
+
+    def draw(self,
+             graph: "lib.graphs.GraphDisplay",
+             V: np.array,
+             x,
+             y,
+             num):
+        """
+        Draws self as graphs (`3*num`, `3*num+1`, `3*num+2`)
+        on an `x` by `y` figure in `graph`
+
+        Or if this is particle number `num`
+        and graphs are made on a `x` by `y` grid
+        """
+        graph.add_figure(
+            lib.figlocation.FigureLocation(x, y, 3*num),
+            np.angle(self.psi),
+            "Phase (Electron 1)",
+            "color",
+        )
+        graph.add_figure(
+            lib.figlocation.FigureLocation(x, y, 3*num+1),
+            np.absolute(self.psi),
+            "Absolute (Electron 1)",
+            "3d",
+            facecolors=self.colors,
+        )
+
+        graph.add_figure(
+            lib.figlocation.FigureLocation(x, y, 3*num+2),
+            V,
+            "Mean potential (electron 1)",
+            "3d",
+            zlim=(-1, 0),
+            cmap=None,
+        )
 
     def propagate(self, V: np.array, particles: list[lib.particle.Particle], frame: int):
         """

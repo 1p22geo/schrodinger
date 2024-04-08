@@ -5,6 +5,7 @@ import uuid
 import lib.particle
 import lib.config
 import lib.potential
+import lib.quark.color
 
 
 class Quark(lib.particle.Particle):
@@ -39,11 +40,12 @@ class Quark(lib.particle.Particle):
     y0, midpoint of the wave function
     """
 
-    def __init__(self, config, x_center, y_center):
+    def __init__(self, config, x_center, y_center, color: lib.quark.color.COLOR):
         self._id = uuid.uuid4()
         self.config = config
         self.x_center = x_center
         self.y_center = y_center
+        self.color_charge = color
         self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         for x in range(config.Nx):
             for y in range(config.Ny):

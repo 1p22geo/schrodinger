@@ -15,6 +15,7 @@ const state = {
       Ny: 1000,
       Nt: 2000,
       T_max: 10,
+      interactions: false
     },
   },
 };
@@ -54,6 +55,9 @@ function render_sidebar() {
   Number of time divisions
   <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
 
+  [EXPERIMENTAL] [SLOW AND UNOPTIMIZED] [NOT RECOMMENDED] [RADIATION RISK] Inter-particle interactions
+  <input type="checkbox" class="mb-4 border" ${state.config.domain.interactions ? "checked" : ""}>
+
 </form>
 `;
     const form = document.querySelector(`#config-form`);
@@ -72,6 +76,7 @@ function render_sidebar() {
       state.config.domain.Nt = parseInt(
         form.querySelectorAll("input")[5].value,
       );
+      state.config.domain.interactions = form.querySelectorAll("input")[6].checked
       render_data();
     };
 
@@ -258,6 +263,7 @@ function render_data() {
     div.innerText = p.text;
     document.querySelector("#particles").appendChild(div);
   });
+  document.querySelector("#spinner").hidden = false;
   fetch(
     `/api/renderpreview?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}`,
   ).then((res) => {
@@ -265,6 +271,7 @@ function render_data() {
       document
         .querySelector("#main-image-render")
         .setAttribute("src", URL.createObjectURL(blob));
+      document.querySelector("#spinner").hidden = true
       document.querySelector("#eta").innerText =
         `ETA: ${res.headers.get("X-ETA-To-Full-Animation")}`;
     });
