@@ -12,24 +12,35 @@ class Baryon(lib.quark.hadron.Hadron):
     But hey, colors! :3
     """
 
-    def __init__(self, config, x0: float, y0: float, spread: float):
+    def __init__(self,
+                 config,
+                 x0: float,
+                 y0: float,
+                 spread: float = 3.0,
+                 rotation: int = 0):
+        self.rotation = rotation
         super().__init__(
             config,
             [
                 lib.quark.quark.Quark(
-                    config, x0 - spread, y0, lib.quark.color.COLOR.RED
+                    config, x0 -
+                    spread, y0,
+                    lib.quark.color.rotate(
+                        lib.quark.color.COLOR.RED, self.rotation)
                 ),
                 lib.quark.quark.Quark(
                     config,
                     x0 + spread / 2,
                     y0 - spread / 2 * math.sqrt(3),
-                    lib.quark.color.COLOR.GREEN,
+                    lib.quark.color.rotate(
+                        lib.quark.color.COLOR.GREEN, self.rotation)
                 ),
                 lib.quark.quark.Quark(
                     config,
                     x0 + spread / 2,
                     y0 + spread / 2 * math.sqrt(3),
-                    lib.quark.color.COLOR.BLUE,
+                    lib.quark.color.rotate(
+                        lib.quark.color.COLOR.BLUE, self.rotation)
                 ),
             ],
         )
@@ -55,12 +66,15 @@ class Baryon(lib.quark.hadron.Hadron):
                 self.spread * math.sqrt(3),
                 -self.spread,
                 2,
-                lib.quark.color.COLOR.ANTIGREEN,
-                lib.quark.color.COLOR.RED,
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.ANTIGREEN, self.rotation),
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.RED, self.rotation),
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
-            self.quarks[0].color_charge = lib.quark.color.COLOR.GREEN
+            self.quarks[0].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.GREEN, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         if ((frame * self.config.dt) % self.T > 1) and self._cycle == 1:
             self._cycle = 2
@@ -68,7 +82,8 @@ class Baryon(lib.quark.hadron.Hadron):
                 if particles[n]._id == self._meson:
                     del particles[n]
                     break
-            self.quarks[1].color_charge = lib.quark.color.COLOR.RED
+            self.quarks[1].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.RED, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         if ((frame * self.config.dt) % self.T > 3) and self._cycle == 2:
             self._cycle = 3
@@ -79,12 +94,16 @@ class Baryon(lib.quark.hadron.Hadron):
                 0,
                 self.spread * 2,
                 2,
-                lib.quark.color.COLOR.ANTIBLUE,
-                lib.quark.color.COLOR.RED,
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.ANTIBLUE, self.rotation),
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.RED, self.rotation),
+
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
-            self.quarks[1].color_charge = lib.quark.color.COLOR.BLUE
+            self.quarks[1].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.BLUE, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         if ((frame * self.config.dt) % self.T > 4) and self._cycle == 3:
             self._cycle = 4
@@ -92,7 +111,8 @@ class Baryon(lib.quark.hadron.Hadron):
                 if particles[n]._id == self._meson:
                     del particles[n]
                     break
-            self.quarks[2].color_charge = lib.quark.color.COLOR.RED
+            self.quarks[2].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.RED, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         if ((frame * self.config.dt) % self.T > 6) and self._cycle == 4:
             self._cycle = 5
@@ -103,12 +123,16 @@ class Baryon(lib.quark.hadron.Hadron):
                 -self.spread * math.sqrt(3),
                 -self.spread,
                 2,
-                lib.quark.color.COLOR.ANTIGREEN,
-                lib.quark.color.COLOR.RED,
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.ANTIGREEN, self.rotation),
+                lib.quark.color.rotate(
+                    lib.quark.color.COLOR.RED, self.rotation),
+
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
-            self.quarks[2].color_charge = lib.quark.color.COLOR.GREEN
+            self.quarks[2].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.GREEN, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         if ((frame * self.config.dt) % self.T > 7) and self._cycle == 5:
             self._cycle = 0
@@ -116,6 +140,7 @@ class Baryon(lib.quark.hadron.Hadron):
                 if particles[n]._id == self._meson:
                     del particles[n]
                     break
-            self.quarks[0].color_charge = lib.quark.color.COLOR.RED
+            self.quarks[0].color_charge = lib.quark.color.rotate(
+                lib.quark.color.COLOR.RED, self.rotation)
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         return particles

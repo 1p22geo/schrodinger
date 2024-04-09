@@ -56,3 +56,28 @@ def colorquarks(config, quarks):
                         colors[x][y] += np.array((f, f, 0))
 
     return colors
+
+
+def rotate(color, n=0):
+    """
+    Rotates the color `n` times in the order:
+    RED -> GREEN -> BLUE -> RED -> GREEN -> ...
+    or
+    ~RED -> ~GREEN -> ~BLUE -> ~RED -> ...
+    (where ~RED is ANTIRED)
+    """
+    if not n:
+        return color
+    match color:
+        case COLOR.RED:
+            return rotate(COLOR.GREEN, n-1)
+        case COLOR.GREEN:
+            return rotate(COLOR.BLUE, n-1)
+        case COLOR.BLUE:
+            return rotate(COLOR.RED, n-1)
+        case COLOR.ANTIRED:
+            return rotate(COLOR.ANTIGREEN, n-1)
+        case COLOR.ANTIGREEN:
+            return rotate(COLOR.ANTIBLUE, n-1)
+        case COLOR.ANTIBLUE:
+            return rotate(COLOR.ANTIRED, n-1)

@@ -66,13 +66,13 @@ class Deserializer:
                 case lib.constants.DeserializationConstants.PARTICLES.NEUTRON:
                     particles.append(
                         lib.quark.baryon.Baryon(
-                            config, sp["x0"], sp["y0"], sp["spread"]
+                            config, sp["x0"], sp["y0"], sp["spread"], 0
                         )
                     )
                 case lib.constants.DeserializationConstants.PARTICLES.PROTON:
                     particles.append(
                         lib.quark.baryon.Baryon(
-                            config, sp["x0"], sp["y0"], sp["spread"]
+                            config, sp["x0"], sp["y0"], sp["spread"], 1
                         )
                     )
                     potentials.append(
