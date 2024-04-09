@@ -32,7 +32,8 @@ class QueuedRender:
             os.makedirs(dirname)
 
         for t in range(config.Nt):
-            graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
+            graph = lib.graphs.GraphDisplay(
+                config, (12, 4 * len(particles)), t)
             for n in range(len(particles)):
                 particle = particles[n]
                 V_total = np.zeros((config.Nx, config.Ny))
@@ -42,7 +43,10 @@ class QueuedRender:
 
                 new_particles = particle.propagate(V_total, particles, t)
                 if new_particles:
+                    old_particles = particles[:]
                     particles = new_particles
+                    if len(old_particles) != len(new_particles):
+                        break  # bodge for deleting particles mid-loop
 
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)

@@ -26,26 +26,38 @@ class Baryon(lib.quark.hadron.Hadron):
         ])
         self.spread = spread
         self._meson = None
+        self._cycle = 0
+        self.T = 10
 
         self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
+        particles = particles[:]
         super().propagate(V, particles, frame)
         if not (self.config.interactions_enabled):
             return
 
-        if frame % 150 == 1:
+        if ((frame * self.config.dt) % self.T > 0) and self._cycle == 0:
+            self._cycle = 1
             m = lib.quark.meson.Meson(
                 self.config,
                 self.quarks[0].x_center,
                 self.quarks[0].y_center,
-                self.spread,
-                -self.spread*math.sqrt(3),
+                self.spread*math.sqrt(3),
+                -self.spread,
                 2,
                 lib.quark.color.COLOR.ANTIGREEN,
                 lib.quark.color.COLOR.RED)
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[0].color_charge = lib.quark.color.COLOR.GREEN
+            self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
+        if ((frame * self.config.dt) % self.T > 1) and self._cycle == 1:
+            self._cycle = 2
+            for n in range(len(particles)):
+                if particles[n]._id == self._meson:
+                    del particles[n]
+                    break
+            self.quarks[1].color_charge = lib.quark.color.COLOR.RED
             self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
         return particles

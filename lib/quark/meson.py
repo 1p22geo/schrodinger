@@ -49,7 +49,19 @@ class Meson(lib.quark.hadron.Hadron):
             self.quarks[n].psi = lib.waveutils.rollwave(
                 self.config, self.quarks[n].psi, self.vx, self.vy)
             self.quarks[n].x_center += self.vx * self.config.dt
+            self.quarks[n].x_center = (
+                self.quarks[n].x_center + self.config.Lx) % self.config.Lx
             self.quarks[n].y_center += self.vy * self.config.dt
+            self.quarks[n].y_center = (
+                self.quarks[n].y_center + self.config.Ly) % self.config.Ly
+
+        self.x0 += self.vx * self.config.dt
+        self.x0 = (
+            self.x0 + self.config.Lx) % self.config.Lx
+
+        self.y0 += self.vy * self.config.dt
+        self.y0 = (
+            self.y0 + self.config.Ly) % self.config.Ly
 
         super().propagate(V, particles, frame)
         self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
