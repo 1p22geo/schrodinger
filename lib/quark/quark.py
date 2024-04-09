@@ -40,7 +40,12 @@ class Quark(lib.particle.Particle):
     y0, midpoint of the wave function
     """
 
-    def __init__(self, config, x_center, y_center, color: lib.quark.color.COLOR):
+    def __init__(
+            self,
+            config,
+            x_center,
+            y_center,
+            color: lib.quark.color.COLOR):
         self._id = uuid.uuid4()
         self.config = config
         self.x_center = x_center
