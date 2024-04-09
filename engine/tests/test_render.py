@@ -23,7 +23,7 @@ def test_render():
                     "Ny": 1000,
                     "Nt": 10,
                     "T_max": 1,
-                    "interactions": False
+                    "interactions": False,
                 }
             },
             "components": [

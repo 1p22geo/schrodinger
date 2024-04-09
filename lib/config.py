@@ -63,7 +63,17 @@ class Config:
     please leave it at False.
     """
 
-    def __init__(self, a0=1.0, Lx=10, Ly=10, Nx=1000, Ny=1000, Nt=2000, T_max=10, interactions=False):
+    def __init__(
+        self,
+        a0=1.0,
+        Lx=10,
+        Ly=10,
+        Nx=1000,
+        Ny=1000,
+        Nt=2000,
+        T_max=10,
+        interactions=False,
+    ):
         self.a0 = a0
         self.Lx = Lx
         self.Ly = Ly

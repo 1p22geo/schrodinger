@@ -14,16 +14,26 @@ class Baryon(lib.quark.hadron.Hadron):
     """
 
     def __init__(self, config, x0: float, y0: float, spread: float):
-        super().__init__(config, [
-            lib.quark.quark.Quark(config, x0-spread, y0,
-                                  lib.quark.color.COLOR.RED),
-            lib.quark.quark.Quark(config, x0 + spread/2,
-                                  y0-spread/2*math.sqrt(3),
-                                  lib.quark.color.COLOR.GREEN),
-            lib.quark.quark.Quark(config, x0 + spread/2,
-                                  y0+spread/2*math.sqrt(3),
-                                  lib.quark.color.COLOR.BLUE)
-        ])
+        super().__init__(
+            config,
+            [
+                lib.quark.quark.Quark(
+                    config, x0 - spread, y0, lib.quark.color.COLOR.RED
+                ),
+                lib.quark.quark.Quark(
+                    config,
+                    x0 + spread / 2,
+                    y0 - spread / 2 * math.sqrt(3),
+                    lib.quark.color.COLOR.GREEN,
+                ),
+                lib.quark.quark.Quark(
+                    config,
+                    x0 + spread / 2,
+                    y0 + spread / 2 * math.sqrt(3),
+                    lib.quark.color.COLOR.BLUE,
+                ),
+            ],
+        )
         self.spread = spread
         self._meson = None
         self._cycle = 0
@@ -43,11 +53,12 @@ class Baryon(lib.quark.hadron.Hadron):
                 self.config,
                 self.quarks[0].x_center,
                 self.quarks[0].y_center,
-                self.spread*math.sqrt(3),
+                self.spread * math.sqrt(3),
                 -self.spread,
                 2,
                 lib.quark.color.COLOR.ANTIGREEN,
-                lib.quark.color.COLOR.RED)
+                lib.quark.color.COLOR.RED,
+            )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[0].color_charge = lib.quark.color.COLOR.GREEN
@@ -70,7 +81,8 @@ class Baryon(lib.quark.hadron.Hadron):
                 self.spread * 2,
                 2,
                 lib.quark.color.COLOR.ANTIBLUE,
-                lib.quark.color.COLOR.RED)
+                lib.quark.color.COLOR.RED,
+            )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[1].color_charge = lib.quark.color.COLOR.BLUE
@@ -89,11 +101,12 @@ class Baryon(lib.quark.hadron.Hadron):
                 self.config,
                 self.quarks[2].x_center,
                 self.quarks[2].y_center,
-                -self.spread*math.sqrt(3),
+                -self.spread * math.sqrt(3),
                 -self.spread,
                 2,
                 lib.quark.color.COLOR.ANTIGREEN,
-                lib.quark.color.COLOR.RED)
+                lib.quark.color.COLOR.RED,
+            )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[2].color_charge = lib.quark.color.COLOR.GREEN

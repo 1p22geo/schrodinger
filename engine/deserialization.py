@@ -24,7 +24,14 @@ class Deserializer:
         """
         dc = state["config"]["domain"]
         config = lib.config.Config(
-            1, dc["x"], dc["y"], dc["Nx"], dc["Ny"], dc["Nt"], dc["T_max"], dc["interactions"]
+            1,
+            dc["x"],
+            dc["y"],
+            dc["Nx"],
+            dc["Ny"],
+            dc["Nt"],
+            dc["T_max"],
+            dc["interactions"],
         )
         serialized_components = state["components"]
         particles = []
@@ -59,10 +66,21 @@ class Deserializer:
                 case lib.constants.DeserializationConstants.PARTICLES.NEUTRON:
                     particles.append(
                         lib.quark.baryon.Baryon(
+                            config, sp["x0"], sp["y0"], sp["spread"]
+                        )
+                    )
+                case lib.constants.DeserializationConstants.PARTICLES.PROTON:
+                    particles.append(
+                        lib.quark.baryon.Baryon(
+                            config, sp["x0"], sp["y0"], sp["spread"]
+                        )
+                    )
+                    potentials.append(
+                        lib.potential.CoulombPotential(
                             config,
-                            sp["x0"],
-                            sp["y0"],
-                            sp["spread"]
+                            x_center=sp["x0"],
+                            y_center=sp["y0"],
+                            charge=sp["spread"],
                         )
                     )
 

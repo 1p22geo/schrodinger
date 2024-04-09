@@ -10,7 +10,7 @@ export class Photon {
     this.vx = vx;
     this.vy = vy;
 
-    this.text = "PHOTON"
+    this.text = "PHOTON";
     this.__type = PARTICLES.PHOTON;
     this.__style = ["bg-yellow-300"];
   }

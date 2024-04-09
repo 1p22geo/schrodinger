@@ -39,8 +39,8 @@ def colorquarks(config, quarks):
             for q in quarks:
                 x0 = q.x_center / config.dx
                 y0 = q.y_center / config.dy
-                d = math.sqrt((x-x0)**2 + (y-y0)**2)
-                f = min(max(0, (200-d)/200), 1)
+                d = math.sqrt((x - x0) ** 2 + (y - y0) ** 2)
+                f = min(max(0, (200 - d) / 200), 1)
                 match q.color_charge:
                     case COLOR.RED:
                         colors[x][y] += np.array((f, 0, 0))

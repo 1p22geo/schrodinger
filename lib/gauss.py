@@ -73,7 +73,9 @@ class WavePacket(lib.particle.Particle):
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
 
-    def propagate(self, V: np.array, particles: list[lib.particle.Particle], frame: int):
+    def propagate(
+        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+    ):
         """
         propagate the wave function in a potential field
 

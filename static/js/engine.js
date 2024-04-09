@@ -2,6 +2,7 @@ import { PARTICLES, POTENTIAL } from "./constants.js";
 import { Electron } from "./electron.js";
 import { Photon } from "./photon.js";
 import { Neutron } from "./neutron.js";
+import { Proton } from "./proton.js";
 import { CoulombPotential } from "./potential.js";
 import { serialize_state } from "./serialization.js";
 
@@ -15,7 +16,7 @@ const state = {
       Ny: 1000,
       Nt: 2000,
       T_max: 10,
-      interactions: false
+      interactions: false,
     },
   },
 };
@@ -76,7 +77,8 @@ function render_sidebar() {
       state.config.domain.Nt = parseInt(
         form.querySelectorAll("input")[5].value,
       );
-      state.config.domain.interactions = form.querySelectorAll("input")[6].checked
+      state.config.domain.interactions =
+        form.querySelectorAll("input")[6].checked;
       render_data();
     };
 
@@ -116,12 +118,8 @@ x0, y0:
         particle.magnetic_quantum = parseInt(
           form.querySelectorAll("input")[2].value,
         );
-        particle.x_center = parseInt(
-          form.querySelectorAll("input")[3].value,
-        );
-        particle.y_center = parseInt(
-          form.querySelectorAll("input")[4].value,
-        );
+        particle.x_center = parseInt(form.querySelectorAll("input")[3].value);
+        particle.y_center = parseInt(form.querySelectorAll("input")[4].value);
 
         render_data();
       };
@@ -170,6 +168,32 @@ v:
       break;
     }
     case PARTICLES.NEUTRON: {
+      sidebar.innerHTML = `
+<h1 class="text-xl">Component ${focused_particle}</h1>
+<h1 class="mb-4">${particle.__type}</h1>
+<form id="config-${focused_particle}" class="flex flex-col gap-2">
+spread:
+  <input type="number" class="mb-4 border" value="${particle.spread}">
+x0, y0:
+  <div class="flex flex-row gap-1">
+  <input type="number" class="mb-4 border w-full" value="${particle.x0}">
+      ,
+  <input type="number" class="mb-4 border w-full" value="${particle.y0}">
+  </div>
+
+</form>
+`;
+      const form = document.querySelector(`#config-${focused_particle}`);
+      form.onchange = () => {
+        particle.spread = parseFloat(form.querySelectorAll("input")[0].value);
+        particle.x0 = parseFloat(form.querySelectorAll("input")[1].value);
+        particle.y0 = parseFloat(form.querySelectorAll("input")[2].value);
+
+        render_data();
+      };
+      break;
+    }
+    case PARTICLES.PROTON: {
       sidebar.innerHTML = `
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
@@ -271,7 +295,7 @@ function render_data() {
       document
         .querySelector("#main-image-render")
         .setAttribute("src", URL.createObjectURL(blob));
-      document.querySelector("#spinner").hidden = true
+      document.querySelector("#spinner").hidden = true;
       document.querySelector("#eta").innerText =
         `ETA: ${res.headers.get("X-ETA-To-Full-Animation")}`;
     });
@@ -294,7 +318,10 @@ document.querySelector("#add-neutron").onclick = () => {
   state.components.push(new Neutron(5, 5, 3));
   render_data();
 };
-
+document.querySelector("#add-proton").onclick = () => {
+  state.components.push(new Proton(5, 5, 3));
+  render_data();
+};
 
 document.querySelector("#reload").onclick = () => {
   render_sidebar();

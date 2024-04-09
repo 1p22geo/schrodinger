@@ -21,6 +21,7 @@ class DeserializationConstants:
         ELECTRON = "PARTICLES.ELECTRON"
         PHOTON = "PARTICLES.PHOTON"
         NEUTRON = "PARTICLES.NEUTRON"
+        PROTON = "PARTICLES.PROTON"
 
     class POTENTIAL:
         COULOMB = "POTENTIAL.COULOMB"

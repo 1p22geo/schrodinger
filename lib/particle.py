@@ -30,7 +30,9 @@ class Particle:
         self.psi = np.zeros((config.Nx, config.Ny))
         self._fig_opts = {}
 
-    def propagate(self, V: np.array, particles: list["lib.particle.Particle"], frame: int):
+    def propagate(
+        self, V: np.array, particles: list["lib.particle.Particle"], frame: int
+    ):
         """
         propagate the wave function in a potential field
 
@@ -46,12 +48,7 @@ class Particle:
         """
         pass
 
-    def draw(self,
-             graph: "lib.graphs.GraphDisplay",
-             V: np.array,
-             x,
-             y,
-             num):
+    def draw(self, graph: "lib.graphs.GraphDisplay", V: np.array, x, y, num):
         """
         Draws self as graphs (`3*num`, `3*num+1`, `3*num+2`)
         on an `x` by `y` figure in `graph`
@@ -60,20 +57,20 @@ class Particle:
         and graphs are made on a `x` by `y` grid
         """
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3*num),
+            lib.figlocation.FigureLocation(x, y, 3 * num),
             np.angle(self.psi),
             f"Phase (particle {num})",
             "color",
         )
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3*num+1),
+            lib.figlocation.FigureLocation(x, y, 3 * num + 1),
             np.absolute(self.psi),
             f"Absolute (particle {num})",
             "3d",
         )
 
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3*num+2),
+            lib.figlocation.FigureLocation(x, y, 3 * num + 2),
             V,
             f"Mean potential (particle {num})",
             "3d",

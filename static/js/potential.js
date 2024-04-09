@@ -6,7 +6,7 @@ export class CoulombPotential {
     this.y_center = y_center;
     this.charge = charge;
     this.__type = POTENTIAL.COULOMB;
-    this.text = "COULOMB POTENTIAL"
+    this.text = "COULOMB POTENTIAL";
     this.__style = ["bg-slate-600", "text-white"];
   }
   serialize() {
@@ -14,7 +14,7 @@ export class CoulombPotential {
       type: POTENTIAL.COULOMB,
       x_center: this.x_center,
       y_center: this.y_center,
-      charge: this.charge
+      charge: this.charge,
     };
   }
 }

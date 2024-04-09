@@ -39,7 +39,7 @@ class QueuedRender:
                 V_total = np.zeros((config.Nx, config.Ny))
                 for potential in potentials:
                     V_total += potential.V
-                particle.draw(graph, V_total,  len(particles), 3, n)
+                particle.draw(graph, V_total, len(particles), 3, n)
 
                 new_particles = particle.propagate(V_total, particles, t)
                 if new_particles:

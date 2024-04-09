@@ -88,7 +88,9 @@ class Electron(lib.particle.Particle):
         )
         return psi
 
-    def propagate(self, V: np.array, particles: list[lib.particle.Particle], frame: int):
+    def propagate(
+        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+    ):
         """
         propagate the wave function in a potential field
 
