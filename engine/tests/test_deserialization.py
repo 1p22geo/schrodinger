@@ -16,6 +16,7 @@ def test_deserialization_default():
                 "Ny": 4,
                 "Nt": 5,
                 "T_max": 6,
+                "interactions": False
             }
         },
         "components": [
