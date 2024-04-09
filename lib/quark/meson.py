@@ -27,13 +27,25 @@ class Meson(lib.quark.hadron.Hadron):
                  spread: float,
                  c1: lib.quark.color.COLOR,
                  c2: lib.quark.color.COLOR):
-        k = vy/vx
-        ku = -1/k
-        xa = 1
-        ya = xa * ku
-        u = math.sqrt(xa**2+ya**2)
-        xa /= u
-        ya /= u
+        try:
+            k = vy/vx
+            ku = -1/k
+            xa = 1
+            ya = xa * ku
+            u = math.sqrt(xa**2+ya**2)
+            xa /= u
+            ya /= u
+        except ZeroDivisionError:
+            if vx != 0 and vy == 0:
+                xa = 0
+                ya = 1
+            if vx == 0 and vy != 0:
+                xa = -1
+                ya = 0
+            if vx == 0 and vy == 0:
+                xa = 0
+                ya = 0
+
         self.vx = vx
         self.vy = vy
         self.x0 = x0
