@@ -5,6 +5,7 @@ import uuid
 import lib.particle
 import lib.config
 import lib.potential
+import lib.gauss
 
 
 class Electron(lib.particle.Particle):
@@ -56,6 +57,12 @@ class Electron(lib.particle.Particle):
         self.azimuthal_quantum = azimuthal_quantum
         self.magnetic_quantum = magnetic_quantum
         self.config = config
+        self.potential = potential
+
+        self._photon = None
+        self._cycle = 0
+        self.T = 5
+
         self.psi = self.calculate_psi(potential)
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
@@ -118,16 +125,39 @@ class Electron(lib.particle.Particle):
         )
         self.psi = np.fft.ifft2(self.psi)
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
-
         if not (self.config.interactions_enabled):
             return
-        # Interact with other particles
-        for p in particles:
-            if p._id == self._id:
-                continue
-            pass
-            # interact with particle
+        if ((frame * self.config.dt) % self.T > 0)\
+                and ((frame * self.config.dt) % self.T < 1)\
+                and self._cycle == 0:
+            if self.principal_quantum < 2:
+                # broke-ass electron, can't even afford a photon xd
+                return
+            self._cycle = 1
+            p = lib.gauss.WavePacket(
+                self.config,
+                0.3,
+                2,
+                2,
+                self.potential.x_center,
+                self.potential.y_center,
+                0,
+                self.config.Ly
+                # The photon has to run 1 Ly in 1 dt of time
+                # No, Ly is not light-year. It's the width of the simulation.
+            )
+            particles.append(p)
+            self._photon = p._id
+            self.principal_quantum -= 1
+            self.psi = self.calculate_psi(self.potential)
+            return particles
+        if ((frame * self.config.dt) % self.T > 1) and self._cycle == 1:
+            self._cycle = 0
+            for n in range(len(particles)):
+                if particles[n]._id == self._photon:
+                    del particles[n]
+                    break
 
-        if self.principal_quantum > 1:
-            pass
-            # emit photons
+            self.principal_quantum += 1
+            self.psi = self.calculate_psi(self.potential)
+            return particles

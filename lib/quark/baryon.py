@@ -52,7 +52,6 @@ class Baryon(lib.quark.hadron.Hadron):
         self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
-        particles = particles[:]
         super().propagate(V, particles, frame)
         if not (self.config.interactions_enabled):
             return

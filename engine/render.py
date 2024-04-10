@@ -41,12 +41,13 @@ class QueuedRender:
                     V_total += potential.V
                 particle.draw(graph, V_total, len(particles), 3, n)
 
-                new_particles = particle.propagate(V_total, particles, t)
+                # bodge for deleting particles mid-loop
+                new_particles = particle.propagate(V_total, particles[:], t)
                 if new_particles:
                     old_particles = particles[:]
                     particles = new_particles
                     if len(old_particles) != len(new_particles):
-                        break  # bodge for deleting particles mid-loop
+                        break
 
             filename = f"{dirname}/frame_{t}.png"
             graph.save(filename)

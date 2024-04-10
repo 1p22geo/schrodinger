@@ -34,6 +34,8 @@ def renderpreview(state):
     end = time.time_ns()
     frame_time = end - start
     eta = frame_time * config.Nt
+    if config.interactions_enabled:
+        eta *= 2  # that meson emmision is really unoptimised
 
     days = int(eta / lib.constants.NS_IN_DAY)
     hours = round((eta % lib.constants.NS_IN_DAY) /
