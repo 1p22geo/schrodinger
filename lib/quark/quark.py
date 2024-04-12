@@ -39,6 +39,10 @@ class Quark(lib.particle.Particle):
     """
     y0, midpoint of the wave function
     """
+    color_charge: lib.quark.color.COLOR
+    """
+    Color charge of this quark
+    """
 
     def __init__(
             self,

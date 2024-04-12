@@ -11,6 +11,25 @@ class Baryon(lib.quark.hadron.Hadron):
 
     But hey, colors! :3
     """
+    rotation: int
+    """
+    How many times are the colors rotated
+
+    Also see `lib.quark.color.rotate`
+    """
+    spread: float
+    """
+    How much should the quarks be spread out.
+
+    The average distance between two quarks within a baryon
+    """
+    T: float
+    """
+    How much does one quark emission cycle take.
+
+    Default is 9.0 meaning it takes 9.0 units of time for three gluons
+    [`lib.quark.meson.Meson`] to be emmited and absorbed.
+    """
 
     def __init__(self,
                  config,

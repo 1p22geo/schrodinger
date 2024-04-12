@@ -62,9 +62,13 @@ def colorquarks(config, quarks):
 def rotate(color, n=0):
     """
     Rotates the color `n` times in the order:
-    RED -> GREEN -> BLUE -> RED -> GREEN -> ...
+
+    > RED -> GREEN -> BLUE -> RED -> GREEN -> ...
+
     or
-    ~RED -> ~GREEN -> ~BLUE -> ~RED -> ...
+
+    > ~RED -> ~GREEN -> ~BLUE -> ~RED -> ...
+
     (where ~RED is ANTIRED)
     """
     if not n:
