@@ -55,13 +55,13 @@ class Hadron(lib.particle.Particle):
         graph.add_figure(
             lib.figlocation.FigureLocation(x, y, 3 * num),
             np.angle(self.psi),
-            "Phase (particle 1)",
+            f"Phase (particle {num})",
             "color",
         )
         graph.add_figure(
             lib.figlocation.FigureLocation(x, y, 3 * num + 1),
             np.absolute(self.psi),
-            "Absolute (particle 1)",
+            f"Absolute (particle {num})",
             "3d",
             facecolors=self.colors,
         )
@@ -69,7 +69,7 @@ class Hadron(lib.particle.Particle):
         graph.add_figure(
             lib.figlocation.FigureLocation(x, y, 3 * num + 2),
             V,
-            "Mean potential (particle 1)",
+            f"Mean potential (particle {num})",
             "3d",
             zlim=(-1, 0),
             cmap=None,

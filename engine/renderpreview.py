@@ -23,6 +23,12 @@ def renderpreview(state):
         V_total = np.zeros((config.Nx, config.Ny))
         for potential in potentials:
             V_total += potential.V
+        for p2 in particles:
+            if p2._id != particle._id:
+                V_total +=\
+                    lib.interaction.\
+                    Interactions.get_relative_potential(
+                        config, particle, p2)
 
         particle.draw(graph, V_total, len(particles), 3, n)
     filename = uuid.uuid4()

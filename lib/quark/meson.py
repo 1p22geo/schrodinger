@@ -16,6 +16,22 @@ class Meson(lib.quark.hadron.Hadron):
     if you know how to help us.
 
     """
+    vx: float
+    """
+    Velocity on X axis.
+    """
+    vy: float
+    """
+    Velocity on Y axis.
+    """
+    x0: float
+    """
+    Initial centerpoint of propability on X axis
+    """
+    y0: float
+    """
+    Initial centerpoint of propability on Y axis
+    """
 
     def __init__(
         self,
