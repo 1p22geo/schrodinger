@@ -91,7 +91,9 @@ function render_sidebar() {
       sidebar.innerHTML = `
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
+
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
+<button class="bg-red-600 mb-4 w-24 h-12 text-white self-center grid place-content-center cursor-pointer">DELETE</button>
   Principal quantum number:
   <input type="number" class="mb-4 border" value="${particle.principal_quantum}">
   Azimuthal quantum number:
@@ -108,6 +110,11 @@ x0, y0:
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
+      form.querySelectorAll("button")[0].onclick = (e) => {
+        e.preventDefault();
+        state.components.splice(focused_particle, 1);
+        render_data();
+      };
       form.onchange = () => {
         particle.principal_quantum = parseInt(
           form.querySelectorAll("input")[0].value,
@@ -130,6 +137,7 @@ x0, y0:
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
+<button class="bg-red-600 mb-4 w-24 h-12 text-white self-center grid place-content-center cursor-pointer">DELETE</button>
 &sigma;:
   <input type="number" class="mb-4 border" value="${particle.sigma}">
 x0, y0:
@@ -154,6 +162,11 @@ v:
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
+      form.querySelectorAll("button")[0].onclick = (e) => {
+        e.preventDefault();
+        state.components.splice(focused_particle, 1);
+        render_data();
+      };
       form.onchange = () => {
         particle.sigma = parseFloat(form.querySelectorAll("input")[0].value);
         particle.x0 = parseFloat(form.querySelectorAll("input")[1].value);
@@ -172,6 +185,7 @@ v:
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
+<button class="bg-red-600 mb-4 w-24 h-12 text-white self-center grid place-content-center cursor-pointer">DELETE</button>
 spread:
   <input type="number" class="mb-4 border" value="${particle.spread}">
 x0, y0:
@@ -184,6 +198,11 @@ x0, y0:
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
+      form.querySelectorAll("button")[0].onclick = (e) => {
+        e.preventDefault();
+        state.components.splice(focused_particle, 1);
+        render_data();
+      };
       form.onchange = () => {
         particle.spread = parseFloat(form.querySelectorAll("input")[0].value);
         particle.x0 = parseFloat(form.querySelectorAll("input")[1].value);
@@ -198,6 +217,7 @@ x0, y0:
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
+<button class="bg-red-600 mb-4 w-24 h-12 text-white self-center grid place-content-center cursor-pointer">DELETE</button>
 spread:
   <input type="number" class="mb-4 border" value="${particle.spread}">
 x0, y0:
@@ -210,6 +230,11 @@ x0, y0:
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
+      form.querySelectorAll("button")[0].onclick = (e) => {
+        e.preventDefault();
+        state.components.splice(focused_particle, 1);
+        render_data();
+      };
       form.onchange = () => {
         particle.spread = parseFloat(form.querySelectorAll("input")[0].value);
         particle.x0 = parseFloat(form.querySelectorAll("input")[1].value);
@@ -224,6 +249,7 @@ x0, y0:
 <h1 class="text-xl">Component ${focused_particle}</h1>
 <h1 class="mb-4">${particle.__type}</h1>
 <form id="config-${focused_particle}" class="flex flex-col gap-2">
+<button class="bg-red-600 mb-4 w-24 h-12 text-white self-center grid place-content-center cursor-pointer">DELETE</button>
 charge:
   <input type="number" class="mb-4 border" value="${particle.charge}">
 x0, y0:
@@ -236,6 +262,11 @@ x0, y0:
 </form>
 `;
       const form = document.querySelector(`#config-${focused_particle}`);
+      form.querySelectorAll("button")[0].onclick = (e) => {
+        e.preventDefault();
+        state.components.splice(focused_particle, 1);
+        render_data();
+      };
       form.onchange = () => {
         particle.charge = parseFloat(form.querySelectorAll("input")[0].value);
         particle.x_center = parseFloat(form.querySelectorAll("input")[1].value);
