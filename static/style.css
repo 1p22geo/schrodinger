@@ -9,7 +9,7 @@ header{
     border-left: 0;
     border-right: 0;
     border-top: 0;
-    transition: 1s ease-in-out;
+    transition: 0.5s ease-in-out;
   }
 
   header:hover{
@@ -24,6 +24,11 @@ header{
     box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
     margin-top: 60px;
     margin-bottom: 40px;
+    transition: 0.5s;
+  }
+
+  .cooldiv:hover{
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
   }
 
   .coolh{
