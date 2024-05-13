@@ -22,16 +22,27 @@ header{
     border-width: 5px;
     border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
     box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
-    margin-top: 20px;
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 
   .coolh{
+    position: relative;
     width: fit-content;
-    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
     margin: auto;
     padding: 0.8em;
     background-color: rgb(51, 51, 51);
     color: aliceblue;
+    transform-style: preserve-3d;
+    margin-top: 30px;
+  }
+
+  .coolh::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    transform: translate3d(6px, 6px, -1px);
+    background: linear-gradient(to left, #b7c2169f, #3ba9b196);
   }
 
 /* THE FLOATING */
