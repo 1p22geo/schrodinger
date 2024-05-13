@@ -1,0 +1,77 @@
+header{
+    z-index: 2;
+    background-color: rgb(51, 51, 51);
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
+    border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    transition: 1s ease-in-out;
+  }
+
+  header:hover{
+    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  }
+
+  .cooldiv{
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
+    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+    margin-top: 20px;
+  }
+
+  .coolh{
+    width: fit-content;
+    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+    margin: auto;
+  }
+
+/* THE FLOATING */
+
+.float1{
+    animation: upDown 5s alternate infinite ease-in-out;
+    }
+  
+    .float2{
+      animation: upDown 4s alternate infinite ease-in-out;
+      }
+    
+    .float3{
+        animation: upDown 3s alternate infinite ease-in-out;
+    }
+  
+    .float4{
+      animation: upDown 2s alternate infinite ease-in-out;
+  }
+  
+  .float1S{
+    animation: upDownSlow 5s alternate infinite ease-in-out;
+    }
+  
+    .float2S{
+      animation: upDownSlow 4s alternate infinite ease-in-out;
+      }
+    
+    .float3S{
+        animation: upDownSlow 3s alternate infinite ease-in-out;
+    }
+  
+    .float4S{
+      animation: upDownSlow 2s alternate infinite ease-in-out;
+  }
+    
+      @keyframes upDown {
+        to { transform: translatey(30px);}
+      }
+  
+      @keyframes upDownSlow {
+        to { transform: translatey(15px);}
+      }
+  
+  
+  
