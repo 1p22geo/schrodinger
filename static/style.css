@@ -9,6 +9,8 @@ header{
     border-left: 0;
     border-right: 0;
     border-top: 0;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
     transition: 0.5s ease-in-out;
   }
 
@@ -24,6 +26,8 @@ header{
     box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
     margin-top: 60px;
     margin-bottom: 40px;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
     transition: 0.5s;
   }
 
@@ -49,6 +53,44 @@ header{
     transform: translate3d(6px, 6px, -1px);
     background: linear-gradient(to left, #b7c2169f, #3ba9b196);
   }
+
+.authors{
+  position: relative;
+  width: fit-content;
+  margin: auto;
+  padding: 0.8em;
+  background-color: rgb(51, 51, 51);
+  color: aliceblue;
+  transform-style: preserve-3d;
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  justify-content: center;
+}
+
+.authors::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  transform: translate3d(6px, 6px, -1px);
+  background: linear-gradient(to left, #b7c216c7, #3ba9b1b7);
+}
+
+  .coolerdiv{
+    padding: 2rem;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(to left, #c28616, #d1eb42);
+    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+    margin-top: 60px;
+    margin-bottom: 40px;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    transition: 0.5s;
+  }
+
 
 /* THE FLOATING */
 
