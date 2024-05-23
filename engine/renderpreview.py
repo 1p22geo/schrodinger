@@ -11,12 +11,12 @@ import lib.figlocation
 import lib.constants
 
 
-def renderpreview(state):
+def renderpreview(state, mobile=False):
     print(state)
     start = time.time_ns()
     config, potentials, particles = Deserializer().ds(state)
 
-    graph = lib.graphs.GraphDisplay(config, (12, 4 * len(particles)))
+    graph = lib.graphs.GraphDisplay(config, ((4 if mobile else 12), (12 if mobile else 4)  * len(particles)))
 
     for n in range(len(particles)):
         particle = particles[n]
@@ -30,7 +30,7 @@ def renderpreview(state):
                     Interactions.get_relative_potential(
                         config, particle, p2)
 
-        particle.draw(graph, V_total, len(particles), 3, n)
+        particle.draw(graph, V_total, len(particles)*(3 if mobile else 1), (1 if mobile else 3), n)
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
     if not os.path.exists("static/temp"):

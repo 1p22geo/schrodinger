@@ -1,17 +1,17 @@
-header{
-    z-index: 2;
-    background-color: rgb(51, 51, 51);
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 5px;
-    /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
-    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-    transition: 0.5s ease-in-out;
-  }
+header {
+  z-index: 2;
+  background-color: rgb(51, 51, 51);
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  transition: 0.5s ease-in-out;
+}
 
-  header:hover{
-    border-image-source: linear-gradient(to left, #d0d32f, #f7a53b);
-  }
+header:hover {
+  border-image-source: linear-gradient(to left, #d0d32f, #f7a53b);
+}

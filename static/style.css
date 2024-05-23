@@ -1,60 +1,60 @@
-header{
-    z-index: 2;
-    background-color: rgb(51, 51, 51);
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 5px;
-    /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
-    border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    transition: 0.5s ease-in-out;
-  }
+header {
+  z-index: 2;
+  background-color: rgb(51, 51, 51);
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  /* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
+  border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s ease-in-out;
+}
 
-  header:hover{
-    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-  }
+header:hover {
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+}
 
-  .cooldiv{
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 5px;
-    border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
-    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
-    margin-top: 60px;
-    margin-bottom: 40px;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    transition: 0.5s;
-  }
+.cooldiv {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
+  box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+  margin-top: 60px;
+  margin-bottom: 40px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+}
 
-  .cooldiv:hover{
-    border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
-  }
+.cooldiv:hover {
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+}
 
-  .coolh{
-    position: relative;
-    width: fit-content;
-    margin: auto;
-    padding: 0.8em;
-    background-color: rgb(51, 51, 51);
-    color: aliceblue;
-    transform-style: preserve-3d;
-    margin-top: 30px;
-  }
+.coolh {
+  position: relative;
+  width: fit-content;
+  margin: auto;
+  padding: 0.8em;
+  background-color: rgb(51, 51, 51);
+  color: aliceblue;
+  transform-style: preserve-3d;
+  margin-top: 30px;
+}
 
-  .coolh::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    transform: translate3d(6px, 6px, -1px);
-    background: linear-gradient(to left, #b7c2169f, #3ba9b196);
-  }
+.coolh::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  transform: translate3d(6px, 6px, -1px);
+  background: linear-gradient(to left, #b7c2169f, #3ba9b196);
+}
 
-.authors{
+.authors {
   position: relative;
   width: fit-content;
   margin: auto;
@@ -77,62 +77,62 @@ header{
   background: linear-gradient(to left, #b7c216c7, #3ba9b1b7);
 }
 
-  .coolerdiv{
-    padding: 2rem;
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 5px;
-    border-image-source: linear-gradient(to left, #c28616, #d1eb42);
-    box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
-    margin-top: 60px;
-    margin-bottom: 40px;
-    -webkit-transition: 0.5s;
-    -moz-transition: 0.5s;
-    transition: 0.5s;
-  }
-
+.coolerdiv {
+  padding: 2rem;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #c28616, #d1eb42);
+  box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+  margin-top: 60px;
+  margin-bottom: 40px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+}
 
 /* THE FLOATING */
 
-.float1{
-    animation: upDown 5s alternate infinite ease-in-out;
-    }
-  
-    .float2{
-      animation: upDown 4s alternate infinite ease-in-out;
-      }
-    
-    .float3{
-        animation: upDown 3s alternate infinite ease-in-out;
-    }
-  
-    .float4{
-      animation: upDown 2s alternate infinite ease-in-out;
+.float1 {
+  animation: upDown 5s alternate infinite ease-in-out;
+}
+
+.float2 {
+  animation: upDown 4s alternate infinite ease-in-out;
+}
+
+.float3 {
+  animation: upDown 3s alternate infinite ease-in-out;
+}
+
+.float4 {
+  animation: upDown 2s alternate infinite ease-in-out;
+}
+
+.float1S {
+  animation: upDownSlow 5s alternate infinite ease-in-out;
+}
+
+.float2S {
+  animation: upDownSlow 4s alternate infinite ease-in-out;
+}
+
+.float3S {
+  animation: upDownSlow 3s alternate infinite ease-in-out;
+}
+
+.float4S {
+  animation: upDownSlow 2s alternate infinite ease-in-out;
+}
+
+@keyframes upDown {
+  to {
+    transform: translatey(30px);
   }
-  
-  .float1S{
-    animation: upDownSlow 5s alternate infinite ease-in-out;
-    }
-  
-    .float2S{
-      animation: upDownSlow 4s alternate infinite ease-in-out;
-      }
-    
-    .float3S{
-        animation: upDownSlow 3s alternate infinite ease-in-out;
-    }
-  
-    .float4S{
-      animation: upDownSlow 2s alternate infinite ease-in-out;
+}
+
+@keyframes upDownSlow {
+  to {
+    transform: translatey(15px);
   }
-    
-      @keyframes upDown {
-        to { transform: translatey(30px);}
-      }
-  
-      @keyframes upDownSlow {
-        to { transform: translatey(15px);}
-      }
-  
-  
-  
+}

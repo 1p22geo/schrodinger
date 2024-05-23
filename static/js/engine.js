@@ -320,7 +320,7 @@ function render_data() {
   });
   document.querySelector("#spinner").hidden = false;
   fetch(
-    `/api/renderpreview?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}`,
+    `/api/renderpreview?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}&mobile=${window.innerWidth < 700 ? "true" : "false"}`,
   ).then((res) => {
     res.blob().then((blob) => {
       document

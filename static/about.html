@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Schrodinger's equation | About the project</title>
     <script src="js/tailwind.3.4.3.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="grid place-center">
     <header
@@ -27,56 +27,56 @@
       <h1 class="text-3xl m-4">About the project</h1>
       <p>Python. That's really all you need to know. 5 lines of Python.</p>
       <div class="coolerdiv float4S">
-      <pre class="text-left">
+        <pre class="text-left">
 psi = psi * np.exp(-1j * V * dt / 2)
 psi = np.fft.fft2(psi)
 psi = psi * np.exp(-1j * (np.fft.fftfreq(Nx, dx)**2 + np.fft.fftfreq(Ny, dy)**2) * dt)
 psi = np.fft.ifft2(psi)
 psi = psi * np.exp(-1j * V * dt / 2)</pre
-      >
-    </div>
+        >
+      </div>
       <p>
         And that's all the thinking here. The rest is theory and complex plots.
       </p>
       <a href="./doc/" class="hover:underline m-8">Docs (built with pdoc)</a>
       <h1 class="text-2xl m-4 mt-16">Credits:</h1>
       <div class="flex gap-5 items-center">
-      <div class="authors float2S">
-      <div class="flex flex-row gap-4 items-center">
-        <img
-          src="https://avatars.githubusercontent.com/u/113300767?s=48&v=4"
-          class="rounded-full w-12 h-12"
-        />
-        <a href="https://github.com/1p22geo">1p22geo</a>
-        <a href="mailto:1p22geodecki@gmail.com"
-          >&lt;1p22geodecki@gmail.com&gt;</a
-        >
+        <div class="authors float2S">
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="https://avatars.githubusercontent.com/u/113300767?s=48&v=4"
+              class="rounded-full w-12 h-12"
+            />
+            <a href="https://github.com/1p22geo">1p22geo</a>
+            <a href="mailto:1p22geodecki@gmail.com"
+              >&lt;1p22geodecki@gmail.com&gt;</a
+            >
+          </div>
+          Lead programmer
+          <!-- / maid -->
+        </div>
+        <div class="authors float4S">
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="https://avatars.githubusercontent.com/u/113526043?s=48&v=4"
+              class="rounded-full w-12 h-12"
+            />
+            <a href="https://github.com/KacperTZSTI">KacperTZSTI</a>
+          </div>
+          Lead graphic designer and artist
+        </div>
+        <div class="authors float3S">
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="https://avatars.githubusercontent.com/u/75852386?s=48&v=4"
+              class="rounded-full w-12 h-12"
+            />
+            <a href="https://github.com/ErexPL">ErexPL</a>
+          </div>
+          Senior compute resource provider and manager<br />
+          + Lead code reviewer
+        </div>
       </div>
-      Lead programmer
-      <!-- / maid -->
     </div>
-      <div class="authors float4S">
-      <div class="flex flex-row gap-4  items-center">
-        <img
-          src="https://avatars.githubusercontent.com/u/113526043?s=48&v=4"
-          class="rounded-full w-12 h-12"
-        />
-        <a href="https://github.com/KacperTZSTI">KacperTZSTI</a>
-      </div>
-      Lead graphic designer and artist
-    </div>
-      <div class="authors float3S">
-      <div class="flex flex-row gap-4 items-center">
-        <img
-          src="https://avatars.githubusercontent.com/u/75852386?s=48&v=4"
-          class="rounded-full w-12 h-12"
-        />
-        <a href="https://github.com/ErexPL">ErexPL</a>
-      </div>
-      Senior compute resource provider and manager<br />
-      + Lead code reviewer
-    </div>
-    </div>
-  </div>
   </body>
 </html>

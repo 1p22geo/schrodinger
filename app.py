@@ -16,7 +16,8 @@ def hello_world():
 @app.route("/api/renderpreview")
 def renderpreview():
     return engine.renderpreview.renderpreview(
-        json.loads(base64.b64decode(flask.request.args.get("state")))
+        json.loads(base64.b64decode(flask.request.args.get("state"))),
+        flask.request.args.get("mobile") == "true"
     )
 
 
