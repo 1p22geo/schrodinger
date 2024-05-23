@@ -1,6 +1,6 @@
 # A Python script to solve the Schrodinger's equation in a 2D domain.
 
-(spelled that wrong)
+![schreenshot showing app UI where people can create and edit particles](./static/media/png/screenshot.png)
 
 ## Static deployment
 
