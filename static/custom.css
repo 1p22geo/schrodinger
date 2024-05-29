@@ -13,5 +13,5 @@ header {
 }
 
 header:hover {
-  border-image-source: linear-gradient(to left, #d0d32f, #f7a53b);
+  border-image-source: linear-gradient(to left, #d0d32f, #ef9e34);
 }
