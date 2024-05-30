@@ -48,7 +48,7 @@ jobs:
           python -m pytest
       - name: Build pdoc docs
         run: |
-          python -m pdoc -o static/doc lib
+          python -m pdoc -o static/doc libschrodinger
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
