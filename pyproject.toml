@@ -1,0 +1,22 @@
+[project]
+name = "libschrodinger"
+version = "1.0.1"
+authors = [
+  { name="1p22geo", email="1p22geodecki@gmail.com" },
+  { name="KacperTZSTI", email="kacper.m.trzop@gmail.com" },
+]
+description = "A small package for simulating quantum-scale physics."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/1p22geo/schrodinger"
+Issues = "https://github.com/1p22geo/schrodinger/issues"
+
+[tool.setuptools.packages.find]
+include = ["lib"]
