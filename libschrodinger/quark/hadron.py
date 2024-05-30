@@ -1,20 +1,20 @@
 import numpy as np
 import uuid
 
-import lib.particle
-import lib.config
-import lib.potential
-import lib.quark.quark
+import libschrodinger.particle
+import libschrodinger.config
+import libschrodinger.potential
+import libschrodinger.quark.quark
 
 
-class Hadron(lib.particle.Particle):
+class Hadron(libschrodinger.particle.Particle):
     """
-    [HIGHLY EXPERIMENTAL] (see relevant doc for `lib.quark.quark.Quark`)
+    [HIGHLY EXPERIMENTAL] (see relevant doc for `libschrodinger.quark.quark.Quark`)
 
     Base class for heavy particles composed of a couple quarks
     """
 
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
     experiment configurations
     """
@@ -25,17 +25,17 @@ class Hadron(lib.particle.Particle):
 
     a `np.array` of shape `(config.Nx, config.Ny)`
     """
-    quarks: list[lib.quark.quark.Quark]
+    quarks: list[libschrodinger.quark.quark.Quark]
     """
     Literally the list of involved quarks
     """
     colors: np.array
     """
     Colors which can be passed as **facecolors to matplotlib or
-    `lib.graphs.GraphDisplay.add_figure`
+    `libschrodinger.graphs.GraphDisplay.add_figure`
     """
 
-    def __init__(self, config, quarks: list[lib.quark.quark.Quark]):
+    def __init__(self, config, quarks: list[libschrodinger.quark.quark.Quark]):
         self._id = uuid.uuid4()
         self.config = config
         self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
@@ -44,7 +44,7 @@ class Hadron(lib.particle.Particle):
         for q in self.quarks:
             self.psi += q.psi
 
-    def draw(self, graph: "lib.graphs.GraphDisplay", V: np.array, x, y, num):
+    def draw(self, graph: "libschrodinger.graphs.GraphDisplay", V: np.array, x, y, num):
         """
         Draws self as graphs (`3*num`, `3*num+1`, `3*num+2`)
         on an `x` by `y` figure in `graph`
@@ -53,13 +53,13 @@ class Hadron(lib.particle.Particle):
         and graphs are made on a `x` by `y` grid
         """
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3 * num),
+            libschrodinger.figlocation.FigureLocation(x, y, 3 * num),
             np.angle(self.psi),
             f"Phase (particle {num})",
             "color",
         )
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3 * num + 1),
+            libschrodinger.figlocation.FigureLocation(x, y, 3 * num + 1),
             np.absolute(self.psi),
             f"Absolute (particle {num})",
             "3d",
@@ -67,7 +67,7 @@ class Hadron(lib.particle.Particle):
         )
 
         graph.add_figure(
-            lib.figlocation.FigureLocation(x, y, 3 * num + 2),
+            libschrodinger.figlocation.FigureLocation(x, y, 3 * num + 2),
             V,
             f"Mean potential (particle {num})",
             "3d",
@@ -76,7 +76,7 @@ class Hadron(lib.particle.Particle):
         )
 
     def propagate(
-        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
@@ -86,7 +86,7 @@ class Hadron(lib.particle.Particle):
         - `V: np.array`
             - the potential field as an array
             of shape (Nx, Ny)
-        - `particles: list[lib.particle.Particle]`
+        - `particles: list[libschrodinger.particle.Particle]`
             - an array of other particles
             for inter-particle interactions
 

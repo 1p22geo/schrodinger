@@ -1,6 +1,6 @@
-from lib.testutils.clearcache import rmtemp
-from lib.testutils.asserts import assert_file_exists
-import lib.constants
+from libschrodinger.testutils.clearcache import rmtemp
+from libschrodinger.testutils.asserts import assert_file_exists
+import libschrodinger.constants
 import time
 import os
 
@@ -29,7 +29,7 @@ def test_render():
             "components": [
                 {
                     "type":
-                    lib.constants.DeserializationConstants.PARTICLES.ELECTRON,
+                    libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON,
                     "principal_quantum": 3,
                     "azimuthal_quantum": 2,
                     "magnetic_quantum": 1,
@@ -38,7 +38,7 @@ def test_render():
                 },
                 {
                     "type":
-                    lib.constants.DeserializationConstants.PARTICLES.PHOTON,
+                    libschrodinger.constants.DeserializationConstants.PARTICLES.PHOTON,
                     "sigma": 0.5,
                     "kx0": 2,
                     "ky0": 2,
@@ -49,7 +49,7 @@ def test_render():
                 },
                 {
                     "type":
-                    lib.constants.DeserializationConstants.POTENTIAL.COULOMB,
+                    libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB,
                     "x_center": 5,
                     "y_center": 5,
                     "charge": 1,

@@ -8,7 +8,7 @@ nanoseconds in an hour, needed for ETA calculations in the engine
 """
 TEST_TOLERANCE_TRESHOLD = 0.001
 """
-the tolerance threshold for lib.testutils.floateq.floateq()
+the tolerance threshold for libschrodinger.testutils.floateq.floateq()
 """
 PLT_FONT = {"fontname": "monospace"}
 """

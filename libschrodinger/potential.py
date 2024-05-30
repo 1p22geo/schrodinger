@@ -1,6 +1,6 @@
 import numpy as np
 
-import lib.config
+import libschrodinger.config
 
 
 class Potential:
@@ -8,7 +8,7 @@ class Potential:
     The base class for a potential field
     """
 
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
     configuration for the domain
     """

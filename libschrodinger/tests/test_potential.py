@@ -1,20 +1,20 @@
-from lib.testutils.floateq import floateq
+from libschrodinger.testutils.floateq import floateq
 
-import lib.config
-import lib.potential
+import libschrodinger.config
+import libschrodinger.potential
 
 
 def test_zero_potential():
-    config = lib.config.Config(1, 20, 20, 2000, 2000, 100, 10)
-    pot = lib.potential.Potential(config)
+    config = libschrodinger.config.Config(1, 20, 20, 2000, 2000, 100, 10)
+    pot = libschrodinger.potential.Potential(config)
     for row in pot.V:
         for x in row:
             assert floateq(x, 0)
 
 
 def test_coulomb_potential():
-    config = lib.config.Config(1, 20, 20, 2000, 2000, 100, 10)
-    pot = lib.potential.Potential(config)
+    config = libschrodinger.config.Config(1, 20, 20, 2000, 2000, 100, 10)
+    pot = libschrodinger.potential.Potential(config)
     for row in pot.V:
         for x in row:
             assert x <= 0

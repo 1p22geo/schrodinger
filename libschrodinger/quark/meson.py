@@ -1,12 +1,12 @@
 import math
 
-import lib.quark.hadron
-import lib.quark.color
+import libschrodinger.quark.hadron
+import libschrodinger.quark.color
 
-import lib.waveutils
+import libschrodinger.waveutils
 
 
-class Meson(lib.quark.hadron.Hadron):
+class Meson(libschrodinger.quark.hadron.Hadron):
     """
     Now, I know gluons can have more than two quarks and
     what we are simulating here is not even a meson, let
@@ -41,8 +41,8 @@ class Meson(lib.quark.hadron.Hadron):
         vx: float,
         vy: float,
         spread: float,
-        c1: lib.quark.color.COLOR,
-        c2: lib.quark.color.COLOR,
+        c1: libschrodinger.quark.color.COLOR,
+        c2: libschrodinger.quark.color.COLOR,
     ):
         try:
             k = vy / vx
@@ -70,17 +70,17 @@ class Meson(lib.quark.hadron.Hadron):
         super().__init__(
             config,
             [
-                lib.quark.quark.Quark(
+                libschrodinger.quark.quark.Quark(
                     config, x0 + xa * spread, y0 + ya * spread, c1),
-                lib.quark.quark.Quark(
+                libschrodinger.quark.quark.Quark(
                     config, x0 - xa * spread, y0 - ya * spread, c2),
             ],
         )
-        self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
+        self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
         for n in range(len(self.quarks)):
-            self.quarks[n].psi = lib.waveutils.rollwave(
+            self.quarks[n].psi = libschrodinger.waveutils.rollwave(
                 self.config, self.quarks[n].psi, self.vx, self.vy
             )
             self.quarks[n].x_center += self.vx * self.config.dt
@@ -99,4 +99,4 @@ class Meson(lib.quark.hadron.Hadron):
         self.y0 = (self.y0 + self.config.Ly) % self.config.Ly
 
         super().propagate(V, particles, frame)
-        self.colors = lib.quark.color.colorquarks(self.config, self.quarks)
+        self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)

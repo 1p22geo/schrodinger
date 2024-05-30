@@ -1,12 +1,12 @@
 import numpy as np
 import uuid
 
-import lib.particle
-import lib.waveutils
-import lib.config
+import libschrodinger.particle
+import libschrodinger.waveutils
+import libschrodinger.config
 
 
-class WavePacket(lib.particle.Particle):
+class WavePacket(libschrodinger.particle.Particle):
     """
     Gaussian wave packet.
     Pretty simple representation of a photon or other alone particle
@@ -40,7 +40,7 @@ class WavePacket(lib.particle.Particle):
     """
     Y component for the velocity [EXPERIMENTAL]
     """
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
     configuration for the domain
     """
@@ -74,7 +74,7 @@ class WavePacket(lib.particle.Particle):
         self.psi /= integ ** (1 / 2)
 
     def propagate(
-        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
@@ -84,13 +84,13 @@ class WavePacket(lib.particle.Particle):
         - `V: np.array`
             - the potential field as an array
             of shape (Nx, Ny)
-        - `particles: list[lib.particle.Particle]`
+        - `particles: list[libschrodinger.particle.Particle]`
             - an array of other particles
             for inter-particle interactions
 
         """
 
-        self.psi = lib.waveutils.rollwave(
+        self.psi = libschrodinger.waveutils.rollwave(
             self.config, self.psi, self.vx, self.vy)
 
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)

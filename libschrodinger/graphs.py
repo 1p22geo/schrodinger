@@ -4,9 +4,9 @@ import os
 
 import numpy as np
 
-import lib.config
-import lib.figlocation
-import lib.constants
+import libschrodinger.config
+import libschrodinger.figlocation
+import libschrodinger.constants
 
 matplotlib.use("Agg")
 
@@ -16,7 +16,7 @@ class GraphDisplay:
     Class for displaying experiment output as a matplotlib graph into a file.
     """
 
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
     configuration for the domain
     """
@@ -34,7 +34,7 @@ class GraphDisplay:
     """
 
     def __init__(
-        self, config: lib.config.Config, figsize=(12, 8), frameno: int | None = None
+        self, config: libschrodinger.config.Config, figsize=(12, 8), frameno: int | None = None
     ):
         self.config = config
         self.frameno = frameno
@@ -76,12 +76,12 @@ class GraphDisplay:
             if `frameno` is not None
         """
         self.fig.text(
-            0, 0, "frame " + str(self.frameno), fontsize=10, **lib.constants.PLT_FONT
+            0, 0, "frame " + str(self.frameno), fontsize=10, **libschrodinger.constants.PLT_FONT
         )
 
     def add_figure(
         self,
-        location: lib.figlocation.FigureLocation,
+        location: libschrodinger.figlocation.FigureLocation,
         function: np.array,
         title: str = "",
         fig_type: str = "3d",
@@ -97,7 +97,7 @@ class GraphDisplay:
         - 'simple': simple 2d color plot
 
         Parameters:
-        - `location:lib.figlocation.FigureLocation`:
+        - `location:libschrodinger.figlocation.FigureLocation`:
             the location for the subplot
         - `function:np.array`: the actual function to plot
         - `title:str`: the title of the subplot
@@ -109,7 +109,7 @@ class GraphDisplay:
                 ax = self.fig.add_subplot(location.spec())
                 cs = ax.contourf(self.config.X, self.config.Y,
                                  function, **kwargs)
-                ax.set_title(title, **lib.constants.PLT_FONT)
+                ax.set_title(title, **libschrodinger.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 self.fig.colorbar(cs)
@@ -117,14 +117,14 @@ class GraphDisplay:
                 ax = self.fig.add_subplot(location.spec(), projection="3d")
                 ax.plot_surface(self.config.X, self.config.Y,
                                 function, **kwargs)
-                ax.set_title(title, **lib.constants.PLT_FONT)
+                ax.set_title(title, **libschrodinger.constants.PLT_FONT)
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)
                 ax.set_zlim(zlim[0], zlim[1])
             case "simple":
                 ax = self.fig.add_subplot(location.spec())
                 ax.pcolormesh(self.config.X, self.config.Y, function, **kwargs)
-                ax.set_title(title, **lib.constants.PLT_FONT)
+                ax.set_title(title, **libschrodinger.constants.PLT_FONT)
 
                 ax.set_xlim(0, self.config.Lx)
                 ax.set_ylim(0, self.config.Ly)

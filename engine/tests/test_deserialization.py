@@ -1,9 +1,9 @@
 from engine.deserialization import Deserializer
 
-import lib.electron
-import lib.gauss
-import lib.potential
-import lib.constants
+import libschrodinger.electron
+import libschrodinger.gauss
+import libschrodinger.potential
+import libschrodinger.constants
 
 
 def test_deserialization_default():
@@ -22,7 +22,7 @@ def test_deserialization_default():
         "components": [
             {
                 "type":
-                lib.constants.DeserializationConstants.PARTICLES.ELECTRON,
+                libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON,
                 "principal_quantum": 3,
                 "azimuthal_quantum": 2,
                 "magnetic_quantum": 1,
@@ -31,7 +31,7 @@ def test_deserialization_default():
             },
             {
                 "type":
-                lib.constants.DeserializationConstants.PARTICLES.PHOTON,
+                libschrodinger.constants.DeserializationConstants.PARTICLES.PHOTON,
                 "sigma": 0.5,
                 "kx0": 1,
                 "ky0": 2,
@@ -42,7 +42,7 @@ def test_deserialization_default():
             },
             {
                 "type":
-                lib.constants.DeserializationConstants.POTENTIAL.COULOMB,
+                libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB,
                 "x_center": 5,
                 "y_center": 5,
                 "charge": 1,
@@ -59,17 +59,17 @@ def test_deserialization_default():
     assert config.Nt == 5
     assert config.T_max == 6
 
-    assert isinstance(particles[0], lib.electron.Electron)
+    assert isinstance(particles[0], libschrodinger.electron.Electron)
     assert particles[0].principal_quantum == 3
     assert particles[0].azimuthal_quantum == 2
     assert particles[0].magnetic_quantum == 1
 
-    assert isinstance(particles[1], lib.gauss.WavePacket)
+    assert isinstance(particles[1], libschrodinger.gauss.WavePacket)
     assert particles[1].vx == 5
     assert particles[1].vy == 6
     # only testing those fields due to access levels
 
-    assert isinstance(potentials[0], lib.potential.CoulombPotential)
+    assert isinstance(potentials[0], libschrodinger.potential.CoulombPotential)
 
     assert len(particles) == 2
     assert len(potentials) == 1

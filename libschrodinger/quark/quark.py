@@ -2,13 +2,13 @@ import numpy as np
 import math
 import uuid
 
-import lib.particle
-import lib.config
-import lib.potential
-import lib.quark.color
+import libschrodinger.particle
+import libschrodinger.config
+import libschrodinger.potential
+import libschrodinger.quark.color
 
 
-class Quark(lib.particle.Particle):
+class Quark(libschrodinger.particle.Particle):
     """
     [HIGHLY EXPERIMENTAL]
 
@@ -21,7 +21,7 @@ class Quark(lib.particle.Particle):
 
     """
 
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
        experiment configurations
     """
@@ -39,7 +39,7 @@ class Quark(lib.particle.Particle):
     """
     y0, midpoint of the wave function
     """
-    color_charge: lib.quark.color.COLOR
+    color_charge: libschrodinger.quark.color.COLOR
     """
     Color charge of this quark
     """
@@ -49,7 +49,7 @@ class Quark(lib.particle.Particle):
             config,
             x_center,
             y_center,
-            color: lib.quark.color.COLOR):
+            color: libschrodinger.quark.color.COLOR):
         self._id = uuid.uuid4()
         self.config = config
         self.x_center = x_center
@@ -65,7 +65,7 @@ class Quark(lib.particle.Particle):
                 self.psi[x][y] = math.exp(-r / config.a0)
 
     def propagate(
-        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
@@ -75,7 +75,7 @@ class Quark(lib.particle.Particle):
         - `V: np.array`
             - the potential field as an array
             of shape (Nx, Ny)
-        - `particles: list[lib.particle.Particle]`
+        - `particles: list[libschrodinger.particle.Particle]`
             - an array of other particles
             for inter-particle interactions
 
@@ -85,7 +85,7 @@ class Quark(lib.particle.Particle):
         # a normal way, so I will just make them kinda sit in place.
         #
         # Once again, a major simplification.
-        V = lib.potential.CoulombPotential(
+        V = libschrodinger.potential.CoulombPotential(
             self.config, self.x_center, self.y_center).V
 
         # Propagate through the Schrodinger's equation

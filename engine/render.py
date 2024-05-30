@@ -6,9 +6,9 @@ import threading
 import os
 from engine.deserialization import Deserializer
 
-import lib.graphs
-import lib.figlocation
-import lib.interaction
+import libschrodinger.graphs
+import libschrodinger.figlocation
+import libschrodinger.interaction
 
 renders = []
 
@@ -33,7 +33,7 @@ class QueuedRender:
             os.makedirs(dirname)
 
         for t in range(config.Nt):
-            graph = lib.graphs.GraphDisplay(
+            graph = libschrodinger.graphs.GraphDisplay(
                 config, (12, 4 * len(particles)), t)
             for n in range(len(particles)):
                 particle = particles[n]
@@ -43,7 +43,7 @@ class QueuedRender:
                 for p2 in particles:
                     if p2._id != particle._id:
                         V_total +=\
-                            lib.interaction.\
+                            libschrodinger.interaction.\
                             Interactions.get_relative_potential(
                                 config, particle, p2)
 

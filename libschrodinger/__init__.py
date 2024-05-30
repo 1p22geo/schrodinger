@@ -9,5 +9,5 @@ of the main package.
 
 Subpackages available:
 ---
-`lib.quark` - package related to quarks and particles composed of quarks
+`libschrodinger.quark` - package related to quarks and particles composed of quarks
 """

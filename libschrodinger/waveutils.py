@@ -1,16 +1,16 @@
 import numpy as np
 
-import lib.config
+import libschrodinger.config
 
 
-def rollwave(config: lib.config.Config, wave: np.array, vx: float, vy: float):
+def rollwave(config: libschrodinger.config.Config, wave: np.array, vx: float, vy: float):
     """
     Move a wave linearily forward by `(vx, vy)` within experiment coordinates.
     Might not work well with small distances.
 
     Parameters
     ----------
-    - `config: lib.config.Config`: the domain config
+    - `config: libschrodinger.config.Config`: the domain config
     - `wave: np.array`: the wave to move, an array of shape `(Nx, Ny)`
     - `vx: float`: the X velocity (will be normalized, taking into account dx and dt)
     - `vy: float`: the Y velocity (will be normalized, taking into account dy and dt)

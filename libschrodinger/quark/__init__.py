@@ -1,5 +1,5 @@
 """
-## lib.quark subpackage
+## libschrodinger.quark subpackage
 
 All functions and classes related to quarks, and particles composed of quarks.
 

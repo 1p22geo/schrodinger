@@ -2,22 +2,22 @@ import numpy as np
 import scipy
 import uuid
 
-import lib.particle
-import lib.config
-import lib.potential
-import lib.gauss
+import libschrodinger.particle
+import libschrodinger.config
+import libschrodinger.potential
+import libschrodinger.gauss
 
 
-class Electron(lib.particle.Particle):
+class Electron(libschrodinger.particle.Particle):
     """
     Basic representation of an electron in an atom.
     """
 
-    config: lib.config.Config
+    config: libschrodinger.config.Config
     """
        experiment configurations
     """
-    potential: lib.potential.Potential
+    potential: libschrodinger.potential.Potential
     """
     the potential field
             we are modeling the electron in
@@ -67,13 +67,13 @@ class Electron(lib.particle.Particle):
         integ = np.sum((abs(self.psi) ** 2) * (config.dx) * (config.dy))
         self.psi /= integ ** (1 / 2)
 
-    def calculate_psi(self, potential: lib.potential.Potential):
+    def calculate_psi(self, potential: libschrodinger.potential.Potential):
         """
         Calculate the wave function for a bound electron with given n, l, m
 
         Parameters
         ----------
-        - potential: lib.potential.Potential
+        - potential: libschrodinger.potential.Potential
             - the actual potential function to model an electron in
         """
         r_norm = potential.r / (
@@ -96,7 +96,7 @@ class Electron(lib.particle.Particle):
         return psi
 
     def propagate(
-        self, V: np.array, particles: list[lib.particle.Particle], frame: int
+        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
@@ -106,7 +106,7 @@ class Electron(lib.particle.Particle):
         - `V: np.array`
             - the potential field as an array
             of shape (Nx, Ny)
-        - `particles: list[lib.particle.Particle]`
+        - `particles: list[libschrodinger.particle.Particle]`
             - an array of other particles
             for inter-particle interactions
 
@@ -134,7 +134,7 @@ class Electron(lib.particle.Particle):
                 # broke-ass electron, can't even afford a photon xd
                 return
             self._cycle = 1
-            p = lib.gauss.WavePacket(
+            p = libschrodinger.gauss.WavePacket(
                 self.config,
                 0.3,
                 2,

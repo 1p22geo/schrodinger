@@ -6,9 +6,9 @@ import os
 
 from engine.deserialization import Deserializer
 
-import lib.graphs
-import lib.figlocation
-import lib.constants
+import libschrodinger.graphs
+import libschrodinger.figlocation
+import libschrodinger.constants
 
 
 def renderpreview(state, mobile=False):
@@ -16,7 +16,7 @@ def renderpreview(state, mobile=False):
     start = time.time_ns()
     config, potentials, particles = Deserializer().ds(state)
 
-    graph = lib.graphs.GraphDisplay(config, ((4 if mobile else 12), (12 if mobile else 4)  * len(particles)))
+    graph = libschrodinger.graphs.GraphDisplay(config, ((4 if mobile else 12), (12 if mobile else 4)  * len(particles)))
 
     for n in range(len(particles)):
         particle = particles[n]
@@ -26,7 +26,7 @@ def renderpreview(state, mobile=False):
         for p2 in particles:
             if p2._id != particle._id:
                 V_total +=\
-                    lib.interaction.\
+                    libschrodinger.interaction.\
                     Interactions.get_relative_potential(
                         config, particle, p2)
 
@@ -43,9 +43,9 @@ def renderpreview(state, mobile=False):
     if config.interactions_enabled:
         eta *= 2  # that meson emmision is really unoptimised
 
-    days = int(eta / lib.constants.NS_IN_DAY)
-    hours = round((eta % lib.constants.NS_IN_DAY) /
-                  lib.constants.NS_IN_HOUR, 2)
+    days = int(eta / libschrodinger.constants.NS_IN_DAY)
+    hours = round((eta % libschrodinger.constants.NS_IN_DAY) /
+                  libschrodinger.constants.NS_IN_HOUR, 2)
 
     res = flask.send_file(filename)
     res.headers["X-ETA-To-Full-Animation"] = f"{days} days, {hours} hours"
