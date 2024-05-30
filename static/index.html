@@ -14,103 +14,243 @@
       <a href="index.html" class="text-xl w-content mr-auto"
         >Physics simulations - Schrodinger's equation</a
       >
+      <a href="gallery.html" class="hover:text-gray-300">Image gallery</a>
+      <a href="hydrogen.html" class="hover:text-gray-300">Hydrogen levels</a>
+      <a href="large.html" class="hover:text-gray-300">Large files</a>
       <a href="custom.html" class="hover:text-gray-300"
         >Customized experiments</a
       >
-      <a href="hydrogen.html" class="hover:text-gray-300">Hydrogen levels</a>
-      <a href="large.html" class="hover:text-gray-300">Large files</a>
       <a href="about.html" class="hover:text-gray-300">About the project</a>
     </header>
-    <div class="w-content mx-auto text-center font-sans">
+    <div
+      class="w-content mx-auto text-center font-sans flex flex-col items-center"
+    >
       <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in a zero potential
+        Schrodinger's equation - a journey of physics simulation
       </h2>
-      <div class="float4S cooldiv">
-        <a href="media/gif/gauss_empty.gif" download>
-          <img
-            src="media/gif/gauss_empty.gif"
-            alt="A Gauss wave packet in a zero potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in a sin potential
-      </h2>
-      <div class="float3 cooldiv">
-        <a href="media/gif/gauss_sin.gif" download>
-          <img
-            src="media/gif/gauss_sin.gif"
-            alt="A Gauss wave packet in a sin potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in a step potential
-      </h2>
-      <div class="float2S cooldiv">
-        <a href="media/gif/gauss_step.gif" download>
-          <img
-            src="media/gif/gauss_step.gif"
-            alt="A Gauss wave packet in a step potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A wave packet in a quadratic gravity well
-      </h2>
-      <div class="float3S cooldiv">
-        <a href="media/gif/quadratic_down_2x.gif" download>
-          <img
-            src="media/gif/quadratic_down_2x.gif"
-            alt="A Gauss wave packet in a sin potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in a gravity well (phase offset)
-      </h2>
-      <div class="float1 cooldiv">
-        <a href="media/gif/quadratic_down_offset.gif" download>
-          <img
-            src="media/gif/quadratic_down_offset.gif"
-            alt="A Gauss wave packet in a step potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in an inverse gravity well (attracted to corners)
-      </h2>
-      <div class="float4S cooldiv">
-        <a href="media/gif/quadratic_up.gif" download>
-          <img
-            src="media/gif/quadratic_up.gif"
-            alt="A Gauss wave packet in a sin potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in an inverse gravity well (higher quality, phase
-        offset)
-      </h2>
-      <div class="float1 cooldiv">
-        <a href="media/gif/quadratic_up_2x.gif" download>
-          <img
-            src="media/gif/quadratic_up_2x.gif"
-            alt="A Gauss wave packet in a step potential"
-          />
-        </a>
-      </div>
-      <h2 class="text-xl float3S coolh">
-        A Gauss wave packet in a gravity well (higher quality, phase offset)
-      </h2>
-      <div class="float4S cooldiv">
-        <a href="media/gif/quadratic_down_2x.gif" download>
-          <img
-            src="media/gif/quadratic_down_2x.gif"
-            alt="A Gauss wave packet in a sin potential"
-          />
-        </a>
-      </div>
+      <p class="m-8">
+        This project is not finished yet. And it is definitely not yet compliant
+        with realistic physics standards. At least, we tried.
+      </p>
+      <h2 class="text-xl m-4 mt-8">Majorly misunderstood explaination</h2>
+      <p class="m-8">
+        According to a pretty modern theory, quantum mechanics, all matter in
+        the universe is composed of tiny <code>particles</code>, the basic
+        building blocks of the world. Now, we have something like a "periodic
+        table" of particles. The standard model.
+      </p>
+      <figure>
+        <img
+          src="./media/png/standard_model.png"
+          alt="The Standard Model of Elementary particles"
+          class="block"
+        />
+        <figcaption>
+          Copyright:
+          <a
+            class="hover:underline text-gray-700"
+            href="https://en.wikipedia.org/wiki/Standard_Model"
+            >Wikipedia</a
+          >
+        </figcaption>
+      </figure>
+      <p class="m-8">
+        But here's the thing. Particles are so small that we can't really
+        measure where they are. And on this scale, when the particle size is
+        noting compared to the uncertainty of its position (or momentum, for
+        that matter), we cannot even speak of a certain "location" in space and
+        time. And we can't just take better measurments in order to decrease the
+        uncertainty. Because we have both position and momentum uncertainty. And
+        measuring one of them will inevitably interfere with the other. So much
+        that there is a special equation - the
+        <b>Heisenberg Uncertainty principle</b>, linking those values together.
+      </p>
+      <figure class="flex flex-col items-center">
+        <img
+          src="./media/svg/heisenberg.svg"
+          alt="Heisenberg's uncertainty principle"
+          class="block w-72"
+        />
+        <figcaption>
+          Copyright:
+          <a
+            class="hover:underline text-gray-700"
+            href="https://en.wikipedia.org/wiki/Uncertainty_principle"
+            >Wikipedia</a
+          >
+          and
+          <a
+            class="hover:underline text-gray-700"
+            href="https://en.wikipedia.org/wiki/Werner_Heisenberg"
+            ><!-- Walter White -->
+            Werner Heisenberg</a
+          >
+        </figcaption>
+      </figure>
+      <ul class="list-disc block m-8 flex flex-col items-start">
+        <li>σ_x is the uncertainty of position</li>
+        <li>σ_p is the uncertainty of momentum</li>
+        <li>
+          ℏ is the reduced Planck constant,
+          <code>1.05457148 × 10^-34 m^2 kg / s </code>
+        </li>
+      </ul>
+      <p class="m-8">
+        If there is no certain location, then what is there? The naive answer
+        would be: propability. But propability requires a finite number of
+        possible states or values - <b>eigenstates</b>. Here, we have an
+        <a
+          href="https://en.wikipedia.org/wiki/Uncountable_set"
+          class="hover:underline text-gray-700"
+          >uncountable infinity</a
+        >
+        of them. We need an infinitely small propability for every one of the
+        infinite points in space. And assigning a single propability to each
+        point implies... a function. The <b>wave function</b> is an object
+        closest to the position of a subatomic particle.
+      </p>
+      <h2 class="text-xl m-4 mt-8">Properties of the wave function</h2>
+      <p class="m-8">
+        The wave function assigns a complex number to each point in space and
+        time. The square of this value is the propability density. It is a
+        finite number, not infinitely small. The propability of the particle
+        existing in a given range of space is a definite integral of the square
+        of the absolute value of the wave function.
+      </p>
+      <figure>
+        <img
+          src="./media/hydrogen/level_1.png"
+          alt="An electron in the hydrogen atom"
+          class="block"
+        />
+        <figcaption>
+          Copyright:
+          <a
+            class="hover:underline text-gray-700"
+            href="https://matplotlib.org/"
+            >matplotlib i guess?</a
+          >
+          <br />
+          I made the graph myself...
+        </figcaption>
+      </figure>
+      <p class="m-8">
+        This is a typical wave-function-graph of an electron in a hydrogen atom
+        at ground level. It is pretty straightforward that there is a higher
+        chance of finding an electron where the square of the absolute value
+        <code>(Re^2 + Im^2)</code> is higher. The real and imaginary part are
+        separate, just for clarity. Later they will not always be (we will show
+        phase and absolute).
+      </p>
+      <p class="m-8">
+        The potential function is another abstract concept. It is a value for
+        the particle to interact with external forces and particles. Particles
+        are atracted to places with a potential lower than their wave function,
+        and repeled from places where their wave function is lower than the
+        potential around them.
+      </p>
+      <h2 class="text-xl m-4 mt-8">Evolution in time</h2>
+      <figure>
+        <img
+          src="./media/svg/schrodinger.svg"
+          alt="The Schrodinger's equation in its entirety."
+          class="block"
+        />
+        <figcaption>
+          Copyright:
+          <a
+            class="hover:underline text-gray-700"
+            href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation"
+            >Wikipedia</a
+          >
+          <br />
+          Propably
+          <a
+            class="hover:underline text-gray-700"
+            href="https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger"
+            >Erwin Schrödinger</a
+          >
+          too
+        </figcaption>
+      </figure>
+      <p class="m-8">
+        This is the Schrödinger's equation. It describes the evolution in time
+        of the wave function (𝛙) based on the potential (V). We are solving it
+        using <code>scipy</code> and <code>numpy</code> for arbitrary functions,
+        some of which supplied by the user. That way we get an accurate
+        representation of how particles move. Actually respecting quantum
+        physics.
+      </p>
+      <figure>
+        <img
+          src="./media/gif/gauss_empty.gif"
+          alt="A photon moving through vacuum"
+          class="block"
+        />
+        <figcaption>
+          Copyright:
+          <a
+            class="hover:underline text-gray-700"
+            href="https://matplotlib.org/"
+            >matplotlib i guess?</a
+          >
+          <br />
+          I made the graph myself too...
+        </figcaption>
+      </figure>
+      <h2 class="text-xl m-4 mt-8">Limitations</h2>
+      <p class="m-8">
+        1. Relativity<br />
+        Our library simulates only <b>non-relativistic</b> quantum physics. And
+        the only reason for that is... computation power. Not everyone has a
+        computer capable of solving complex differential equations,
+        <i
+          >while accounting for spacetime curvature and doing Lorentz
+          transformations</i
+        >
+      </p>
+      <p class="m-8">
+        2. Quantum field theory<br />
+        We understand that when dealing with wave functions, there is no need to
+        count individual particles, since they should be just written down as a
+        single electron field, single photon field, and interacting with
+        superposed quasi-particles. We understand that electrons either repel
+        each other electromagnetically or emit photons. But here, we just
+        focused on visualising all the quantum phenomena in a simple way,
+        instead of implementing the tiniest and newest releases in difficult
+        physics papers.
+      </p>
+      <p class="m-8">
+        3. Quantum chromodynamics<br />
+        My complete misunderstanding of quarks and hadrons, and color charge
+        would leave even the wildest of physics-ignorants amazed by my scale of
+        stupidity. (only
+        <a
+          href="https://github.com/1p22geo"
+          class="hover:underline text-gray-700"
+          >mine</a
+        >,
+        <a
+          href="https://github.com/KacperTZSTI"
+          class="hover:underline text-gray-700"
+          >KacperTZSTI</a
+        >
+        and
+        <a
+          class="hover:underline text-gray-700"
+          href="https://github.com/ErexPL"
+          >ErexPL</a
+        >
+        did just fine). But our main focus was computationally-efficient
+        kinda-realistic visualisations of most quantum phenomena, not complete
+        realism. If you need more realism, install a quantum physics Micro$oft
+        Minecraft &reg;&copy; texture pack.
+      </p>
+      <h6 class="text-xs">
+        Yes, I will be refering to it as Micro$oft Minecraft &reg;&copy;. That
+        company totally destroyed this game. I am an open-source supporter and
+        you will not convince me otherwise.
+      </h6>
     </div>
   </body>
 </html>
