@@ -30,5 +30,6 @@ class FigureLocation:
         Creates a SubplotSpec which can then be passed to fig.add_subplot
         """
         return matplotlib.gridspec.SubplotSpec(
-            matplotlib.gridspec.GridSpec(self.x, self.y), self.num
+            # this is not a typo, matplotlib is stupid and has (y,x) coordinates
+            matplotlib.gridspec.GridSpec(self.y, self.x), self.num
         )
