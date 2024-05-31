@@ -47,7 +47,7 @@ class QueuedRender:
                             Interactions.get_relative_potential(
                                 config, particle, p2)
 
-                particle.draw(graph, V_total, len(particles), 3, n)
+                particle.draw(graph, V_total, 3, len(particles), n)
 
                 # bodge for deleting particles mid-loop
                 new_particles = particle.propagate(V_total, particles[:], t)
