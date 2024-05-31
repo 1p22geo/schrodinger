@@ -34,7 +34,10 @@ class GraphDisplay:
     """
 
     def __init__(
-        self, config: libschrodinger.config.Config, figsize=(12, 8), frameno: int | None = None
+        self,
+        config: libschrodinger.config.Config,
+        figsize=(12, 8),
+        frameno: int | None = None,
     ):
         self.config = config
         self.frameno = frameno
@@ -76,7 +79,11 @@ class GraphDisplay:
             if `frameno` is not None
         """
         self.fig.text(
-            0, 0, "frame " + str(self.frameno), fontsize=10, **libschrodinger.constants.PLT_FONT
+            0,
+            0,
+            "frame " + str(self.frameno),
+            fontsize=10,
+            **libschrodinger.constants.PLT_FONT,
         )
 
     def add_figure(

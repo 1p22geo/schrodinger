@@ -11,6 +11,7 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
 
     But hey, colors! :3
     """
+
     rotation: int
     """
     How many times are the colors rotated
@@ -31,35 +32,36 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
     [`libschrodinger.quark.meson.Meson`] to be emmited and absorbed.
     """
 
-    def __init__(self,
-                 config,
-                 x0: float,
-                 y0: float,
-                 spread: float = 3.0,
-                 rotation: int = 0):
+    def __init__(
+        self, config, x0: float, y0: float, spread: float = 3.0, rotation: int = 0
+    ):
         self.rotation = rotation
         super().__init__(
             config,
             [
                 libschrodinger.quark.quark.Quark(
-                    config, x0 -
-                    spread, y0,
+                    config,
+                    x0 - spread,
+                    y0,
                     libschrodinger.quark.color.rotate(
-                        libschrodinger.quark.color.COLOR.RED, self.rotation)
+                        libschrodinger.quark.color.COLOR.RED, self.rotation
+                    ),
                 ),
                 libschrodinger.quark.quark.Quark(
                     config,
                     x0 + spread / 2,
                     y0 - spread / 2 * math.sqrt(3),
                     libschrodinger.quark.color.rotate(
-                        libschrodinger.quark.color.COLOR.GREEN, self.rotation)
+                        libschrodinger.quark.color.COLOR.GREEN, self.rotation
+                    ),
                 ),
                 libschrodinger.quark.quark.Quark(
                     config,
                     x0 + spread / 2,
                     y0 + spread / 2 * math.sqrt(3),
                     libschrodinger.quark.color.rotate(
-                        libschrodinger.quark.color.COLOR.BLUE, self.rotation)
+                        libschrodinger.quark.color.COLOR.BLUE, self.rotation
+                    ),
                 ),
             ],
         )
@@ -68,7 +70,8 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
         self._cycle = 0
         self.T = 9
 
-        self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+        self.colors = libschrodinger.quark.color.colorquarks(
+            self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
         super().propagate(V, particles, frame)
@@ -85,15 +88,20 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 -self.spread,
                 2,
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.ANTIGREEN, self.rotation),
+                    libschrodinger.quark.color.COLOR.ANTIGREEN, self.rotation
+                ),
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.RED, self.rotation),
+                    libschrodinger.quark.color.COLOR.RED, self.rotation
+                ),
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[0].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.GREEN, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.GREEN, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         if ((frame * self.config.dt) % self.T > 1) and self._cycle == 1:
             self._cycle = 2
             for n in range(len(particles)):
@@ -101,8 +109,11 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                     del particles[n]
                     break
             self.quarks[1].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.RED, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.RED, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         if ((frame * self.config.dt) % self.T > 3) and self._cycle == 2:
             self._cycle = 3
             m = libschrodinger.quark.meson.Meson(
@@ -113,16 +124,20 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 self.spread * 2,
                 2,
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.ANTIBLUE, self.rotation),
+                    libschrodinger.quark.color.COLOR.ANTIBLUE, self.rotation
+                ),
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.RED, self.rotation),
-
+                    libschrodinger.quark.color.COLOR.RED, self.rotation
+                ),
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[1].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.BLUE, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.BLUE, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         if ((frame * self.config.dt) % self.T > 4) and self._cycle == 3:
             self._cycle = 4
             for n in range(len(particles)):
@@ -130,8 +145,11 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                     del particles[n]
                     break
             self.quarks[2].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.RED, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.RED, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         if ((frame * self.config.dt) % self.T > 6) and self._cycle == 4:
             self._cycle = 5
             m = libschrodinger.quark.meson.Meson(
@@ -142,16 +160,20 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 -self.spread,
                 2,
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.ANTIGREEN, self.rotation),
+                    libschrodinger.quark.color.COLOR.ANTIGREEN, self.rotation
+                ),
                 libschrodinger.quark.color.rotate(
-                    libschrodinger.quark.color.COLOR.RED, self.rotation),
-
+                    libschrodinger.quark.color.COLOR.RED, self.rotation
+                ),
             )
             particles.append(m)
             self._meson = m._id  # to access or delete this meson later on
             self.quarks[2].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.GREEN, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.GREEN, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         if ((frame * self.config.dt) % self.T > 7) and self._cycle == 5:
             self._cycle = 0
             for n in range(len(particles)):
@@ -159,6 +181,9 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                     del particles[n]
                     break
             self.quarks[0].color_charge = libschrodinger.quark.color.rotate(
-                libschrodinger.quark.color.COLOR.RED, self.rotation)
-            self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+                libschrodinger.quark.color.COLOR.RED, self.rotation
+            )
+            self.colors = libschrodinger.quark.color.colorquarks(
+                self.config, self.quarks
+            )
         return particles

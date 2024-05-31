@@ -31,7 +31,10 @@ class Particle:
         self._fig_opts = {}
 
     def propagate(
-        self, V: np.array, particles: list["libschrodinger.particle.Particle"], frame: int
+        self,
+        V: np.array,
+        particles: list["libschrodinger.particle.Particle"],
+        frame: int,
     ):
         """
         propagate the wave function in a potential field

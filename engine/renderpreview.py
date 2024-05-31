@@ -17,7 +17,8 @@ def renderpreview(state, mobile=False):
     config, potentials, particles = Deserializer().ds(state)
 
     graph = libschrodinger.graphs.GraphDisplay(
-        config, ((4 if mobile else 12), (12 if mobile else 4) * len(particles)))
+        config, ((4 if mobile else 12), (12 if mobile else 4) * len(particles))
+    )
 
     for n in range(len(particles)):
         particle = particles[n]
@@ -26,13 +27,19 @@ def renderpreview(state, mobile=False):
             V_total += potential.V
         for p2 in particles:
             if p2._id != particle._id:
-                V_total +=\
-                    libschrodinger.interaction.\
-                    Interactions.get_relative_potential(
-                        config, particle, p2)
+                V_total += (
+                    libschrodinger.interaction.Interactions.get_relative_potential(
+                        config, particle, p2
+                    )
+                )
 
-        particle.draw(graph, V_total,
-                      (1 if mobile else 3), len(particles)*(3 if mobile else 1), n)
+        particle.draw(
+            graph,
+            V_total,
+            (1 if mobile else 3),
+            len(particles) * (3 if mobile else 1),
+            n,
+        )
     filename = uuid.uuid4()
     filename = f"static/temp/{filename}.png"
     if not os.path.exists("static/temp"):
@@ -46,8 +53,11 @@ def renderpreview(state, mobile=False):
         eta *= 2  # that meson emmision is really unoptimised
 
     days = int(eta / libschrodinger.constants.NS_IN_DAY)
-    hours = round((eta % libschrodinger.constants.NS_IN_DAY) /
-                  libschrodinger.constants.NS_IN_HOUR, 2)
+    hours = round(
+        (eta % libschrodinger.constants.NS_IN_DAY)
+        / libschrodinger.constants.NS_IN_HOUR,
+        2,
+    )
 
     res = flask.send_file(filename)
     res.headers["X-ETA-To-Full-Animation"] = f"{days} days, {hours} hours"

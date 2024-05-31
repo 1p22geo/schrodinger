@@ -75,14 +75,14 @@ def rotate(color, n=0):
         return color
     match color:
         case COLOR.RED:
-            return rotate(COLOR.GREEN, n-1)
+            return rotate(COLOR.GREEN, n - 1)
         case COLOR.GREEN:
-            return rotate(COLOR.BLUE, n-1)
+            return rotate(COLOR.BLUE, n - 1)
         case COLOR.BLUE:
-            return rotate(COLOR.RED, n-1)
+            return rotate(COLOR.RED, n - 1)
         case COLOR.ANTIRED:
-            return rotate(COLOR.ANTIGREEN, n-1)
+            return rotate(COLOR.ANTIGREEN, n - 1)
         case COLOR.ANTIGREEN:
-            return rotate(COLOR.ANTIBLUE, n-1)
+            return rotate(COLOR.ANTIBLUE, n - 1)
         case COLOR.ANTIBLUE:
-            return rotate(COLOR.ANTIRED, n-1)
+            return rotate(COLOR.ANTIRED, n - 1)

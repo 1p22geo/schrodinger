@@ -31,5 +31,6 @@ class FigureLocation:
         """
         return matplotlib.gridspec.SubplotSpec(
             # this is not a typo, matplotlib is stupid and has (y,x) coordinates
-            matplotlib.gridspec.GridSpec(self.y, self.x), self.num
+            matplotlib.gridspec.GridSpec(self.y, self.x),
+            self.num,
         )

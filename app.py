@@ -17,7 +17,7 @@ def hello_world():
 def renderpreview():
     return engine.renderpreview.renderpreview(
         json.loads(base64.b64decode(flask.request.args.get("state"))),
-        flask.request.args.get("mobile") == "true"
+        flask.request.args.get("mobile") == "true",
     )
 
 

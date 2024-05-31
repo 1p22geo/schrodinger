@@ -21,8 +21,7 @@ def test_deserialization_default():
         },
         "components": [
             {
-                "type":
-                libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON,
+                "type": libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON,
                 "principal_quantum": 3,
                 "azimuthal_quantum": 2,
                 "magnetic_quantum": 1,
@@ -30,8 +29,7 @@ def test_deserialization_default():
                 "y_center": 5,
             },
             {
-                "type":
-                libschrodinger.constants.DeserializationConstants.PARTICLES.PHOTON,
+                "type": libschrodinger.constants.DeserializationConstants.PARTICLES.PHOTON,
                 "sigma": 0.5,
                 "kx0": 1,
                 "ky0": 2,
@@ -41,8 +39,7 @@ def test_deserialization_default():
                 "vy": 6,
             },
             {
-                "type":
-                libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB,
+                "type": libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB,
                 "x_center": 5,
                 "y_center": 5,
                 "charge": 1,

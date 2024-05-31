@@ -127,9 +127,11 @@ class Electron(libschrodinger.particle.Particle):
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)
         if not (self.config.interactions_enabled):
             return
-        if ((frame * self.config.dt) % self.T > 0)\
-                and ((frame * self.config.dt) % self.T < 1)\
-                and self._cycle == 0:
+        if (
+            ((frame * self.config.dt) % self.T > 0)
+            and ((frame * self.config.dt) % self.T < 1)
+            and self._cycle == 0
+        ):
             if self.principal_quantum < 2:
                 # broke-ass electron, can't even afford a photon xd
                 return
@@ -142,7 +144,7 @@ class Electron(libschrodinger.particle.Particle):
                 self.potential.x_center,
                 self.potential.y_center,
                 0,
-                self.config.Ly
+                self.config.Ly,
                 # The photon has to run 1 Ly in 1 dt of time
                 # No, Ly is not light-year. It's the width of the simulation.
             )

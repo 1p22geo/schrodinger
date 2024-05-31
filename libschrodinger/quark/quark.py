@@ -45,11 +45,8 @@ class Quark(libschrodinger.particle.Particle):
     """
 
     def __init__(
-            self,
-            config,
-            x_center,
-            y_center,
-            color: libschrodinger.quark.color.COLOR):
+        self, config, x_center, y_center, color: libschrodinger.quark.color.COLOR
+    ):
         self._id = uuid.uuid4()
         self.config = config
         self.x_center = x_center
@@ -86,7 +83,8 @@ class Quark(libschrodinger.particle.Particle):
         #
         # Once again, a major simplification.
         V = libschrodinger.potential.CoulombPotential(
-            self.config, self.x_center, self.y_center).V
+            self.config, self.x_center, self.y_center
+        ).V
 
         # Propagate through the Schrodinger's equation
         self.psi = self.psi * np.exp(-1j * (V) * self.config.dt / 2)

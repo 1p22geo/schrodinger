@@ -34,7 +34,8 @@ class QueuedRender:
 
         for t in range(config.Nt):
             graph = libschrodinger.graphs.GraphDisplay(
-                config, (12, 4 * len(particles)), t)
+                config, (12, 4 * len(particles)), t
+            )
             for n in range(len(particles)):
                 particle = particles[n]
                 V_total = np.zeros((config.Nx, config.Ny))
@@ -42,10 +43,9 @@ class QueuedRender:
                     V_total += potential.V
                 for p2 in particles:
                     if p2._id != particle._id:
-                        V_total +=\
-                            libschrodinger.interaction.\
-                            Interactions.get_relative_potential(
-                                config, particle, p2)
+                        V_total += libschrodinger.interaction.Interactions.get_relative_potential(
+                            config, particle, p2
+                        )
 
                 particle.draw(graph, V_total, 3, len(particles), n)
 

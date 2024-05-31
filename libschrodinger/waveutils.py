@@ -3,7 +3,9 @@ import numpy as np
 import libschrodinger.config
 
 
-def rollwave(config: libschrodinger.config.Config, wave: np.array, vx: float, vy: float):
+def rollwave(
+    config: libschrodinger.config.Config, wave: np.array, vx: float, vy: float
+):
     """
     Move a wave linearily forward by `(vx, vy)` within experiment coordinates.
     Might not work well with small distances.

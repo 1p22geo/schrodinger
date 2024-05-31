@@ -38,7 +38,9 @@ class Deserializer:
         potentials = []
         for sp in serialized_components:
             match sp["type"]:
-                case libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON:
+                case (
+                    libschrodinger.constants.DeserializationConstants.PARTICLES.ELECTRON
+                ):
                     particles.append(
                         libschrodinger.electron.Electron(
                             config,
@@ -63,7 +65,9 @@ class Deserializer:
                             sp["vy"],
                         )
                     )
-                case libschrodinger.constants.DeserializationConstants.PARTICLES.NEUTRON:
+                case (
+                    libschrodinger.constants.DeserializationConstants.PARTICLES.NEUTRON
+                ):
                     particles.append(
                         libschrodinger.quark.baryon.Baryon(
                             config, sp["x0"], sp["y0"], sp["spread"], 0
@@ -84,7 +88,9 @@ class Deserializer:
                         )
                     )
 
-                case libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB:
+                case (
+                    libschrodinger.constants.DeserializationConstants.POTENTIAL.COULOMB
+                ):
                     potentials.append(
                         libschrodinger.potential.CoulombPotential(
                             config,

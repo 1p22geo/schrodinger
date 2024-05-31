@@ -16,6 +16,7 @@ class Meson(libschrodinger.quark.hadron.Hadron):
     if you know how to help us.
 
     """
+
     vx: float
     """
     Velocity on X axis.
@@ -71,12 +72,15 @@ class Meson(libschrodinger.quark.hadron.Hadron):
             config,
             [
                 libschrodinger.quark.quark.Quark(
-                    config, x0 + xa * spread, y0 + ya * spread, c1),
+                    config, x0 + xa * spread, y0 + ya * spread, c1
+                ),
                 libschrodinger.quark.quark.Quark(
-                    config, x0 - xa * spread, y0 - ya * spread, c2),
+                    config, x0 - xa * spread, y0 - ya * spread, c2
+                ),
             ],
         )
-        self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+        self.colors = libschrodinger.quark.color.colorquarks(
+            self.config, self.quarks)
 
     def propagate(self, V, particles, frame):
         for n in range(len(self.quarks)):
@@ -99,4 +103,5 @@ class Meson(libschrodinger.quark.hadron.Hadron):
         self.y0 = (self.y0 + self.config.Ly) % self.config.Ly
 
         super().propagate(V, particles, frame)
-        self.colors = libschrodinger.quark.color.colorquarks(self.config, self.quarks)
+        self.colors = libschrodinger.quark.color.colorquarks(
+            self.config, self.quarks)
