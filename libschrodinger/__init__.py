@@ -11,6 +11,7 @@ Subpackages available:
 ---
 `libschrodinger.quark` - package related to quarks and particles composed of quarks
 """
+
 import libschrodinger.quark.hadron
 import libschrodinger.quark.baryon
 import libschrodinger.quark.meson
@@ -27,5 +28,10 @@ import libschrodinger.electron
 import libschrodinger.figlocation
 import libschrodinger.gauss
 from importlib.metadata import version
-__version__ = version('libschrodinger')
-print(f"Starting libschrodinger v{__version__}")
+
+try:
+    __version__ = version("libschrodinger")
+    print(f"Starting libschrodinger v{__version__}")
+except:
+    print("[WARNING] failed to fetch package metadata")
+    print("libschrodinger might be installed incorrectly...")
