@@ -1,6 +1,6 @@
 [project]
 name = "libschrodinger"
-version = "1.2.2"
+version = "1.2.3"
 authors = [
   { name="1p22geo", email="1p22geodecki@gmail.com" },
   { name="KacperTZSTI", email="kacper.m.trzop@gmail.com" },
@@ -27,4 +27,4 @@ Homepage = "https://github.com/1p22geo/schrodinger"
 Issues = "https://github.com/1p22geo/schrodinger/issues"
 
 [tool.setuptools.packages.find]
-include = ["libschrodinger"]
+include = ["libschrodinger", "libschrodinger.quark"]
