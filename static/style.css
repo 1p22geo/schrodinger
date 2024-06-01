@@ -91,6 +91,24 @@ header:hover {
   transition: 0.5s;
 }
 
+.sidenote{
+  color: rgba(51, 51, 51, 0.601);
+  scale: 90%;
+}
+
+.editornote{
+  padding: 1rem;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #c28616, #d1eb42);
+  position: relative;
+  scale: 90%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+  margin: -40px;
+}
+
 /* THE FLOATING */
 
 .float1 {
