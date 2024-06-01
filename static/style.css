@@ -55,6 +55,10 @@ header:hover {
 }
 
 .authors {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 4px;
+  border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
   position: relative;
   width: fit-content;
   margin: auto;
@@ -74,7 +78,7 @@ header:hover {
   position: absolute;
   inset: -1px;
   transform: translate3d(6px, 6px, -1px);
-  background: linear-gradient(to left, #b7c216c7, #3ba9b1b7);
+  background: linear-gradient(to left, #b7c2165e, #3ba9b15f);
 }
 
 .coolerdiv {
@@ -89,6 +93,10 @@ header:hover {
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s;
+  background-image: url("path2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 .sidenote{
