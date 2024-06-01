@@ -55,6 +55,10 @@ header:hover {
 }
 
 .authors {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 4px;
+  border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
   position: relative;
   width: fit-content;
   margin: auto;
@@ -74,7 +78,7 @@ header:hover {
   position: absolute;
   inset: -1px;
   transform: translate3d(6px, 6px, -1px);
-  background: linear-gradient(to left, #b7c216c7, #3ba9b1b7);
+  background: linear-gradient(to left, #b7c2165e, #3ba9b15f);
 }
 
 .coolerdiv {
@@ -89,6 +93,28 @@ header:hover {
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s;
+  background-image: url("path2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.sidenote{
+  color: rgba(51, 51, 51, 0.601);
+  scale: 90%;
+}
+
+.editornote{
+  padding: 1rem;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #c28616, #d1eb42);
+  position: relative;
+  scale: 90%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+  margin: -40px;
 }
 
 /* THE FLOATING */
