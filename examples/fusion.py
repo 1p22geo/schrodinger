@@ -1,16 +1,18 @@
 import os
 import numpy as np
-import lib.constants as constants
+import libschrodinger
 
-config = constants.Config(1, 20, 20, 4000, 4000, 2000, 100)
+config = libschrodinger.config.Config(1, 20, 20, 4000, 4000, 2000, 100)
 
-proton_1 = constants.CoulombPotential(config, x_center=10, y_center=5)
-proton_2 = constants.CoulombPotential(config, x_center=10, y_center=15)
+proton_1 = libschrodinger.potential.CoulombPotential(
+    config, x_center=10, y_center=5)
+proton_2 = libschrodinger.potential.CoulombPotential(
+    config, x_center=10, y_center=15)
 
 
-el1 = constants.Electron(config, proton_1, 1, 0, 0)
+el1 = libschrodinger.electron.Electron(config, proton_1, 1, 0, 0)
 
-el2 = constants.Electron(config, proton_2, 1, 0, 0)
+el2 = libschrodinger.electron.Electron(config, proton_2, 1, 0, 0)
 el2.psi *= -1
 
 
@@ -28,61 +30,23 @@ for t in range(config.Nt):
         el1.psi = np.roll(el1.psi, 1, axis=0)
         el2.psi = np.roll(el2.psi, -1, axis=0)
 
-    proton_1 = constants.CoulombPotential(
+    proton_1 = libschrodinger.potential.CoulombPotential(
         config, x_center=10, y_center=(5 + merged * 5)
     )
-    proton_2 = constants.CoulombPotential(
+    proton_2 = libschrodinger.potential.CoulombPotential(
         config, x_center=10, y_center=(15 - merged * 5)
     )
 
     potential_1 = proton_1.V + proton_2.V
     potential_2 = proton_1.V + proton_2.V
 
-    el1.propagate(potential_1, particles)
-    el2.propagate(potential_2, particles)
+    el1.propagate(potential_1, particles, t)
+    el2.propagate(potential_2, particles, t)
 
-    graph = constants.GraphDisplay(config)
+    graph = libschrodinger.graphs.GraphDisplay(config)
 
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 0),
-        np.angle(el1.psi),
-        "Phase (Electron 1)",
-        "color",
-    )
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 3),
-        np.angle(el2.psi),
-        "Phase (Electron 2)",
-        "color",
-    )
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 1),
-        np.absolute(el1.psi),
-        "Absolute (Electron 1)",
-        "3d",
-    )
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 4),
-        np.absolute(el2.psi),
-        "Absolute (Electron 2)",
-        "3d",
-    )
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 2),
-        proton_1.V,
-        "Potential (proton 1)",
-        "3d",
-        cmap=None,
-        zlim=(-1, 0),
-    )
-    graph.add_figure(
-        constants.FigureLocation(2, 3, 5),
-        proton_2.V,
-        "Potential (proton 2)",
-        "3d",
-        cmap=None,
-        zlim=(-1, 0),
-    )
+    el1.draw(graph, potential_1, 3, 2, 0)
+    el2.draw(graph, potential_2, 3, 2, 1)
 
     filename = f"output_images/frame_{t}.png"
     graph.save(filename)

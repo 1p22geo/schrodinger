@@ -1,19 +1,13 @@
 import os
 
-import lib.config
-import lib.potential
-import lib.electron
-import lib.graphs
-import lib.figlocation
+import libschrodinger
 
-import lib.quark.quark
-import lib.quark.meson
+config = libschrodinger.config.Config(0.7, 10, 10, 2000, 2000, 10, 1)
 
-config = lib.config.Config(0.7, 10, 10, 2000, 2000, 10, 1)
+potential = libschrodinger.potential.CoulombPotential(config)
 
-potential = lib.potential.CoulombPotential(config)
-
-particles = [lib.quark.meson.Meson(config, 5, 5, 1, 3, 2)]
+particles = [libschrodinger.quark.meson.Meson(
+    config, 5, 5, 1, 3, 2, libschrodinger.quark.color.COLOR.RED, libschrodinger.quark.color.COLOR.ANTIRED)]
 
 if not os.path.exists("output_images4"):
     os.makedirs("output_images4")
@@ -23,7 +17,7 @@ frames = []
 for t in range(config.Nt):
     print(f"Time: {t}")
 
-    graph = lib.graphs.GraphDisplay(config, figsize=(12, 8))
+    graph = libschrodinger.graphs.GraphDisplay(config, figsize=(12, 8))
 
     for n in range(len(particles)):
         particle = particles[n]
