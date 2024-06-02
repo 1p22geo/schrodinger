@@ -319,6 +319,11 @@ function render_data() {
     div.innerText = p.text;
     document.querySelector("#particles").appendChild(div);
   });
+  const empty = document.createElement("div");
+  empty.classList.add(
+    "empty",
+  );
+  document.querySelector("#particles").appendChild(empty);
   document.querySelector("#spinner").hidden = false;
   fetch(
     `/api/renderpreview?state=${serialize_state(state)}&req=${parseInt(Math.random() * 10000)}&mobile=${window.innerWidth < 700 ? "true" : "false"}`,
