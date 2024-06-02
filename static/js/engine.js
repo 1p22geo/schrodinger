@@ -35,6 +35,7 @@ function render_sidebar() {
   const sidebar = document.querySelector("#sidebar");
   if (focused_particle < 0) {
     sidebar.innerHTML = `
+    <div class="config">
 <h1 class="text-xl mb-4">Experiment config</h1>
 <form id="config-form" class="flex flex-col gap-2">
   Size of the domain:
@@ -55,6 +56,7 @@ function render_sidebar() {
 
   Number of time divisions
   <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
+  </div>
   <div class="radiation">
   [EXPERIMENTAL] [SLOW AND UNOPTIMIZED] [NOT RECOMMENDED] [RADIATION RISK] Inter-particle interactions
   <input type="checkbox" class="mb-4 border red" ${state.config.domain.interactions ? "checked" : ""}>
