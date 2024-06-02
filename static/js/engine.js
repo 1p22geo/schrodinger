@@ -55,9 +55,10 @@ function render_sidebar() {
 
   Number of time divisions
   <input type="number" class="mb-4 border w-full" value="${state.config.domain.Nt}">
-
+  <div class="radiation">
   [EXPERIMENTAL] [SLOW AND UNOPTIMIZED] [NOT RECOMMENDED] [RADIATION RISK] Inter-particle interactions
   <input type="checkbox" class="mb-4 border" ${state.config.domain.interactions ? "checked" : ""}>
+  </div>
 
 </form>
 `;
