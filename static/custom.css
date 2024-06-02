@@ -54,8 +54,12 @@ header:hover {
 
 .radiation{
   padding: 1em;
-  background-color: rgb(51, 51, 51);
-  color: white;
+  background-image: url("./media/png/radiation.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  color: black;
   display: flex;
   flex-direction: column;
   gap: 5px;

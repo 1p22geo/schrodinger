@@ -95,7 +95,7 @@ header:hover {
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
   transition: 0.5s;
-  background-image: url("path2.png");
+  background-image: url("./media/png/stripes.png");
   background-repeat: no-repeat;
   background-size: cover;
 
