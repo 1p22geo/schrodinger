@@ -12,6 +12,16 @@ header {
   transition: 0.5s ease-in-out;
 }
 
+::-moz-selection { /* Code for Firefox */
+  color: rgb(223, 201, 79);
+  background: rgb(179, 125, 26);
+}
+
+::selection {
+  color: rgb(247, 219, 65);
+  background: rgb(179, 125, 26);
+}
+
 header:hover {
   border-image-source: linear-gradient(to left, #d0d32f, #ef9e34);
 }
@@ -46,8 +56,8 @@ header:hover {
 }
 
 .empty {
-  width: 100px;
-  height: 6rem;
+  width: 99px;
+  height: 6.08rem;
   background-color: black;
   display: grid;
 }
