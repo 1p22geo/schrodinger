@@ -16,17 +16,17 @@ header:hover {
   border-image-source: linear-gradient(to left, #d0d32f, #ef9e34);
 }
 
-.engine{
+.engine {
   padding: 1rem;
 }
 
-.add{
+.add {
   background-color: rgb(51, 51, 51);
   box-shadow: 0 0 0 10px rgb(51, 51, 51);
   color: rgb(255, 255, 255);
 }
 
-.components{
+.components {
   text-align: start;
   width: fit-content;
   background-color: rgb(51, 51, 51);
@@ -39,25 +39,24 @@ header:hover {
   box-shadow: 0 0 0 5px rgb(51, 51, 51);
 }
 
-#particles{
+#particles {
   display: flex;
   text-align: center;
   justify-content: start;
 }
 
-.empty{
-  width: 24px;
-  height: 24px;
+.empty {
+  width: 6rem;
+  height: 6rem;
   background-color: black;
   display: grid;
 }
 
-.radiation{
+.radiation {
   padding: 1em;
   background-image: url("./media/png/radiation.png");
   background-repeat: no-repeat;
   background-size: cover;
-
 
   color: black;
   display: flex;

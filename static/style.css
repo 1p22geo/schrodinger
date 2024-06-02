@@ -54,8 +54,6 @@ header:hover {
   background: linear-gradient(to left, #b7c2169f, #3ba9b196);
 }
 
-
-
 .authors {
   border: 10px solid;
   border-image-slice: 1;
@@ -98,15 +96,14 @@ header:hover {
   background-image: url("./media/png/stripes.png");
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
-.sidenote{
+.sidenote {
   color: rgba(51, 51, 51, 0.601);
   scale: 90%;
 }
 
-.editornote{
+.editornote {
   padding: 1rem;
   border: 10px solid;
   border-image-slice: 1;
