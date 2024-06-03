@@ -94,3 +94,9 @@ header:hover {
 .red {
   accent-color: red;
 }
+
+.image-bg{
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 0px;
+}

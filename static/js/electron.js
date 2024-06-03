@@ -15,7 +15,7 @@ export class Electron {
     this.y_center = y_center;
     this.text = "ELECTRON";
     this.__type = PARTICLES.ELECTRON;
-    this.__style = ["bg-green-300"];
+    this.__style = ["bg-green-300", "bg-[url('./media/png/icons/electron_smol.jpg')]", "image-bg"];
   }
   serialize() {
     return {
