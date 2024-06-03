@@ -8,7 +8,7 @@ export class Proton {
 
     this.text = "PROTON";
     this.__type = PARTICLES.PROTON;
-    this.__style = ["bg-red-500"];
+    this.__style = ["bg-red-500", "bg-[url('./media/png/icons/proton_smol.jpg')]", "image-bg"];
   }
   serialize() {
     return {

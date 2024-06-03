@@ -8,7 +8,7 @@ export class Neutron {
 
     this.text = "NEUTRON";
     this.__type = PARTICLES.NEUTRON;
-    this.__style = ["bg-blue-600"];
+    this.__style = ["bg-blue-600", "bg-[url('./media/png/icons/neutron_smol.jpg')]", "image-bg"];
   }
   serialize() {
     return {
