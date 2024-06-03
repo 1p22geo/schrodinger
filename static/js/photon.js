@@ -12,7 +12,7 @@ export class Photon {
 
     this.text = "PHOTON";
     this.__type = PARTICLES.PHOTON;
-    this.__style = ["bg-yellow-300"];
+    this.__style = ["bg-yellow-300", "bg-[url('./media/png/icons/photon_smol.jpg')]", "image-bg"];
   }
   serialize() {
     return {
