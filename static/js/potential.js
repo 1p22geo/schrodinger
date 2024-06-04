@@ -7,7 +7,7 @@ export class CoulombPotential {
     this.charge = charge;
     this.__type = POTENTIAL.COULOMB;
     this.text = "COULOMB POTENTIAL";
-    this.__style = ["bg-slate-600", "text-white"];
+    this.__style = ["bg-slate-600", "text-white", "bg-[url('./media/png/icons/coulomb.png')]", "image-bg"];
   }
   serialize() {
     return {

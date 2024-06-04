@@ -1,3 +1,19 @@
+body{
+  background-image: url("./media/mp4/background2.mp4");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#background{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -2;
+}
+
 header {
   z-index: 2;
   background-color: rgb(51, 51, 51);
@@ -47,6 +63,7 @@ header:hover {
   border-image-slice: 1;
   border-image-source: linear-gradient(to left, #e26009, #d1eb42);
   box-shadow: 0 0 0 5px rgb(51, 51, 51);
+  margin-bottom: 20px;
 }
 
 #particles {
@@ -82,6 +99,7 @@ header:hover {
   background-image: url("./media/png/radiation.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   background-color: rgb(51, 51, 51);
   color: rgb(255, 81, 81);
   display: flex;
@@ -99,4 +117,17 @@ header:hover {
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 0px;
+}
+
+.cooldiv {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+  border-image-source: linear-gradient(to left, #b6c216, #3ba9b1);
+  box-shadow: 10px 10px rgba(53, 53, 53, 0.089);
+  margin-top: 60px;
+  margin-bottom: 40px;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
 }
