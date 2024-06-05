@@ -89,7 +89,7 @@ class GraphDisplay:
     def add_figure(
         self,
         location: libschrodinger.figlocation.FigureLocation,
-        function: np.array,
+        function: np.ndarray,
         title: str = "",
         fig_type: str = "3d",
         zlim=(None, None),

@@ -1,14 +1,38 @@
 import numpy as np
 import math
 
+COLORS = {
+    "RED": "COLOR.RED",
+    "BLUE": "COLOR.BLUE",
+    "GREEN": "COLOR.GREEN",
+    "ANTIRED": "COLOR.ANTIRED",
+    "ANTIBLUE": "COLOR.ANTIBLUE",
+    "ANTIGREEN": "COLOR.ANTIGREEN",
+}
+
+
+class WrongColorException(Exception):
+    # idk what do i do here
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
 
 class COLOR:
-    RED = "COLOR.RED"
-    BLUE = "COLOR.BLUE"
-    GREEN = "COLOR.GREEN"
-    ANTIRED = "COLOR.ANTIRED"
-    ANTIBLUE = "COLOR.ANTIBLUE"
-    ANTIGREEN = "COLOR.ANTIGREEN"
+    """
+    wtf how do i do enums in python
+    """
+
+    def __init__(self, _c: str):
+        if _c not in COLORS.values():
+            raise WrongColorException(_c)
+        self._c = _c
+
+    RED: "COLOR"
+    GREEN: "COLOR"
+    BLUE: "COLOR"
+    ANTIRED: "COLOR"
+    ANTIGREEN: "COLOR"
+    ANTIBLUE: "COLOR"
 
     def ANTI(c):
         match c:
@@ -24,6 +48,14 @@ class COLOR:
                 return COLOR.GREEN
             case COLOR.ANTIBLUE:
                 return COLOR.BLUE
+
+
+COLOR.RED = COLOR(COLORS["RED"])
+COLOR.GREEN = COLOR(COLORS["GREEN"])
+COLOR.BLUE = COLOR(COLORS["BLUE"])
+COLOR.ANTIRED = COLOR(COLORS["ANTIRED"])
+COLOR.ANTIGREEN = COLOR(COLORS["ANTIGREEN"])
+COLOR.ANTIBLUE = COLOR(COLORS["ANTIBLUE"])
 
 
 def colorquarks(config, quarks):
@@ -59,7 +91,7 @@ def colorquarks(config, quarks):
     return colors
 
 
-def rotate(color, n=0):
+def rotate(color: COLOR, n=0) -> COLOR:
     """
     Rotates the color `n` times in the order:
 
@@ -86,3 +118,5 @@ def rotate(color, n=0):
             return rotate(COLOR.ANTIBLUE, n - 1)
         case COLOR.ANTIBLUE:
             return rotate(COLOR.ANTIRED, n - 1)
+        case _:
+            raise WrongColorException()

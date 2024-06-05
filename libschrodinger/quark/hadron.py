@@ -18,7 +18,7 @@ class Hadron(libschrodinger.particle.Particle):
     """
     experiment configurations
     """
-    psi: np.array
+    psi: np.ndarray
     """
     Composite wave function
     Sum of all wave functions of the quarks
@@ -29,7 +29,7 @@ class Hadron(libschrodinger.particle.Particle):
     """
     Literally the list of involved quarks
     """
-    colors: np.array
+    colors: np.ndarray
     """
     Colors which can be passed as **facecolors to matplotlib or
     `libschrodinger.graphs.GraphDisplay.add_figure`
@@ -44,7 +44,7 @@ class Hadron(libschrodinger.particle.Particle):
         for q in self.quarks:
             self.psi += q.psi
 
-    def draw(self, graph: "libschrodinger.graphs.GraphDisplay", V: np.array, x, y, num):
+    def draw(self, graph: "libschrodinger.graphs.GraphDisplay", V: np.ndarray, x, y, num):
         """
         Draws self as graphs (`3*num`, `3*num+1`, `3*num+2`)
         on an `x` by `y` figure in `graph`
@@ -76,14 +76,14 @@ class Hadron(libschrodinger.particle.Particle):
         )
 
     def propagate(
-        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
+        self, V: np.ndarray, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
 
         Parameters
         ----------
-        - `V: np.array`
+        - `V: np.ndarray`
             - the potential field as an array
             of shape (Nx, Ny)
         - `particles: list[libschrodinger.particle.Particle]`

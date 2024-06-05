@@ -46,12 +46,12 @@ class Config:
     """
     length of a single division on Y axis
     """
-    x: np.array
+    x: np.ndarray
     """
     a linear space from 0 to Lx with a resolution of Nx  
     can be used in calculating psi
     """
-    y: np.array
+    y: np.ndarray
     """
     a linear space from 0 to Ly with a resolution of Ny  
     can be used in calculating psi

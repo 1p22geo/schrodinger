@@ -22,14 +22,14 @@ class Potential:
     defaults to center of domain,
           the centerpoint of the potential
     """
-    r: np.array
+    r: np.ndarray
     """
     A `np.array` of shape `(Nx, Ny)` where each point
     is assigned its distance from `(x_center, y_center)`.
 
     Only for internal use in calculating V.
     """
-    V: np.array
+    V: np.ndarray
     """
     An initially zero-filled `np.array` of shape `(Nx, Ny)`
     """
@@ -54,7 +54,7 @@ class CoulombPotential(Potential):
 
     """
 
-    V: np.array
+    V: np.ndarray
     """
     The actual potential field definition.
 
@@ -92,14 +92,14 @@ class MeanFieldPotential(Potential):
 
     """
 
-    V: np.array
+    V: np.ndarray
     """
     The actual potential field definition.
 
     A `np.array` of shape `(Nx, Ny)`
     """
 
-    rho: np.array
+    rho: np.ndarray
     """
     The `rho` parameter of the potential
 

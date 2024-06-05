@@ -44,7 +44,7 @@ class WavePacket(libschrodinger.particle.Particle):
     """
     configuration for the domain
     """
-    psi: np.array
+    psi: np.ndarray
     """
     the wave function  
 
@@ -74,14 +74,14 @@ class WavePacket(libschrodinger.particle.Particle):
         self.psi /= integ ** (1 / 2)
 
     def propagate(
-        self, V: np.array, particles: list[libschrodinger.particle.Particle], frame: int
+        self, V: np.ndarray, particles: list[libschrodinger.particle.Particle], frame: int
     ):
         """
         propagate the wave function in a potential field
 
         Parameters
         ----------
-        - `V: np.array`
+        - `V: np.ndarray`
             - the potential field as an array
             of shape (Nx, Ny)
         - `particles: list[libschrodinger.particle.Particle]`
