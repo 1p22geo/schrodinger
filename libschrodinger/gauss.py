@@ -62,7 +62,7 @@ class WavePacket(libschrodinger.particle.Particle):
         vx=0.0,
         vy=0.0,
     ):
-        self.__id = uuid.uuid4()
+        self._id = uuid.uuid4()
         self.config = config
         self.vx = vx
         self.vy = vy
@@ -110,7 +110,7 @@ class WavePacket(libschrodinger.particle.Particle):
             return
         # Interact with other particles
         for p in particles:
-            if p._id == self.__id:
+            if p._id == self._id:
                 continue
             pass
             # interact with particle

@@ -37,7 +37,7 @@ class Hadron(libschrodinger.particle.Particle):
     """
 
     def __init__(self, config, quarks: list[libschrodinger.quark.quark.Quark]):
-        self.__id = uuid.uuid4()
+        self._id = uuid.uuid4()
         self.config = config
         self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         self.quarks = quarks
@@ -103,7 +103,7 @@ class Hadron(libschrodinger.particle.Particle):
             return
         # Interact with other particles
         for p in particles:
-            if p._id == self.__id:
+            if p._id == self._id:
                 continue
             pass
             # interact with particle

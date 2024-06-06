@@ -27,7 +27,7 @@ def renderpreview(state, mobile=False):
         for potential in potentials:
             V_total += potential.V
         for p2 in particles:
-            if p2.__id != particle.__id:
+            if p2._id != particle._id:
                 V_total += (
                     libschrodinger.interaction.Interactions.get_relative_potential(
                         config, particle, p2
