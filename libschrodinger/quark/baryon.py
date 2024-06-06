@@ -3,6 +3,7 @@ import math
 import libschrodinger.quark.hadron
 import libschrodinger.quark.color
 import libschrodinger.quark.meson
+import libschrodinger.quark.quark
 
 
 class Baryon(libschrodinger.quark.hadron.Hadron):
@@ -95,7 +96,7 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 ),
             )
             particles.append(m)
-            self._meson = m._id  # to access or delete this meson later on
+            self._meson = m.__id  # to access or delete this meson later on
             self.quarks[0].color_charge = libschrodinger.quark.color.rotate(
                 libschrodinger.quark.color.COLOR.GREEN, self.rotation
             )
@@ -131,7 +132,7 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 ),
             )
             particles.append(m)
-            self._meson = m._id  # to access or delete this meson later on
+            self._meson = m.__id  # to access or delete this meson later on
             self.quarks[1].color_charge = libschrodinger.quark.color.rotate(
                 libschrodinger.quark.color.COLOR.BLUE, self.rotation
             )
@@ -167,7 +168,7 @@ class Baryon(libschrodinger.quark.hadron.Hadron):
                 ),
             )
             particles.append(m)
-            self._meson = m._id  # to access or delete this meson later on
+            self._meson = m.__id  # to access or delete this meson later on
             self.quarks[2].color_charge = libschrodinger.quark.color.rotate(
                 libschrodinger.quark.color.COLOR.GREEN, self.rotation
             )

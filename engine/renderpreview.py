@@ -9,6 +9,7 @@ from engine.deserialization import Deserializer
 import libschrodinger.graphs
 import libschrodinger.figlocation
 import libschrodinger.constants
+import libschrodinger.interaction
 
 
 def renderpreview(state, mobile=False):
@@ -26,7 +27,7 @@ def renderpreview(state, mobile=False):
         for potential in potentials:
             V_total += potential.V
         for p2 in particles:
-            if p2._id != particle._id:
+            if p2.__id != particle.__id:
                 V_total += (
                     libschrodinger.interaction.Interactions.get_relative_potential(
                         config, particle, p2

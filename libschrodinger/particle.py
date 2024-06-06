@@ -1,4 +1,5 @@
 import numpy as np
+import uuid
 
 import libschrodinger.config
 import libschrodinger.figlocation
@@ -25,6 +26,10 @@ class Particle:
     Additional kwargs to `libschrodinger.graphs.GraphDisplay.add_figure`
 
     or to `matplotlib.pyplot`
+    """
+    _id: uuid.UUID
+    """
+    ID of the particle.
     """
 
     def __init__(self, config):

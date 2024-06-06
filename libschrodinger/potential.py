@@ -12,12 +12,12 @@ class Potential:
     """
     configuration for the domain
     """
-    x_center: float | None
+    x_center: float
     """
     defaults to center of domain,
           the centerpoint of the potential
     """
-    y_center: float | None
+    y_center: float
     """
     defaults to center of domain,
           the centerpoint of the potential

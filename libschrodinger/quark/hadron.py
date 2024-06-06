@@ -5,6 +5,7 @@ import libschrodinger.particle
 import libschrodinger.config
 import libschrodinger.potential
 import libschrodinger.quark.quark
+import libschrodinger.figlocation
 
 
 class Hadron(libschrodinger.particle.Particle):
@@ -36,7 +37,7 @@ class Hadron(libschrodinger.particle.Particle):
     """
 
     def __init__(self, config, quarks: list[libschrodinger.quark.quark.Quark]):
-        self._id = uuid.uuid4()
+        self.__id = uuid.uuid4()
         self.config = config
         self.psi = np.zeros((config.Nx, config.Ny), dtype="complex128")
         self.quarks = quarks
@@ -77,7 +78,7 @@ class Hadron(libschrodinger.particle.Particle):
 
     def propagate(
         self, V: np.ndarray, particles: list[libschrodinger.particle.Particle], frame: int
-    ):
+    ) -> list["libschrodinger.particle.Particle"] | None:
         """
         propagate the wave function in a potential field
 
@@ -102,7 +103,7 @@ class Hadron(libschrodinger.particle.Particle):
             return
         # Interact with other particles
         for p in particles:
-            if p._id == self._id:
+            if p._id == self.__id:
                 continue
             pass
             # interact with particle
